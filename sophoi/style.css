@@ -17,7 +17,7 @@ th, td {
 }
 
 .tdiv {
-    overflow: scroll;
+    overflow-x: auto;
 }
 
 #selector td span {
@@ -49,7 +49,7 @@ th, td {
 
 #resexpllist {
     height: 300px;
-    overflow: scroll;
+    overflow-y: auto;
 }
 
 #resexpl {
