@@ -1,0 +1,3258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sophoi</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="sophoi.js"></script>
+	<script src="data.js"></script>
+</head>
+<body>
+	<div id="content">
+		<h1>Simple Online Phoible Interface</h1>
+
+		<p>
+			This is the Simple Online Phoible Interface, or Sophoi for short. If you are familiar with the online <a href="https://linguistics.berkeley.edu/saphon/en/phonemes.php">SAPhon search tool</a>, this is essentially the same thing, but for the full <a href="https://phoible.org/">Phoible</a> database. As Phoible is composed of several sub-databases with different transcription conventions, some normalization of the Phoible data has been made. See the bottom of the page for more detailed information about the data. Currently only searching by (non-click) consonants is implemented. The table below shows the consonants that appear at least 20 times in the normalized data. Click on a consonant to have the search criteria include it (blue) or exclude it (red).
+		</p>
+
+		<div class="tdiv">
+			<table id="selector">
+	<tr>
+		<th></th>
+		<th>Labial</th>
+		<th>Dental</th>
+		<th>Alveolar</th>
+		<th>Postalveolar</th>
+		<th>Retroflex</th>
+		<th>Palatal</th>
+		<th>Velar</th>
+		<th>Uvular</th>
+		<th>Laryngeal</th>
+	<tr>
+		<th>Nasal</th>
+		<td><span onclick="toggle(this)">m</span> <span onclick="toggle(this)">ŋm</span> <span onclick="toggle(this)">m̥</span> <span onclick="toggle(this)">mʲ</span> <span onclick="toggle(this)">mʷ</span> <span onclick="toggle(this)">mʱ</span> <span onclick="toggle(this)">m̰</span></td>
+		<td><span onclick="toggle(this)">n̪</span></td>
+		<td><span onclick="toggle(this)">n</span> <span onclick="toggle(this)">n̺</span> <span onclick="toggle(this)">n̥</span> <span onclick="toggle(this)">nʲ</span> <span onclick="toggle(this)">nʷ</span> <span onclick="toggle(this)">n̰</span> <span onclick="toggle(this)">nʱ</span></td>
+		<td><span onclick="toggle(this)">ȵ</span></td>
+		<td><span onclick="toggle(this)">ɳ</span></td>
+		<td><span onclick="toggle(this)">ɲ</span> <span onclick="toggle(this)">ɲ̊</span></td>
+		<td><span onclick="toggle(this)">ŋ</span> <span onclick="toggle(this)">ŋʷ</span> <span onclick="toggle(this)">ŋ̊</span></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Voiceless stop</th>
+		<td><span onclick="toggle(this)">p</span> <span onclick="toggle(this)">kp</span> <span onclick="toggle(this)">pʲ</span> <span onclick="toggle(this)">pʷ</span> <span onclick="toggle(this)">pf</span></td>
+		<td><span onclick="toggle(this)">t̪</span> <span onclick="toggle(this)">t̪s̪</span></td>
+		<td><span onclick="toggle(this)">t</span> <span onclick="toggle(this)">ts</span> <span onclick="toggle(this)">t̺</span> <span onclick="toggle(this)">tʲ</span> <span onclick="toggle(this)">tʷ</span> <span onclick="toggle(this)">tsʲ</span> <span onclick="toggle(this)">t̻</span></td>
+		<td><span onclick="toggle(this)">tʃ</span> <span onclick="toggle(this)">ȶ</span> <span onclick="toggle(this)">tɕ</span> <span onclick="toggle(this)">tʃʷ</span></td>
+		<td><span onclick="toggle(this)">ʈ</span> <span onclick="toggle(this)">ʈʂ</span></td>
+		<td><span onclick="toggle(this)">c</span> <span onclick="toggle(this)">cç</span></td>
+		<td><span onclick="toggle(this)">k</span> <span onclick="toggle(this)">kʷ</span> <span onclick="toggle(this)">kʲ</span></td>
+		<td><span onclick="toggle(this)">q</span> <span onclick="toggle(this)">qʷ</span></td>
+		<td><span onclick="toggle(this)">ʔ</span> <span onclick="toggle(this)">ʔʷ</span> <span onclick="toggle(this)">ʔʲ</span></td>
+	</tr>
+	<tr>
+		<th>Aspirated stop</th>
+		<td><span onclick="toggle(this)">pʰ</span></td>
+		<td><span onclick="toggle(this)">t̪ʰ</span></td>
+		<td><span onclick="toggle(this)">tʰ</span> <span onclick="toggle(this)">tsʰ</span></td>
+		<td><span onclick="toggle(this)">tʃʰ</span> <span onclick="toggle(this)">tɕʰ</span></td>
+		<td><span onclick="toggle(this)">ʈʰ</span> <span onclick="toggle(this)">ʈʂʰ</span></td>
+		<td><span onclick="toggle(this)">cʰ</span> <span onclick="toggle(this)">cçʰ</span></td>
+		<td><span onclick="toggle(this)">kʰ</span> <span onclick="toggle(this)">kʷʰ</span></td>
+		<td><span onclick="toggle(this)">qʰ</span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Voiced stop</th>
+		<td><span onclick="toggle(this)">b</span> <span onclick="toggle(this)">ɡb</span> <span onclick="toggle(this)">bʱ</span> <span onclick="toggle(this)">bʲ</span> <span onclick="toggle(this)">bʷ</span> <span onclick="toggle(this)">b̰</span> <span onclick="toggle(this)">bv</span></td>
+		<td><span onclick="toggle(this)">d̪</span> <span onclick="toggle(this)">d̪ʱ</span> <span onclick="toggle(this)">d̪z̪</span></td>
+		<td><span onclick="toggle(this)">d</span> <span onclick="toggle(this)">dz</span> <span onclick="toggle(this)">dʲ</span> <span onclick="toggle(this)">d̺</span> <span onclick="toggle(this)">dʱ</span> <span onclick="toggle(this)">dʷ</span></td>
+		<td><span onclick="toggle(this)">dʒ</span> <span onclick="toggle(this)">dʑ</span> <span onclick="toggle(this)">ȡ</span> <span onclick="toggle(this)">dʒʱ</span></td>
+		<td><span onclick="toggle(this)">ɖ</span> <span onclick="toggle(this)">ɖʱ</span> <span onclick="toggle(this)">ɖʐ</span></td>
+		<td><span onclick="toggle(this)">ɟ</span> <span onclick="toggle(this)">ɟʝ</span> <span onclick="toggle(this)">ɟʝʱ</span></td>
+		<td><span onclick="toggle(this)">ɡ</span> <span onclick="toggle(this)">ɡʷ</span> <span onclick="toggle(this)">ɡʲ</span> <span onclick="toggle(this)">ɡʱ</span></td>
+		<td><span onclick="toggle(this)">ɢ</span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Prenasalized stop</th>
+		<td><span onclick="toggle(this)">mb</span> <span onclick="toggle(this)">ŋmɡb</span> <span onclick="toggle(this)">mp</span></td>
+		<td></td>
+		<td><span onclick="toggle(this)">nd</span> <span onclick="toggle(this)">ndz</span> <span onclick="toggle(this)">nt</span></td>
+		<td><span onclick="toggle(this)">ndʒ</span> <span onclick="toggle(this)">ntʃ</span></td>
+		<td></td>
+		<td><span onclick="toggle(this)">ɲɟ</span></td>
+		<td><span onclick="toggle(this)">ŋɡ</span> <span onclick="toggle(this)">ŋɡʷ</span> <span onclick="toggle(this)">ŋk</span></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Glottalized stop</th>
+		<td><span onclick="toggle(this)">ɓ</span> <span onclick="toggle(this)">pʼ</span></td>
+		<td><span onclick="toggle(this)">t̪ʼ</span></td>
+		<td><span onclick="toggle(this)">ɗ</span> <span onclick="toggle(this)">tʼ</span> <span onclick="toggle(this)">tsʼ</span></td>
+		<td><span onclick="toggle(this)">tʃʼ</span></td>
+		<td></td>
+		<td><span onclick="toggle(this)">ʄ</span> <span onclick="toggle(this)">cʼ</span></td>
+		<td><span onclick="toggle(this)">kʼ</span> <span onclick="toggle(this)">kʷʼ</span> <span onclick="toggle(this)">kʲʼ</span> <span onclick="toggle(this)">ɠ</span></td>
+		<td><span onclick="toggle(this)">qʼ</span> <span onclick="toggle(this)">qʷʼ</span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Voiceless fricative</th>
+		<td><span onclick="toggle(this)">f</span> <span onclick="toggle(this)">ɸ</span> <span onclick="toggle(this)">fʷ</span> <span onclick="toggle(this)">fʲ</span></td>
+		<td><span onclick="toggle(this)">s̪</span> <span onclick="toggle(this)">θ</span></td>
+		<td><span onclick="toggle(this)">s</span> <span onclick="toggle(this)">sʲ</span> <span onclick="toggle(this)">sʷ</span> <span onclick="toggle(this)">s̺</span> <span onclick="toggle(this)">s̻</span> <span onclick="toggle(this)">sʰ</span> <span onclick="toggle(this)">sʼ</span> <span onclick="toggle(this)">ns</span></td>
+		<td><span onclick="toggle(this)">ʃ</span> <span onclick="toggle(this)">ɕ</span> <span onclick="toggle(this)">ʃʷ</span></td>
+		<td><span onclick="toggle(this)">ʂ</span></td>
+		<td><span onclick="toggle(this)">ç</span></td>
+		<td><span onclick="toggle(this)">x</span> <span onclick="toggle(this)">xʷ</span></td>
+		<td><span onclick="toggle(this)">χ</span> <span onclick="toggle(this)">χʷ</span></td>
+		<td><span onclick="toggle(this)">h</span> <span onclick="toggle(this)">ħ</span> <span onclick="toggle(this)">hʷ</span> <span onclick="toggle(this)">hʲ</span></td>
+	</tr>
+	<tr>
+		<th>Voiced fricative</th>
+		<td><span onclick="toggle(this)">v</span> <span onclick="toggle(this)">β</span> <span onclick="toggle(this)">ɱv</span> <span onclick="toggle(this)">vʲ</span></td>
+		<td><span onclick="toggle(this)">ð</span> <span onclick="toggle(this)">z̪</span></td>
+		<td><span onclick="toggle(this)">z</span> <span onclick="toggle(this)">nz</span> <span onclick="toggle(this)">zʲ</span></td>
+		<td><span onclick="toggle(this)">ʒ</span> <span onclick="toggle(this)">ʑ</span></td>
+		<td><span onclick="toggle(this)">ʐ</span></td>
+		<td><span onclick="toggle(this)">ʝ</span></td>
+		<td><span onclick="toggle(this)">ɣ</span> <span onclick="toggle(this)">ɣʷ</span></td>
+		<td><span onclick="toggle(this)">ʁ</span> <span onclick="toggle(this)">ʁʷ</span></td>
+		<td><span onclick="toggle(this)">ɦ</span> <span onclick="toggle(this)">ʕ</span></td>
+	</tr>
+	<tr>
+		<th>Trill</th>
+		<td></td>
+		<td><span onclick="toggle(this)">r̪</span></td>
+		<td><span onclick="toggle(this)">r</span> <span onclick="toggle(this)">r̺</span> <span onclick="toggle(this)">rʲ</span> <span onclick="toggle(this)">r̥</span> <span onclick="toggle(this)">rʷ</span></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Tap or flap</th>
+		<td><span onclick="toggle(this)">ⱱ</span></td>
+		<td></td>
+		<td><span onclick="toggle(this)">ɾ</span> <span onclick="toggle(this)">ɺ</span> <span onclick="toggle(this)">ɾʲ</span></td>
+		<td></td>
+		<td><span onclick="toggle(this)">ɽ</span> <span onclick="toggle(this)">ɽʱ</span></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Lateral approximant</th>
+		<td></td>
+		<td><span onclick="toggle(this)">l̪</span></td>
+		<td><span onclick="toggle(this)">l</span> <span onclick="toggle(this)">l̺</span> <span onclick="toggle(this)">l̥</span> <span onclick="toggle(this)">lʲ</span> <span onclick="toggle(this)">ɫ</span> <span onclick="toggle(this)">lʷ</span> <span onclick="toggle(this)">lʱ</span> <span onclick="toggle(this)">l̰</span></td>
+		<td><span onclick="toggle(this)">ȴ</span></td>
+		<td><span onclick="toggle(this)">ɭ</span></td>
+		<td><span onclick="toggle(this)">ʎ</span></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Lateral obstruent</th>
+		<td></td>
+		<td></td>
+		<td><span onclick="toggle(this)">ɬ</span> <span onclick="toggle(this)">ɮ</span> <span onclick="toggle(this)">tɬʼ</span> <span onclick="toggle(this)">tɬ</span></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Approximant</th>
+		<td><span onclick="toggle(this)">ʋ</span> <span onclick="toggle(this)">β̞</span></td>
+		<td></td>
+		<td><span onclick="toggle(this)">ɹ̺</span> <span onclick="toggle(this)">ɹ</span></td>
+		<td></td>
+		<td><span onclick="toggle(this)">ɻ</span></td>
+		<td><span onclick="toggle(this)">j</span> <span onclick="toggle(this)">ɥ</span> <span onclick="toggle(this)">j̰</span> <span onclick="toggle(this)">jʷ</span> <span onclick="toggle(this)">j̥</span></td>
+		<td><span onclick="toggle(this)">w</span> <span onclick="toggle(this)">ɰ</span> <span onclick="toggle(this)">ʍ</span> <span onclick="toggle(this)">w̰</span></td>
+		<td></td>
+		<td></td>
+	</tr>
+</table>
+
+		</div>
+
+		<div id="boxes">
+			<div id="resbox">
+				<h2>Matching inventories</h2>
+				<div id="resexpllist">
+					<p id="resexpl">
+						There are <span id="rescount">3020</span> matching inventories. The results are sorted by their total count of consonants, smaller inventories first. Scroll down to see all results.
+					</p>
+					<div id="reslist">
+						<div id="894" onclick="show(894);">I'saka</div>
+<div id="528" onclick="show(528);">Rotokas</div>
+<div id="352" onclick="show(352);">Hawaiian (UPSID)</div>
+<div id="60" onclick="show(60);">Naasioi (SPA)</div>
+<div id="483" onclick="show(483);">Naasioi (UPSID)</div>
+<div id="1989" onclick="show(1989);">Pirahã (SAPHON)</div>
+<div id="477" onclick="show(477);">Pirahã (UPSID)</div>
+<div id="1935" onclick="show(1935);">Puinave</div>
+<div id="589" onclick="show(589);">Toaripi</div>
+<div id="1160" onclick="show(1160);">Abau</div>
+<div id="508" onclick="show(508);">Eastern Ojibwa (UPSID)</div>
+<div id="56" onclick="show(56);">Gadsup (SPA)</div>
+<div id="336" onclick="show(336);">Gadsup (UPSID)</div>
+<div id="1868" onclick="show(1868);">Galibi Carib (SAPHON)</div>
+<div id="1869" onclick="show(1869);">Galibi Carib (SAPHON)</div>
+<div id="43" onclick="show(43);">Hawaiian (SPA)</div>
+<div id="962" onclick="show(962);">Isebe</div>
+<div id="1962" onclick="show(1962);">Karajá</div>
+<div id="949" onclick="show(949);">Namia</div>
+<div id="536" onclick="show(536);">Seneca (UPSID)</div>
+<div id="529" onclick="show(529);">Waima</div>
+<div id="1031" onclick="show(1031);">Wayana (PH)</div>
+<div id="1887" onclick="show(1887);">Wayana (SAPHON)</div>
+<div id="1873" onclick="show(1873);">Akawaio (SAPHON)</div>
+<div id="1862" onclick="show(1862);">Akurio</div>
+<div id="1169" onclick="show(1169);">Au</div>
+<div id="1892" onclick="show(1892);">Barí</div>
+<div id="280" onclick="show(280);">Cherokee</div>
+<div id="1238" onclick="show(1238);">Crow</div>
+<div id="317" onclick="show(317);">Ekari</div>
+<div id="1681" onclick="show(1681);">Leti (Indonesia)</div>
+<div id="2056" onclick="show(2056);">Macuna</div>
+<div id="1877" onclick="show(1877);">Macushi</div>
+<div id="2095" onclick="show(2095);">Makuráp</div>
+<div id="42" onclick="show(42);">Maori</div>
+<div id="1967" onclick="show(1967);">Maxakalí (SAPHON)</div>
+<div id="453" onclick="show(453);">Maxakalí (UPSID)</div>
+<div id="1205" onclick="show(1205);">North Marquesan</div>
+<div id="77" onclick="show(77);">Oneida</div>
+<div id="977" onclick="show(977);">Palauan</div>
+<div id="1970" onclick="show(1970);">Pará Gavião (SAPHON)</div>
+<div id="1881" onclick="show(1881);">Pemon (SAPHON)</div>
+<div id="1882" onclick="show(1882);">Pemon (SAPHON)</div>
+<div id="2148" onclick="show(2148);">Sanumá (SAPHON)</div>
+<div id="52" onclick="show(52);">Sentani (SPA)</div>
+<div id="540" onclick="show(540);">Sentani (UPSID)</div>
+<div id="582" onclick="show(582);">Tamnim Citak (UPSID)</div>
+<div id="1884" onclick="show(1884);">Trió</div>
+<div id="2066" onclick="show(2066);">Waimaha (SAPHON)</div>
+<div id="239" onclick="show(239);">Waimaha (UPSID)</div>
+<div id="2020" onclick="show(2020);">Yameo</div>
+<div id="348" onclick="show(348);">Aché (UPSID)</div>
+<div id="2069" onclick="show(2069);">Akuntsu</div>
+<div id="1922" onclick="show(1922);">Andoque (SAPHON)</div>
+<div id="224" onclick="show(224);">Andoque (UPSID)</div>
+<div id="229" onclick="show(229);">Arabela (UPSID)</div>
+<div id="1954" onclick="show(1954);">Arikapú</div>
+<div id="57" onclick="show(57);">Awiyaana</div>
+<div id="1177" onclick="show(1177);">Awtuw</div>
+<div id="2050" onclick="show(2050);">Barasana-Eduria</div>
+<div id="1193" onclick="show(1193);">Binandere</div>
+<div id="872" onclick="show(872);">Binumarien</div>
+<div id="2054" onclick="show(2054);">Carapana</div>
+<div id="1909" onclick="show(1909);">Cocama-Cocamilla</div>
+<div id="2051" onclick="show(2051);">Cubeo (SAPHON)</div>
+<div id="295" onclick="show(295);">Cubeo (UPSID)</div>
+<div id="395" onclick="show(395);">Dera (Indonesia)</div>
+<div id="1247" onclick="show(1247);">Dibole</div>
+<div id="326" onclick="show(326);">Fasu</div>
+<div id="329" onclick="show(329);">Finnish (UPSID)</div>
+<div id="1867" onclick="show(1867);">Galibi Carib (SAPHON)</div>
+<div id="393" onclick="show(393);">Grass Koiari</div>
+<div id="207" onclick="show(207);">Hokkaido Ainu (UPSID)</div>
+<div id="885" onclick="show(885);">Huron</div>
+<div id="2140" onclick="show(2140);">Iquito</div>
+<div id="377" onclick="show(377);">Iwam</div>
+<div id="1961" onclick="show(1961);">Kaingang (SAPHON)</div>
+<div id="1076" onclick="show(1076);">Karitiâna (PH)</div>
+<div id="2091" onclick="show(2091);">Karitiâna (SAPHON)</div>
+<div id="417" onclick="show(417);">Klao</div>
+<div id="1966" onclick="show(1966);">Krikati-Timbira</div>
+<div id="897" onclick="show(897);">Madi (PH)</div>
+<div id="1847" onclick="show(1847);">Madi (SAPHON)</div>
+<div id="938" onclick="show(938);">Maybrat-Karon</div>
+<div id="464" onclick="show(464);">Mor (Bomberai Peninsula)</div>
+<div id="1969" onclick="show(1969);">Panará</div>
+<div id="1864" onclick="show(1864);">Pará Arára</div>
+<div id="1958" onclick="show(1958);">Pará Gavião (SAPHON)</div>
+<div id="2143" onclick="show(2143);">Pisamira</div>
+<div id="1997" onclick="show(1997);">Sabanê (SAPHON)</div>
+<div id="461" onclick="show(461);">San Miguel El Grande Mixtec (UPSID)</div>
+<div id="1236" onclick="show(1236);">Sanumá (PH)</div>
+<div id="2133" onclick="show(2133);">Sanumá (SAPHON)</div>
+<div id="1002" onclick="show(1002);">Seimat</div>
+<div id="76" onclick="show(76);">Seneca (SPA)</div>
+<div id="1103" onclick="show(1103);">Siksika</div>
+<div id="2061" onclick="show(2061);">Siriano</div>
+<div id="2062" onclick="show(2062);">Tanimuca-Retuarã</div>
+<div id="1040" onclick="show(1040);">Tatuyo (PH)</div>
+<div id="2063" onclick="show(2063);">Tatuyo (SAPHON)</div>
+<div id="2074" onclick="show(2074);">Tocantins Asurini</div>
+<div id="2065" onclick="show(2065);">Tuyuca</div>
+<div id="114" onclick="show(114);">Waimaha (SPA)</div>
+<div id="232" onclick="show(232);">Waorani (UPSID)</div>
+<div id="1943" onclick="show(1943);">Warao (SAPHON)</div>
+<div id="609" onclick="show(609);">Warao (UPSID)</div>
+<div id="1976" onclick="show(1976);">Xavánte</div>
+<div id="1888" onclick="show(1888);">Yabarana</div>
+<div id="2019" onclick="show(2019);">Yagua (SAPHON)</div>
+<div id="628" onclick="show(628);">Yagua (UPSID)</div>
+<div id="2149" onclick="show(2149);">Yanomamö (SAPHON)</div>
+<div id="2150" onclick="show(2150);">Yanomámi (SAPHON)</div>
+<div id="2067" onclick="show(2067);">Yurutí</div>
+<div id="1947" onclick="show(1947);">Aguaruna</div>
+<div id="203" onclick="show(203);">Angaataha</div>
+<div id="1863" onclick="show(1863);">Apalaí</div>
+<div id="2071" onclick="show(2071);">Apiaká</div>
+<div id="226" onclick="show(226);">Apinayé (UPSID)</div>
+<div id="2072" onclick="show(2072);">Araweté</div>
+<div id="2075" onclick="show(2075);">Avá-Canoeiro</div>
+<div id="1185" onclick="show(1185);">Bariai</div>
+<div id="1683" onclick="show(1683);">Biak (GM)</div>
+<div id="1104" onclick="show(1104);">Biloxi</div>
+<div id="1814" onclick="show(1814);">Cabiyarí</div>
+<div id="1021" onclick="show(1021);">Chimalapa Zoque</div>
+<div id="284" onclick="show(284);">Chuave</div>
+<div id="864" onclick="show(864);">Comanche</div>
+<div id="2052" onclick="show(2052);">Desano</div>
+<div id="2077" onclick="show(2077);">Eastern Bolivian Guaraní (SAPHON)</div>
+<div id="2078" onclick="show(2078);">Eastern Bolivian Guaraní (SAPHON)</div>
+<div id="974" onclick="show(974);">Faiwol</div>
+<div id="2081" onclick="show(2081);">Guajá</div>
+<div id="196" onclick="show(196);">Hokkaido Ainu (SPA)</div>
+<div id="1033" onclick="show(1033);">Huarijio</div>
+<div id="1872" onclick="show(1872);">Ikpeng</div>
+<div id="892" onclick="show(892);">Imonda</div>
+<div id="369" onclick="show(369);">Irarutu</div>
+<div id="386" onclick="show(386);">Japrería (UPSID)</div>
+<div id="2086" onclick="show(2086);">Júma</div>
+<div id="275" onclick="show(275);">Kakua (UPSID)</div>
+<div id="904" onclick="show(904);">Kanoê (PH)</div>
+<div id="2121" onclick="show(2121);">Kanoê (SAPHON)</div>
+<div id="1952" onclick="show(1952);">Katukína</div>
+<div id="1875" onclick="show(1875);">Kaxuiâna</div>
+<div id="1964" onclick="show(1964);">Krahô</div>
+<div id="1995" onclick="show(1995);">Latundê</div>
+<div id="308" onclick="show(308);">Lower Grand Valley Dani</div>
+<div id="1846" onclick="show(1846);">Madi (SAPHON)</div>
+<div id="1878" onclick="show(1878);">Mapoyo</div>
+<div id="1879" onclick="show(1879);">Maquiritari</div>
+<div id="2715" onclick="show(2715);">Minjangbal</div>
+<div id="495" onclick="show(495);">Nimboran</div>
+<div id="2132" onclick="show(2132);">Ninam (SAPHON)</div>
+<div id="1951" onclick="show(1951);">Nukak Makú</div>
+<div id="2862" onclick="show(2862);">Nyawaygi</div>
+<div id="1207" onclick="show(1207);">Oluta Popoluca</div>
+<div id="1889" onclick="show(1889);">Oro Win</div>
+<div id="978" onclick="show(978);">Orokaiva</div>
+<div id="514" onclick="show(514);">Panare (UPSID)</div>
+<div id="2100" onclick="show(2100);">Parakanã</div>
+<div id="519" onclick="show(519);">Pohnpeian</div>
+<div id="1971" onclick="show(1971);">Puri</div>
+<div id="1883" onclick="show(1883);">Pémono</div>
+<div id="982" onclick="show(982);">Samo</div>
+<div id="2102" onclick="show(2102);">Sateré-Mawé</div>
+<div id="1000" onclick="show(1000);">Secoya (PH)</div>
+<div id="1061" onclick="show(1061);">South Nuaulu</div>
+<div id="411" onclick="show(411);">Southern Kiwai</div>
+<div id="1936" onclick="show(1936);">Taushiro</div>
+<div id="572" onclick="show(572);">Tigak</div>
+<div id="1170" onclick="show(1170);">Tinputz</div>
+<div id="1086" onclick="show(1086);">Tonga (Tonga Islands)</div>
+<div id="248" onclick="show(248);">Tweed-Albert</div>
+<div id="1975" onclick="show(1975);">Umotína</div>
+<div id="604" onclick="show(604);">Vanimo</div>
+<div id="2058" onclick="show(2058);">Wa'ikhana</div>
+<div id="2716" onclick="show(2716);">Waalubal</div>
+<div id="1942" onclick="show(1942);">Waorani (SAPHON)</div>
+<div id="2135" onclick="show(2135);">Yanomamö (SAPHON)</div>
+<div id="2151" onclick="show(2151);">Yanomamö (SAPHON)</div>
+<div id="2146" onclick="show(2146);">Yanomámi (SAPHON)</div>
+<div id="979" onclick="show(979);">Yil</div>
+<div id="2712" onclick="show(2712);">Yugumbir</div>
+<div id="2154" onclick="show(2154);">Yukpa (SAPHON)</div>
+<div id="2729" onclick="show(2729);"> (ER)</div>
+<div id="1914" onclick="show(1914);">Abipon (SAPHON)</div>
+<div id="209" onclick="show(209);">Akawaio (UPSID)</div>
+<div id="1166" onclick="show(1166);">Arandai</div>
+<div id="2987" onclick="show(2987);">Awabakal</div>
+<div id="1191" onclick="show(1191);">Biak (PH)</div>
+<div id="2982" onclick="show(2982);">Bigambal</div>
+<div id="258" onclick="show(258);">Bororo (UPSID)</div>
+<div id="1676" onclick="show(1676);">Buol</div>
+<div id="1956" onclick="show(1956);">Canela-Krahô</div>
+<div id="281" onclick="show(281);">Chuvash (UPSID)</div>
+<div id="646" onclick="show(646);">Copainalá Zoque (UPSID)</div>
+<div id="468" onclick="show(468);">Dadibi</div>
+<div id="2893" onclick="show(2893);">Djangun</div>
+<div id="2943" onclick="show(2943);">Duungidjawu</div>
+<div id="2890" onclick="show(2890);">Dyaabugay</div>
+<div id="2991" onclick="show(2991);">Dyangadi</div>
+<div id="2732" onclick="show(2732);">Dyirbal (ER)</div>
+<div id="303" onclick="show(303);">Dyirbal (UPSID)</div>
+<div id="316" onclick="show(316);">Efik</div>
+<div id="1818" onclick="show(1818);">Enawené-Nawé</div>
+<div id="875" onclick="show(875);">Endo</div>
+<div id="2941" onclick="show(2941);">Gabigabi</div>
+<div id="2713" onclick="show(2713);">Gidabal</div>
+<div id="881" onclick="show(881);">Golin</div>
+<div id="2938" onclick="show(2938);">Gureng Gureng (ER)</div>
+<div id="2939" onclick="show(2939);">Gureng Gureng (ER)</div>
+<div id="2714" onclick="show(2714);">Guwar</div>
+<div id="1819" onclick="show(1819);">Iñapari</div>
+<div id="2728" onclick="show(2728);">Jandai</div>
+<div id="384" onclick="show(384);">Japanese (UPSID)</div>
+<div id="2028" onclick="show(2028);">Jungle Inga</div>
+<div id="2942" onclick="show(2942);">Kabikabi (ER)</div>
+<div id="402" onclick="show(402);">Kaingang (UPSID)</div>
+<div id="1443" onclick="show(1443);">Kamba (Kenya)</div>
+<div id="1994" onclick="show(1994);">Khithaulhu</div>
+<div id="1820" onclick="show(1820);">Kinikinao</div>
+<div id="2885" onclick="show(2885);">Kuku-Yalanji (ER)</div>
+<div id="2887" onclick="show(2887);">Kuku-Yalanji (ER)</div>
+<div id="2889" onclick="show(2889);">Kuku-Yalanji (ER)</div>
+<div id="349" onclick="show(349);">Kuku-Yalanji (UPSID)</div>
+<div id="2734" onclick="show(2734);">Kumbainggar (ER)</div>
+<div id="2735" onclick="show(2735);">Kumbainggar (ER)</div>
+<div id="918" onclick="show(918);">Kuot</div>
+<div id="925" onclick="show(925);">Lavukaleve</div>
+<div id="406" onclick="show(406);">Lusi</div>
+<div id="1821" onclick="show(1821);">Machinere</div>
+<div id="933" onclick="show(933);">Manam</div>
+<div id="471" onclick="show(471);">Maranao</div>
+<div id="1823" onclick="show(1823);">Mehináku</div>
+<div id="973" onclick="show(973);">Mianmin</div>
+<div id="2888" onclick="show(2888);">Muluridyi</div>
+<div id="954" onclick="show(954);">Nandi</div>
+<div id="1413" onclick="show(1413);">Nateni</div>
+<div id="541" onclick="show(541);">Ninam (UPSID)</div>
+<div id="2098" onclick="show(2098);">Omagua</div>
+<div id="1880" onclick="show(1880);">Panare (SAPHON)</div>
+<div id="1827" onclick="show(1827);">Paraujano</div>
+<div id="995" onclick="show(995);">Sabanê (PH)</div>
+<div id="812" onclick="show(812);">Sabaot</div>
+<div id="1012" onclick="show(1012);">Shawnee</div>
+<div id="1949" onclick="show(1949);">Shuar (SAPHON)</div>
+<div id="2012" onclick="show(2012);">Siang</div>
+<div id="1013" onclick="show(1013);">Skou</div>
+<div id="558" onclick="show(558);">Suena</div>
+<div id="1973" onclick="show(1973);">Suyá (SAPHON)</div>
+<div id="1980" onclick="show(1980);">São Paulo Kaingáng</div>
+<div id="2105" onclick="show(2105);">Tapirapé</div>
+<div id="1832" onclick="show(1832);">Terena-Kinikinao-Chane</div>
+<div id="1680" onclick="show(1680);">Tetum (GM)</div>
+<div id="571" onclick="show(571);">Tetum (UPSID)</div>
+<div id="2109" onclick="show(2109);">Tupinambá</div>
+<div id="838" onclick="show(838);">Waama</div>
+<div id="2944" onclick="show(2944);">Wakawaka</div>
+<div id="619" onclick="show(619);">Waris</div>
+<div id="2733" onclick="show(2733);">Warrgamay</div>
+<div id="2820" onclick="show(2820);">Warrongo</div>
+<div id="51" onclick="show(51);">Wik-Mungkan (SPA)</div>
+<div id="612" onclick="show(612);">Wik-Mungkan (UPSID)</div>
+<div id="2989" onclick="show(2989);">Worimi</div>
+<div id="2945" onclick="show(2945);">Wuliwuli</div>
+<div id="1977" onclick="show(1977);">Xerénte</div>
+<div id="2113" onclick="show(2113);">Xetá</div>
+<div id="2730" onclick="show(2730);">Yagara (ER)</div>
+<div id="2731" onclick="show(2731);">Yagara (ER)</div>
+<div id="2134" onclick="show(2134);">Yanomámi (SAPHON)</div>
+<div id="2147" onclick="show(2147);">Yanomámi (SAPHON)</div>
+<div id="637" onclick="show(637);">Yareba</div>
+<div id="2891" onclick="show(2891);">Yidiñ (ER)</div>
+<div id="633" onclick="show(633);">Yidiñ (UPSID)</div>
+<div id="2983" onclick="show(2983);">Yugambal</div>
+<div id="210" onclick="show(210);">Alabama (UPSID)</div>
+<div id="120" onclick="show(120);">Amahuaca (SPA)</div>
+<div id="216" onclick="show(216);">Amahuaca (UPSID)</div>
+<div id="1164" onclick="show(1164);">Amanab</div>
+<div id="202" onclick="show(202);">Amele</div>
+<div id="2070" onclick="show(2070);">Amundava</div>
+<div id="497" onclick="show(497);">Ao Naga (UPSID)</div>
+<div id="122" onclick="show(122);">Apinayé (SPA)</div>
+<div id="1092" onclick="show(1092);">Apurinã (PH)</div>
+<div id="1804" onclick="show(1804);">Apurinã (SAPHON)</div>
+<div id="1806" onclick="show(1806);">Asháninka (SAPHON)</div>
+<div id="1120" onclick="show(1120);">Awa-Cuaiquer (PH)</div>
+<div id="2076" onclick="show(2076);">Awetí</div>
+<div id="2032" onclick="show(2032);">Ayacucho Quechua</div>
+<div id="1039" onclick="show(1039);">Baruga</div>
+<div id="1843" onclick="show(1843);">Baure</div>
+<div id="1189" onclick="show(1189);">Berbice Creole Dutch</div>
+<div id="678" onclick="show(678);">Biali</div>
+<div id="2812" onclick="show(2812);">Bidyara (ER)</div>
+<div id="1870" onclick="show(1870);">Carijona</div>
+<div id="1899" onclick="show(1899);">Central Tunebo</div>
+<div id="1957" onclick="show(1957);">Chiquitano</div>
+<div id="2362" onclick="show(2362);">Chukchi (EA)</div>
+<div id="285" onclick="show(285);">Chukchi (UPSID)</div>
+<div id="1960" onclick="show(1960);">Djeoromitxí</div>
+<div id="1682" onclick="show(1682);">East Makian (GM)</div>
+<div id="2645" onclick="show(2645);">Garrwa (ER)</div>
+<div id="2647" onclick="show(2647);">Garrwa (ER)</div>
+<div id="882" onclick="show(882);">Guajajára (PH)</div>
+<div id="2085" onclick="show(2085);">Guarayu</div>
+<div id="2819" onclick="show(2819);">Gugu Badhun</div>
+<div id="1389" onclick="show(1389);">Holoholo</div>
+<div id="366" onclick="show(366);">Ignaciano (UPSID)</div>
+<div id="292" onclick="show(292);">Island Carib (UPSID)</div>
+<div id="1874" onclick="show(1874);">Japrería (SAPHON)</div>
+<div id="2089" onclick="show(2089);">Kaiwá</div>
+<div id="2090" onclick="show(2090);">Kamayurá</div>
+<div id="2122" onclick="show(2122);">Karirí-Xocó</div>
+<div id="1097" onclick="show(1097);">Karo (PH)</div>
+<div id="2092" onclick="show(2092);">Karo (SAPHON)</div>
+<div id="902" onclick="show(902);">Kayabí (PH)</div>
+<div id="2093" onclick="show(2093);">Kayabí (SAPHON)</div>
+<div id="2395" onclick="show(2395);">Ket (EA)</div>
+<div id="1387" onclick="show(1387);">Kipsigis</div>
+<div id="1106" onclick="show(1106);">Koasati</div>
+<div id="2006" onclick="show(2006);">Korubo</div>
+<div id="1876" onclick="show(1876);">Kuikúro-Kalapálo</div>
+<div id="428" onclick="show(428);">Kupsabiny</div>
+<div id="1259" onclick="show(1259);">Lega-Shabunda</div>
+<div id="2057" onclick="show(2057);">Maijiki</div>
+<div id="1996" onclick="show(1996);">Mamaindé</div>
+<div id="1266" onclick="show(1266);">Matumbi</div>
+<div id="2083" onclick="show(2083);">Mbyá Guaraní</div>
+<div id="276" onclick="show(276);">Min Dong Chinese (UPSID)</div>
+<div id="2453" onclick="show(2453);">Miyako</div>
+<div id="2633" onclick="show(2633);">Mullukmulluk (ER)</div>
+<div id="466" onclick="show(466);">Mullukmulluk (UPSID)</div>
+<div id="2129" onclick="show(2129);">Murui Huitoto</div>
+<div id="953" onclick="show(953);">Nankina</div>
+<div id="2990" onclick="show(2990);">Nganyaywana</div>
+<div id="980" onclick="show(980);">Ningil</div>
+<div id="798" onclick="show(798);">Nomaande</div>
+<div id="966" onclick="show(966);">Northern Paiute</div>
+<div id="2009" onclick="show(2009);">Nukuini</div>
+<div id="2685" onclick="show(2685);">Nungali</div>
+<div id="1968" onclick="show(1968);">Ofayé</div>
+<div id="1826" onclick="show(1826);">Palikúr</div>
+<div id="2010" onclick="show(2010);">Panobo</div>
+<div id="2011" onclick="show(2011);">Poyanáwa</div>
+<div id="267" onclick="show(267);">Qaqet</div>
+<div id="1972" onclick="show(1972);">Rikbaktsa</div>
+<div id="2059" onclick="show(2059);">Secoya (SAPHON)</div>
+<div id="1062" onclick="show(1062);">Selaru</div>
+<div id="2013" onclick="show(2013);">Shall-Zwall</div>
+<div id="1999" onclick="show(1999);">Sharanahua (SAPHON)</div>
+<div id="1861" onclick="show(1861);">Shawi</div>
+<div id="383" onclick="show(383);">Shuar (UPSID)</div>
+<div id="993" onclick="show(993);">Southern Samo</div>
+<div id="54" onclick="show(54);">Tamnim Citak (SPA)</div>
+<div id="580" onclick="show(580);">Tasomi-Tata</div>
+<div id="2106" onclick="show(2106);">Tenetehara</div>
+<div id="2107" onclick="show(2107);">Tenharim-Parintintin-Diahoi</div>
+<div id="1218" onclick="show(1218);">Tiwi (PH)</div>
+<div id="1429" onclick="show(1429);">Tocho</div>
+<div id="472" onclick="show(472);">Totontepec Mixe</div>
+<div id="596" onclick="show(596);">Tunica (UPSID)</div>
+<div id="2108" onclick="show(2108);">Tuparí</div>
+<div id="2110" onclick="show(2110);">Uru-Eu-Wau-Wau</div>
+<div id="616" onclick="show(616);">Usan</div>
+<div id="1886" onclick="show(1886);">Waiwai</div>
+<div id="615" onclick="show(615);">Wantoat</div>
+<div id="2646" onclick="show(2646);">Wanyi</div>
+<div id="1237" onclick="show(1237);">Wari' (PH)</div>
+<div id="2111" onclick="show(2111);">Wayampi (SAPHON)</div>
+<div id="2112" onclick="show(2112);">Wayampi (SAPHON)</div>
+<div id="1836" onclick="show(1836);">Wayuu (SAPHON)</div>
+<div id="344" onclick="show(344);">Wayuu (UPSID)</div>
+<div id="2114" onclick="show(2114);">Xipaya</div>
+<div id="632" onclick="show(632);">Yagaria</div>
+<div id="2016" onclick="show(2016);">Yaminahua</div>
+<div id="629" onclick="show(629);">Yaqui</div>
+<div id="644" onclick="show(644);">Yawa</div>
+<div id="1006" onclick="show(1006);">Yawanawa (PH)</div>
+<div id="2736" onclick="show(2736);">Yaygir</div>
+<div id="2018" onclick="show(2018);">Yora</div>
+<div id="2981" onclick="show(2981);">Yorta Yorta (ER)</div>
+<div id="2115" onclick="show(2115);">Zo'é</div>
+<div id="2141" onclick="show(2141);">Záparo</div>
+<div id="235" onclick="show(235);">Abipon (UPSID)</div>
+<div id="1946" onclick="show(1946);">Achuar-Shiwiar</div>
+<div id="2118" onclick="show(2118);">Aikanã (SAPHON)</div>
+<div id="79" onclick="show(79);">Alabama (SPA)</div>
+<div id="1998" onclick="show(1998);">Amahuaca (SAPHON)</div>
+<div id="1920" onclick="show(1920);">Amarakaeri</div>
+<div id="2138" onclick="show(2138);">Andoa</div>
+<div id="1891" onclick="show(1891);">Arhuaco (SAPHON)</div>
+<div id="288" onclick="show(288);">Asháninka (UPSID)</div>
+<div id="1556" onclick="show(1556);">Bakaka (GM)</div>
+<div id="241" onclick="show(241);">Batak Toba (UPSID)</div>
+<div id="1188" onclick="show(1188);">Bemba (Zambia)</div>
+<div id="2821" onclick="show(2821);">Bidyara (ER)</div>
+<div id="2799" onclick="show(2799);">Biri (ER)</div>
+<div id="2800" onclick="show(2800);">Biri (ER)</div>
+<div id="2804" onclick="show(2804);">Biri (ER)</div>
+<div id="2805" onclick="show(2805);">Biri (ER)</div>
+<div id="2806" onclick="show(2806);">Biri (ER)</div>
+<div id="2807" onclick="show(2807);">Biri (ER)</div>
+<div id="2808" onclick="show(2808);">Biri (ER)</div>
+<div id="2810" onclick="show(2810);">Biri (ER)</div>
+<div id="2811" onclick="show(2811);">Biri (ER)</div>
+<div id="2822" onclick="show(2822);">Biri (ER)</div>
+<div id="263" onclick="show(263);">Bodo-Mech</div>
+<div id="1955" onclick="show(1955);">Bororo (SAPHON)</div>
+<div id="1167" onclick="show(1167);">Bumbita Arapesh</div>
+<div id="2001" onclick="show(2001);">Cashibo-Cacataibo</div>
+<div id="2003" onclick="show(2003);">Cashinahua</div>
+<div id="2023" onclick="show(2023);">Chachapoyas Quechua</div>
+<div id="1071" onclick="show(1071);">Choctaw</div>
+<div id="1921" onclick="show(1921);">Cholón</div>
+<div id="195" onclick="show(195);">Chukchi (SPA)</div>
+<div id="2265" onclick="show(2265);">Danish (EA)</div>
+<div id="2727" onclick="show(2727);">Dhudhuroa</div>
+<div id="2253" onclick="show(2253);">Dupaninan Agta (EA)</div>
+<div id="1085" onclick="show(1085);">Dupaninan Agta (PH)</div>
+<div id="414" onclick="show(414);">East Kewa</div>
+<div id="1037" onclick="show(1037);">East Makian (PH)</div>
+<div id="709" onclick="show(709);">Ewondo (AA)</div>
+<div id="2535" onclick="show(2535);">Finnish (EA)</div>
+<div id="334" onclick="show(334);">Fwâi</div>
+<div id="272" onclick="show(272);">Galibi Carib (UPSID)</div>
+<div id="2798" onclick="show(2798);">Gangulu (ER)</div>
+<div id="2801" onclick="show(2801);">Gangulu (ER)</div>
+<div id="2803" onclick="show(2803);">Gangulu (ER)</div>
+<div id="2809" onclick="show(2809);">Gangulu (ER)</div>
+<div id="2082" onclick="show(2082);">Guajajára (SAPHON)</div>
+<div id="2818" onclick="show(2818);">Gudjal</div>
+<div id="2922" onclick="show(2922);">Gugubera</div>
+<div id="3017" onclick="show(3017);">Guwamu</div>
+<div id="2984" onclick="show(2984);">Hawkesbury</div>
+<div id="1948" onclick="show(1948);">Huambisa</div>
+<div id="886" onclick="show(886);">Huichol</div>
+<div id="1844" onclick="show(1844);">Ignaciano (SAPHON)</div>
+<div id="1117" onclick="show(1117);">Iloko (PH)</div>
+<div id="2005" onclick="show(2005);">Kaxararí</div>
+<div id="1173" onclick="show(1173);">Kela (Papua New Guinea)</div>
+<div id="1571" onclick="show(1571);">Kituba (Democratic Republic of Congo)</div>
+<div id="427" onclick="show(427);">Koryak</div>
+<div id="539" onclick="show(539);">Koyraboro Senni Songhai (UPSID)</div>
+<div id="2815" onclick="show(2815);">Kunggari</div>
+<div id="58" onclick="show(58);">Kunimaipa (SPA)</div>
+<div id="434" onclick="show(434);">Kunimaipa (UPSID)</div>
+<div id="758" onclick="show(758);">Kuria</div>
+<div id="2900" onclick="show(2900);">Kuuku-Ya'u</div>
+<div id="1549" onclick="show(1549);">Kuwaataay</div>
+<div id="584" onclick="show(584);">Lenakel</div>
+<div id="768" onclick="show(768);">Lingala</div>
+<div id="988" onclick="show(988);">Matbat</div>
+<div id="1124" onclick="show(1124);">Matsés (PH)</div>
+<div id="2008" onclick="show(2008);">Matsés (SAPHON)</div>
+<div id="2007" onclick="show(2007);">Matís</div>
+<div id="2928" onclick="show(2928);">Mbabaram (ER)</div>
+<div id="1217" onclick="show(1217);">Mekens (PH)</div>
+<div id="957" onclick="show(957);">Michoacán Nahuatl</div>
+<div id="2562" onclick="show(2562);">Min Dong Chinese (EA)</div>
+<div id="948" onclick="show(948);">Mwotlap</div>
+<div id="2998" onclick="show(2998);">Ngarigu</div>
+<div id="2721" onclick="show(2721);">Ngiyambaa (ER)</div>
+<div id="623" onclick="show(623);">Ngiyambaa (UPSID)</div>
+<div id="327" onclick="show(327);">Nobiin (UPSID)</div>
+<div id="805" onclick="show(805);">Nugunu (Cameroon) (AA)</div>
+<div id="302" onclick="show(302);">Nyishi-Hill Miri (UPSID)</div>
+<div id="2099" onclick="show(2099);">Pai Tavytera</div>
+<div id="2004" onclick="show(2004);">Panoan Katukína</div>
+<div id="1828" onclick="show(1828);">Parecís</div>
+<div id="1171" onclick="show(1171);">Petats</div>
+<div id="1829" onclick="show(1829);">Piapoco</div>
+<div id="1394" onclick="show(1394);">Pökoot</div>
+<div id="2036" onclick="show(2036);">San Martín Quechua</div>
+<div id="59" onclick="show(59);">Selepet (SPA)</div>
+<div id="554" onclick="show(554);">Selepet (UPSID)</div>
+<div id="1147" onclick="show(1147);">Seri</div>
+<div id="2014" onclick="show(2014);">Sharanahua (SAPHON)</div>
+<div id="1010" onclick="show(1010);">Siar-Lak</div>
+<div id="1015" onclick="show(1015);">South Efate</div>
+<div id="547" onclick="show(547);">Southern Sierra Miwok</div>
+<div id="1174" onclick="show(1174);">Sursurunga</div>
+<div id="1974" onclick="show(1974);">Suyá (SAPHON)</div>
+<div id="1058" onclick="show(1058);">Tamil (PH)</div>
+<div id="2104" onclick="show(2104);">Tapieté</div>
+<div id="1937" onclick="show(1937);">Ticuna (SAPHON)</div>
+<div id="569" onclick="show(569);">Timne (UPSID)</div>
+<div id="1038" onclick="show(1038);">Tok Pisin</div>
+<div id="590" onclick="show(590);">Tonkawa</div>
+<div id="313" onclick="show(313);">Toro So Dogon (UPSID)</div>
+<div id="1222" onclick="show(1222);">Tsafiki (PH)</div>
+<div id="593" onclick="show(593);">Tsou</div>
+<div id="2064" onclick="show(2064);">Tucano</div>
+<div id="2564" onclick="show(2564);">Upper Saxon (EA)</div>
+<div id="2088" onclick="show(2088);">Urubú-Kaapor</div>
+<div id="2926" onclick="show(2926);">Wamin</div>
+<div id="1890" onclick="show(1890);">Wari' (SAPHON)</div>
+<div id="2722" onclick="show(2722);">Wayilwan</div>
+<div id="2723" onclick="show(2723);">Wiradhuri</div>
+<div id="2724" onclick="show(2724);">Wirriyaraay</div>
+<div id="840" onclick="show(840);">Wobe-Wè Northern</div>
+<div id="1032" onclick="show(1032);">Wogeo</div>
+<div id="1340" onclick="show(1340);">Wongo</div>
+<div id="2787" onclick="show(2787);">Wotjobaluk</div>
+<div id="2863" onclick="show(2863);">Wulguru</div>
+<div id="2017" onclick="show(2017);">Yawanawa (SAPHON)</div>
+<div id="2898" onclick="show(2898);">Yintyinka-Ayabadhu (ER)</div>
+<div id="2980" onclick="show(2980);">Yorta Yorta (ER)</div>
+<div id="2153" onclick="show(2153);">Yukpa (SAPHON)</div>
+<div id="2725" onclick="show(2725);">Yuwaalaraay</div>
+<div id="2719" onclick="show(2719);">Yuwaalaraay-Gamilaraay</div>
+<div id="2726" onclick="show(2726);">Yuwaalayaay</div>
+<div id="1944" onclick="show(1944);">Yámana</div>
+<div id="227" onclick="show(227);">A-Pucikwar (UPSID)</div>
+<div id="1395" onclick="show(1395);">Afrikaans</div>
+<div id="1096" onclick="show(1096);">Arhuaco (PH)</div>
+<div id="562" onclick="show(562);">Atayal (UPSID)</div>
+<div id="1853" onclick="show(1853);">Awa-Cuaiquer (SAPHON)</div>
+<div id="669" onclick="show(669);">Baatonum (AA)</div>
+<div id="1199" onclick="show(1199);">Baga Sitemu</div>
+<div id="1865" onclick="show(1865);">Bakairí (SAPHON)</div>
+<div id="1866" onclick="show(1866);">Bakairí (SAPHON)</div>
+<div id="1557" onclick="show(1557);">Bakaka (GM)</div>
+<div id="1811" onclick="show(1811);">Baniwa do Icana (SAPHON)</div>
+<div id="1100" onclick="show(1100);">Baoulé (PH)</div>
+<div id="1613" onclick="show(1613);">Barain (GM)</div>
+<div id="1665" onclick="show(1665);">Batak Karo</div>
+<div id="33" onclick="show(33);">Batak Toba (SPA)</div>
+<div id="251" onclick="show(251);">Beembe (UPSID)</div>
+<div id="2797" onclick="show(2797);">Bidyara (ER)</div>
+<div id="2824" onclick="show(2824);">Bidyara (ER)</div>
+<div id="1210" onclick="show(1210);">Bilua</div>
+<div id="1511" onclick="show(1511);">Bomitaba</div>
+<div id="435" onclick="show(435);">Border Kuna (UPSID)</div>
+<div id="1197" onclick="show(1197);">Boro (Ethiopia) (PH)</div>
+<div id="1201" onclick="show(1201);">Bukusu</div>
+<div id="266" onclick="show(266);">Burarra (UPSID)</div>
+<div id="1252" onclick="show(1252);">Busa</div>
+<div id="2000" onclick="show(2000);">Capanahua</div>
+<div id="271" onclick="show(271);">Car Nicobarese</div>
+<div id="2430" onclick="show(2430);">Cebuano (EA)</div>
+<div id="1773" onclick="show(1773);">Central Nicobarese</div>
+<div id="1893" onclick="show(1893);">Chibcha</div>
+<div id="1230" onclick="show(1230);">Chickasaw</div>
+<div id="1894" onclick="show(1894);">Chimila</div>
+<div id="2002" onclick="show(2002);">Chácobo (SAPHON)</div>
+<div id="1695" onclick="show(1695);">Coastal-Naga Bikol</div>
+<div id="1430" onclick="show(1430);">Dagik</div>
+<div id="2676" onclick="show(2676);">Djeebbana</div>
+<div id="906" onclick="show(906);">Eastern Karaboro</div>
+<div id="72" onclick="show(72);">Eastern Ojibwa (SPA)</div>
+<div id="1903" onclick="show(1903);">Emberá-Chamí</div>
+<div id="2079" onclick="show(2079);">Emerillon</div>
+<div id="322" onclick="show(322);">Even (UPSID)</div>
+<div id="2378" onclick="show(2378);">Faroese</div>
+<div id="1212" onclick="show(1212);">Filipino</div>
+<div id="332" onclick="show(332);">Fulniô (UPSID)</div>
+<div id="116" onclick="show(116);">Galibi Carib (SPA)</div>
+<div id="2802" onclick="show(2802);">Gangulu (ER)</div>
+<div id="1723" onclick="show(1723);">Garo (RA)</div>
+<div id="2364" onclick="show(2364);">Gorum-Parenga</div>
+<div id="1912" onclick="show(1912);">Guayabero</div>
+<div id="2689" onclick="show(2689);">Gudanji</div>
+<div id="2828" onclick="show(2828);">Gugadj</div>
+<div id="2814" onclick="show(2814);">Gungabula</div>
+<div id="350" onclick="show(350);">Hakka Chinese (UPSID)</div>
+<div id="405" onclick="show(405);">Halh Mongolian (UPSID)</div>
+<div id="1064" onclick="show(1064);">Hanga Hundi</div>
+<div id="1696" onclick="show(1696);">Hiligaynon</div>
+<div id="1211" onclick="show(1211);">Hoava</div>
+<div id="2034" onclick="show(2034);">Huallaga Huánuco Quechua</div>
+<div id="1670" onclick="show(1670);">Iloko (GM)</div>
+<div id="376" onclick="show(376);">Itbayat</div>
+<div id="1981" onclick="show(1981);">Iyo'wujwa Chorote</div>
+<div id="2196" onclick="show(2196);">Japanese (UZ)</div>
+<div id="2029" onclick="show(2029);">Jauja Wanca Quechua (SAPHON)</div>
+<div id="2940" onclick="show(2940);">Kabikabi (ER)</div>
+<div id="617" onclick="show(617);">Kamang</div>
+<div id="2446" onclick="show(2446);">Karelian</div>
+<div id="438" onclick="show(438);">Karok (UPSID)</div>
+<div id="1963" onclick="show(1963);">Kayapó</div>
+<div id="2271" onclick="show(2271);">Kazym-Berezover-Suryskarer Khanty (EA)</div>
+<div id="2279" onclick="show(2279);">Kazym-Berezover-Suryskarer Khanty (EA)</div>
+<div id="1290" onclick="show(1290);">Kete</div>
+<div id="1113" onclick="show(1113);">Kotiria (PH)</div>
+<div id="2053" onclick="show(2053);">Kotiria (SAPHON)</div>
+<div id="436" onclick="show(436);">Kwaio</div>
+<div id="1646" onclick="show(1646);">Kwaya</div>
+<div id="1291" onclick="show(1291);">Kwese</div>
+<div id="2025" onclick="show(2025);">Lambayeque Quechua</div>
+<div id="1579" onclick="show(1579);">Lango (Sudan)</div>
+<div id="1805" onclick="show(1805);">Lokono</div>
+<div id="1122" onclick="show(1122);">Loniu</div>
+<div id="1913" onclick="show(1913);">Macaguán</div>
+<div id="2780" onclick="show(2780);">Madhi Madhi</div>
+<div id="2637" onclick="show(2637);">Marimanindji</div>
+<div id="940" onclick="show(940);">Medumba</div>
+<div id="2101" onclick="show(2101);">Mekens (SAPHON)</div>
+<div id="2673" onclick="show(2673);">Miriwung</div>
+<div id="1471" onclick="show(1471);">Ndali</div>
+<div id="1602" onclick="show(1602);">Njyem</div>
+<div id="1825" onclick="show(1825);">Nomatsiguenga</div>
+<div id="486" onclick="show(486);">Northern Puebla Nahuatl</div>
+<div id="835" onclick="show(835);">Northern Toussian</div>
+<div id="2445" onclick="show(2445);">Northwestern Kolami (EA)</div>
+<div id="1662" onclick="show(1662);">Ntomba</div>
+<div id="971" onclick="show(971);">Nyeu</div>
+<div id="21" onclick="show(21);">Nyishi-Hill Miri (SPA)</div>
+<div id="1930" onclick="show(1930);">Olu'bo (SAPHON)</div>
+<div id="2152" onclick="show(2152);">Pacahuara</div>
+<div id="1699" onclick="show(1699);">Pangasinan</div>
+<div id="585" onclick="show(585);">Papantla Totonac (UPSID)</div>
+<div id="345" onclick="show(345);">Paraguayan Guaraní (UPSID)</div>
+<div id="211" onclick="show(211);">Qawasqar (UPSID)</div>
+<div id="534" onclick="show(534);">Sakha (UPSID)</div>
+<div id="2485" onclick="show(2485);">Selkup (EA)</div>
+<div id="2015" onclick="show(2015);">Shipibo</div>
+<div id="113" onclick="show(113);">Shuar (SPA)</div>
+<div id="556" onclick="show(556);">Sirionó (UPSID)</div>
+<div id="1108" onclick="show(1108);">Sochiapam Chinantec</div>
+<div id="2985" onclick="show(2985);">Sydney (ER)</div>
+<div id="2986" onclick="show(2986);">Sydney (ER)</div>
+<div id="1666" onclick="show(1666);">Tagalog (GM)</div>
+<div id="573" onclick="show(573);">Tagalog (UPSID)</div>
+<div id="1051" onclick="show(1051);">Tamambo</div>
+<div id="2923" onclick="show(2923);">Thayore</div>
+<div id="565" onclick="show(565);">Ticuna (UPSID)</div>
+<div id="578" onclick="show(578);">Tiruray</div>
+<div id="1856" onclick="show(1856);">Tsafiki (SAPHON)</div>
+<div id="2902" onclick="show(2902);">Umpila</div>
+<div id="2232" onclick="show(2232);">Upper Saxon (UZ)</div>
+<div id="1940" onclick="show(1940);">Urarina</div>
+<div id="983" onclick="show(983);">Uri</div>
+<div id="1885" onclick="show(1885);">Waimiri-Atroari</div>
+<div id="1029" onclick="show(1029);">Wambon</div>
+<div id="608" onclick="show(608);">Wapishana (UPSID)</div>
+<div id="2664" onclick="show(2664);">Warray (ER)</div>
+<div id="620" onclick="show(620);">Warray (UPSID)</div>
+<div id="1835" onclick="show(1835);">Waurá</div>
+<div id="2786" onclick="show(2786);">Wemba Wemba</div>
+<div id="294" onclick="show(294);">Western Highland Chatino</div>
+<div id="2896" onclick="show(2896);">Wik-Mungkan (ER)</div>
+<div id="2897" onclick="show(2897);">Wik-Ngathana</div>
+<div id="2073" onclick="show(2073);">Xingú Asuriní</div>
+<div id="639" onclick="show(639);">Yessan-Mayo</div>
+<div id="1153" onclick="show(1153);">Yine (PH)</div>
+<div id="1841" onclick="show(1841);">Yine (SAPHON)</div>
+<div id="2903" onclick="show(2903);">Yintyinka-Ayabadhu (ER)</div>
+<div id="1842" onclick="show(1842);">Yucuna (SAPHON)</div>
+<div id="630" onclick="show(630);">Yucuna (UPSID)</div>
+<div id="1206" onclick="show(1206);">Önge</div>
+<div id="199" onclick="show(199);">Achumawi</div>
+<div id="1433" onclick="show(1433);">Acoli</div>
+<div id="1923" onclick="show(1923);">Aewa</div>
+<div id="1342" onclick="show(1342);">Afar</div>
+<div id="1295" onclick="show(1295);">Afitti</div>
+<div id="1095" onclick="show(1095);">Aklanon</div>
+<div id="1554" onclick="show(1554);">Akoose (GM)</div>
+<div id="1159" onclick="show(1159);">Ambulas</div>
+<div id="2958" onclick="show(2958);">Antakarinya (ER)</div>
+<div id="44" onclick="show(44);">Antakarinya (SPA)</div>
+<div id="225" onclick="show(225);">Antakarinya (UPSID)</div>
+<div id="1243" onclick="show(1243);">Anyin (GM)</div>
+<div id="1953" onclick="show(1953);">Apinayé (SAPHON)</div>
+<div id="2909" onclick="show(2909);">Aritinngitigh</div>
+<div id="110" onclick="show(110);">Asháninka (SPA)</div>
+<div id="1060" onclick="show(1060);">Baga Koga</div>
+<div id="254" onclick="show(254);">Bakairí (UPSID)</div>
+<div id="1834" onclick="show(1834);">Baniva de Maroa</div>
+<div id="2697" onclick="show(2697);">Bardi (ER)</div>
+<div id="245" onclick="show(245);">Bardi (UPSID)</div>
+<div id="2892" onclick="show(2892);">Barrow Point</div>
+<div id="2865" onclick="show(2865);">Bibbulman</div>
+<div id="2851" onclick="show(2851);">Bilinarra (ER)</div>
+<div id="1192" onclick="show(1192);">Bilinarra (PH)</div>
+<div id="2688" onclick="show(2688);">Binbinka</div>
+<div id="2788" onclick="show(2788);">Birrdhawal</div>
+<div id="2576" onclick="show(2576);">Bodo Gadaba (EA)</div>
+<div id="984" onclick="show(984);">Boikin</div>
+<div id="1603" onclick="show(1603);">Buamu</div>
+<div id="1926" onclick="show(1926);">Cayubaba (SAPHON)</div>
+<div id="296" onclick="show(296);">Cayubaba (UPSID)</div>
+<div id="244" onclick="show(244);">Central Bai</div>
+<div id="2597" onclick="show(2597);">Central Khmer (EA)</div>
+<div id="2142" onclick="show(2142);">Chiripá</div>
+<div id="121" onclick="show(121);">Chácobo (SPA)</div>
+<div id="2222" onclick="show(2222);">Cocos Islands Malay</div>
+<div id="2773" onclick="show(2773);">Colac</div>
+<div id="1910" onclick="show(1910);">Cuiba</div>
+<div id="1848" onclick="show(1848);">Culina</div>
+<div id="312" onclick="show(312);">Dagur (UPSID)</div>
+<div id="697" onclick="show(697);">Ditammari</div>
+<div id="2785" onclick="show(2785);">Djabwurrung</div>
+<div id="2783" onclick="show(2783);">Djadjawurrungic</div>
+<div id="2700" onclick="show(2700);">Djawi</div>
+<div id="2699" onclick="show(2699);">Dyaberdyaber</div>
+<div id="1905" onclick="show(1905);">Epena (SAPHON)</div>
+<div id="546" onclick="show(546);">Epena (UPSID)</div>
+<div id="2046" onclick="show(2046);">Ese Ejja (SAPHON)</div>
+<div id="2248" onclick="show(2248);">Estonian (EA)</div>
+<div id="2292" onclick="show(2292);">Evenki (EA)</div>
+<div id="330" onclick="show(330);">Fe'fe' (UPSID)</div>
+<div id="328" onclick="show(328);">Fijian</div>
+<div id="2653" onclick="show(2653);">Gaagudju</div>
+<div id="1722" onclick="show(1722);">Galo</div>
+<div id="2789" onclick="show(2789);">Ganai (ER)</div>
+<div id="2790" onclick="show(2790);">Ganai (ER)</div>
+<div id="2791" onclick="show(2791);">Ganai (ER)</div>
+<div id="2866" onclick="show(2866);">Goreng</div>
+<div id="1911" onclick="show(1911);">Guahibo (SAPHON)</div>
+<div id="346" onclick="show(346);">Guahibo (UPSID)</div>
+<div id="1959" onclick="show(1959);">Guató</div>
+<div id="222" onclick="show(222);">Guerrero Amuzgo</div>
+<div id="2853" onclick="show(2853);">Gurindji</div>
+<div id="2886" onclick="show(2886);">Guugu Yimidhirr</div>
+<div id="1155" onclick="show(1155);">Huamalíes-Dos de Mayo Huánuco Quechua</div>
+<div id="1057" onclick="show(1057);">Ibibio</div>
+<div id="1187" onclick="show(1187);">Ida'an</div>
+<div id="2879" onclick="show(2879);">Ikaranggal (ER)</div>
+<div id="2026" onclick="show(2026);">Imbabura Highland Quichua</div>
+<div id="107" onclick="show(107);">Island Carib (SPA)</div>
+<div id="2854" onclick="show(2854);">Jaru</div>
+<div id="1860" onclick="show(1860);">Jebero (SAPHON)</div>
+<div id="2687" onclick="show(2687);">Jingulu</div>
+<div id="1439" onclick="show(1439);">Jita</div>
+<div id="2867" onclick="show(2867);">Kaniyang</div>
+<div id="2825" onclick="show(2825);">Karadjeri (ER)</div>
+<div id="879" onclick="show(879);">Karadjeri (PH)</div>
+<div id="2952" onclick="show(2952);">Kartujarra</div>
+<div id="3002" onclick="show(3002);">Kayardild (ER)</div>
+<div id="1137" onclick="show(1137);">Kazym-Berezover-Suryskarer Khanty (PH)</div>
+<div id="2225" onclick="show(2225);">Kedayan</div>
+<div id="792" onclick="show(792);">Kituba (Congo)</div>
+<div id="2937" onclick="show(2937);">Kokata</div>
+<div id="1306" onclick="show(1306);">Krache</div>
+<div id="2959" onclick="show(2959);">Kukatja</div>
+<div id="2675" onclick="show(2675);">Kungarakany</div>
+<div id="2906" onclick="show(2906);">Kuthant</div>
+<div id="3009" onclick="show(3009);">Kwini</div>
+<div id="2779" onclick="show(2779);">Ladji Ladji</div>
+<div id="760" onclick="show(760);">Lama (Togo)</div>
+<div id="3003" onclick="show(3003);">Lardil</div>
+<div id="1516" onclick="show(1516);">Lele (Guinea)</div>
+<div id="769" onclick="show(769);">Lukpa</div>
+<div id="1427" onclick="show(1427);">Lumun</div>
+<div id="890" onclick="show(890);">Luyi</div>
+<div id="2632" onclick="show(2632);">Madngele</div>
+<div id="1677" onclick="show(1677);">Makasar</div>
+<div id="986" onclick="show(986);">Mal</div>
+<div id="2855" onclick="show(2855);">Malngin</div>
+<div id="463" onclick="show(463);">Manchu</div>
+<div id="2826" onclick="show(2826);">Mangala</div>
+<div id="2682" onclick="show(2682);">Mangarrayi</div>
+<div id="2953" onclick="show(2953);">Manyjilyjara</div>
+<div id="2669" onclick="show(2669);">Mawng (ER)</div>
+<div id="467" onclick="show(467);">Mawng (UPSID)</div>
+<div id="2927" onclick="show(2927);">Mbara-Yanga</div>
+<div id="1641" onclick="show(1641);">Meru</div>
+<div id="1858" onclick="show(1858);">Miraña</div>
+<div id="789" onclick="show(789);">Mossi</div>
+<div id="2856" onclick="show(2856);">Mudburra</div>
+<div id="869" onclick="show(869);">Mufian</div>
+<div id="1129" onclick="show(1129);">Mundurukú (PH)</div>
+<div id="2096" onclick="show(2096);">Mundurukú (SAPHON)</div>
+<div id="1992" onclick="show(1992);">Nadëb</div>
+<div id="501" onclick="show(501);">Nara (UPSID)</div>
+<div id="1600" onclick="show(1600);">Ncane</div>
+<div id="2962" onclick="show(2962);">Ngaanyatjarra</div>
+<div id="960" onclick="show(960);">Ngalakgan (PH)</div>
+<div id="2684" onclick="show(2684);">Ngaliwurru</div>
+<div id="2858" onclick="show(2858);">Ngarinman</div>
+<div id="3007" onclick="show(3007);">Ngarinyin (ER)</div>
+<div id="2961" onclick="show(2961);">Ngarla</div>
+<div id="2842" onclick="show(2842);">Ngarla on the Ashburton river south of the Hamersley range</div>
+<div id="2686" onclick="show(2686);">Ngarnka</div>
+<div id="802" onclick="show(802);">Ngiemboon (AA)</div>
+<div id="2692" onclick="show(2692);">Ngumbarl</div>
+<div id="2698" onclick="show(2698);">Nimanbur</div>
+<div id="492" onclick="show(492);">Noone</div>
+<div id="1689" onclick="show(1689);">North Moluccan Malay</div>
+<div id="498" onclick="show(498);">Northeast Maidu (UPSID)</div>
+<div id="2035" onclick="show(2035);">Northern Conchucos Ancash Quechua</div>
+<div id="2845" onclick="show(2845);">Nyamal</div>
+<div id="2827" onclick="show(2827);">Nyangumarta (ER)</div>
+<div id="2693" onclick="show(2693);">Nyigina</div>
+<div id="2701" onclick="show(2701);">Nyulnyul</div>
+<div id="2864" onclick="show(2864);">Nyunga (ER)</div>
+<div id="2868" onclick="show(2868);">Nyunga (ER)</div>
+<div id="2872" onclick="show(2872);">Nyunga (ER)</div>
+<div id="2873" onclick="show(2873);">Nyunga (ER)</div>
+<div id="2874" onclick="show(2874);">Nyunga (ER)</div>
+<div id="2529" onclick="show(2529);">Pampanga (EA)</div>
+<div id="1697" onclick="show(1697);">Pampanga (GM)</div>
+<div id="512" onclick="show(512);">Pech</div>
+<div id="2869" onclick="show(2869);">Pinjarup</div>
+<div id="2963" onclick="show(2963);">Pintupi-Luritja</div>
+<div id="2960" onclick="show(2960);">Pitjantjatjara (ER)</div>
+<div id="2964" onclick="show(2964);">Pitjantjatjara (ER)</div>
+<div id="2226" onclick="show(2226);">Pitjantjatjara (UZ)</div>
+<div id="985" onclick="show(985);">Prai</div>
+<div id="987" onclick="show(987);">Rama</div>
+<div id="559" onclick="show(559);">Savosavo</div>
+<div id="544" onclick="show(544);">Shasta</div>
+<div id="1476" onclick="show(1476);">Soo</div>
+<div id="1667" onclick="show(1667);">Southern Sama</div>
+<div id="1639" onclick="show(1639);">Sumbwa</div>
+<div id="1566" onclick="show(1566);">Sãotomense</div>
+<div id="1066" onclick="show(1066);">Tatana</div>
+<div id="2212" onclick="show(2212);">Tausug (UZ)</div>
+<div id="55" onclick="show(55);">Telefol</div>
+<div id="757" onclick="show(757);">Tepo Krumen</div>
+<div id="1136" onclick="show(1136);">Texistepec Popoluca</div>
+<div id="831" onclick="show(831);">Timne (AA)</div>
+<div id="833" onclick="show(833);">Toposa</div>
+<div id="588" onclick="show(588);">Trumai (UPSID)</div>
+<div id="1265" onclick="show(1265);">Tunen</div>
+<div id="2644" onclick="show(2644);">Umbugarla</div>
+<div id="1553" onclick="show(1553);">Upper Guinea Crioulo</div>
+<div id="870" onclick="show(870);">Usarufa</div>
+<div id="2781" onclick="show(2781);">Wadi Wadi</div>
+<div id="2636" onclick="show(2636);">Wadjiginy</div>
+<div id="610" onclick="show(610);">Wahgi</div>
+<div id="2871" onclick="show(2871);">Wajuk</div>
+<div id="2859" onclick="show(2859);">Walmajarri</div>
+<div id="2690" onclick="show(2690);">Wambayan</div>
+<div id="2680" onclick="show(2680);">Wandarang</div>
+<div id="2955" onclick="show(2955);">Wangkajunga</div>
+<div id="2957" onclick="show(2957);">Wanman</div>
+<div id="2852" onclick="show(2852);">Wanyjirra</div>
+<div id="108" onclick="show(108);">Wapishana (SPA)</div>
+<div id="3015" onclick="show(3015);">Wardaman</div>
+<div id="2870" onclick="show(2870);">Wardandi</div>
+<div id="2694" onclick="show(2694);">Warrwa</div>
+<div id="3019" onclick="show(3019);">Wergaia</div>
+<div id="1081" onclick="show(1081);">West Coast Bajau</div>
+<div id="469" onclick="show(469);">West Makian</div>
+<div id="766" onclick="show(766);">West-Central Limba</div>
+<div id="2782" onclick="show(2782);">Western Victoria (ER)</div>
+<div id="2988" onclick="show(2988);">Western Victoria (ER)</div>
+<div id="3013" onclick="show(3013);">Worrorra</div>
+<div id="3010" onclick="show(3010);">Wunambal</div>
+<div id="895" onclick="show(895);">Yalunka</div>
+<div id="3016" onclick="show(3016);">Yangman</div>
+<div id="2965" onclick="show(2965);">Yankunytjatjara</div>
+<div id="1335" onclick="show(1335);">Yansi</div>
+<div id="1267" onclick="show(1267);">Yao</div>
+<div id="1839" onclick="show(1839);">Yavitero</div>
+<div id="1840" onclick="show(1840);">Yawalapití</div>
+<div id="1655" onclick="show(1655);">Yemba (GM)</div>
+<div id="636" onclick="show(636);">Yoruba (UPSID)</div>
+<div id="2956" onclick="show(2956);">Yulparija</div>
+<div id="1026" onclick="show(1026);">Yuracaré (PH)</div>
+<div id="1428" onclick="show(1428);">Acheron</div>
+<div id="1090" onclick="show(1090);">Adang</div>
+<div id="41" onclick="show(41);">Adzera (SPA)</div>
+<div id="200" onclick="show(200);">Adzera (UPSID)</div>
+<div id="655" onclick="show(655);">Akan (AA)</div>
+<div id="221" onclick="show(221);">Alamblak</div>
+<div id="2412" onclick="show(2412);">Alutor</div>
+<div id="504" onclick="show(504);">Ama (Sudan)</div>
+<div id="1684" onclick="show(1684);">Ambonese Malay</div>
+<div id="2918" onclick="show(2918);">Angkamuthi</div>
+<div id="1165" onclick="show(1165);">Anuak</div>
+<div id="1242" onclick="show(1242);">Anyin (GM)</div>
+<div id="1808" onclick="show(1808);">Ashéninka Perené</div>
+<div id="2917" onclick="show(2917);">Atampaya (ER)</div>
+<div id="2919" onclick="show(2919);">Atampaya (ER)</div>
+<div id="2373" onclick="show(2373);">Atayal (EA)</div>
+<div id="1175" onclick="show(1175);">Awara</div>
+<div id="240" onclick="show(240);">Baatonum (UPSID)</div>
+<div id="1693" onclick="show(1693);">Balinese</div>
+<div id="1685" onclick="show(1685);">Banda Malay</div>
+<div id="1812" onclick="show(1812);">Baniwa do Icana (SAPHON)</div>
+<div id="2160" onclick="show(2160);">Bardi (UZ)</div>
+<div id="237" onclick="show(237);">Bashkir (UPSID)</div>
+<div id="1099" onclick="show(1099);">Batak Toba (PH)</div>
+<div id="1509" onclick="show(1509);">Beria</div>
+<div id="2823" onclick="show(2823);">Bidyara (ER)</div>
+<div id="253" onclick="show(253);">Bissa (UPSID)</div>
+<div id="1196" onclick="show(1196);">Bongo</div>
+<div id="268" onclick="show(268);">Bribri</div>
+<div id="1692" onclick="show(1692);">Cebuano (GM)</div>
+<div id="742" onclick="show(742);">Central Kanuri (AA)</div>
+<div id="857" onclick="show(857);">Chepang</div>
+<div id="2021" onclick="show(2021);">Corongo Ancash Quechua</div>
+<div id="1385" onclick="show(1385);">Defaka</div>
+<div id="1845" onclick="show(1845);">Deni</div>
+<div id="2813" onclick="show(2813);">Dharumbal</div>
+<div id="454" onclick="show(454);">Donga Mambila (UPSID)</div>
+<div id="2405" onclick="show(2405);">Dutch (EA)</div>
+<div id="2648" onclick="show(2648);">Erre</div>
+<div id="2047" onclick="show(2047);">Ese Ejja (SAPHON)</div>
+<div id="2288" onclick="show(2288);">Even (EA)</div>
+<div id="192" onclick="show(192);">Even (SPA)</div>
+<div id="2238" onclick="show(2238);">Evenki (UZ)</div>
+<div id="3001" onclick="show(3001);">Ganggalida</div>
+<div id="1052" onclick="show(1052);">Gayo</div>
+<div id="339" onclick="show(339);">Gbagyi</div>
+<div id="1562" onclick="show(1562);">Gban</div>
+<div id="347" onclick="show(347);">Guambiano (UPSID)</div>
+<div id="1871" onclick="show(1871);">Hixkaryána (SAPHON)</div>
+<div id="355" onclick="show(355);">Hixkaryána (UPSID)</div>
+<div id="2878" onclick="show(2878);">Ikaranggal (ER)</div>
+<div id="1690" onclick="show(1690);">Indonesian (GM)</div>
+<div id="1144" onclick="show(1144);">Indonesian (PH)</div>
+<div id="2683" onclick="show(2683);">Jaminjung-Ngaliwurru</div>
+<div id="381" onclick="show(381);">Jebero (UPSID)</div>
+<div id="315" onclick="show(315);">Jola-Fonyi (UPSID)</div>
+<div id="2087" onclick="show(2087);">Jurúna</div>
+<div id="2967" onclick="show(2967);">Kala Lagaw Ya (ER)</div>
+<div id="475" onclick="show(475);">Kala Lagaw Ya (UPSID)</div>
+<div id="2767" onclick="show(2767);">Kalali</div>
+<div id="2966" onclick="show(2966);">Kalaw Kawaw</div>
+<div id="40" onclick="show(40);">Kaliai</div>
+<div id="1494" onclick="show(1494);">Kangaki-Kagbaaga-Kajoko Bidyogo</div>
+<div id="3004" onclick="show(3004);">Kayardild (ER)</div>
+<div id="396" onclick="show(396);">Kazym-Berezover-Suryskarer Khanty (UPSID)</div>
+<div id="1412" onclick="show(1412);">Kemezung</div>
+<div id="2" onclick="show(2);">Ket (SPA)</div>
+<div id="399" onclick="show(399);">Ket (UPSID)</div>
+<div id="748" onclick="show(748);">Kikuyu</div>
+<div id="1668" onclick="show(1668);">Kimaragang</div>
+<div id="2904" onclick="show(2904);">Kok-Nar</div>
+<div id="2055" onclick="show(2055);">Koreguaje</div>
+<div id="2094" onclick="show(2094);">Kuruáya</div>
+<div id="1445" onclick="show(1445);">Lango (Uganda)</div>
+<div id="2642" onclick="show(2642);">Laragia</div>
+<div id="1688" onclick="show(1688);">Larantuka Malay</div>
+<div id="764" onclick="show(764);">Loko</div>
+<div id="2913" onclick="show(2913);">Luthigh</div>
+<div id="1822" onclick="show(1822);">Machiguenga</div>
+<div id="2202" onclick="show(2202);">Mafea</div>
+<div id="422" onclick="show(422);">Maharashtrian Konkani (UPSID)</div>
+<div id="1007" onclick="show(1007);">Makonde</div>
+<div id="1686" onclick="show(1686);">Manado Malay</div>
+<div id="2649" onclick="show(2649);">Mangerr</div>
+<div id="1125" onclick="show(1125);">Manipuri (PH)</div>
+<div id="1369" onclick="show(1369);">Manya</div>
+<div id="2830" onclick="show(2830);">Mayaguduna</div>
+<div id="2829" onclick="show(2829);">Mayi-Kulan</div>
+<div id="2832" onclick="show(2832);">Mayi-Yapi</div>
+<div id="2128" onclick="show(2128);">Minica Huitoto</div>
+<div id="2187" onclick="show(2187);">Modern Greek (UZ)</div>
+<div id="479" onclick="show(479);">Movima (UPSID)</div>
+<div id="341" onclick="show(341);">Nanai</div>
+<div id="1824" onclick="show(1824);">Nanti</div>
+<div id="2784" onclick="show(2784);">Nari Nari</div>
+<div id="2291" onclick="show(2291);">Naukan Yupik</div>
+<div id="799" onclick="show(799);">Ngambay</div>
+<div id="2857" onclick="show(2857);">Ngardi</div>
+<div id="601" onclick="show(601);">Ngarinyin (UPSID)</div>
+<div id="2833" onclick="show(2833);">Ngawun (ER)</div>
+<div id="1455" onclick="show(1455);">Nkonya</div>
+<div id="82" onclick="show(82);">Northeast Maidu (SPA)</div>
+<div id="2372" onclick="show(2372);">Northern Altai</div>
+<div id="499" onclick="show(499);">Norwegian Bokmål (UPSID)</div>
+<div id="505" onclick="show(505);">Nyang'i</div>
+<div id="1382" onclick="show(1382);">Oko</div>
+<div id="975" onclick="show(975);">Oku</div>
+<div id="511" onclick="show(511);">Pacoh</div>
+<div id="2084" onclick="show(2084);">Paraguayan Guaraní (SAPHON)</div>
+<div id="1361" onclick="show(1361);">Pero</div>
+<div id="1073" onclick="show(1073);">Pilagá (PH)</div>
+<div id="1917" onclick="show(1917);">Pilagá (SAPHON)</div>
+<div id="2758" onclick="show(2758);">Punthamara</div>
+<div id="1801" onclick="show(1801);">Qawasqar (SAPHON)</div>
+<div id="2144" onclick="show(2144);">Qawasqar (SAPHON)</div>
+<div id="2048" onclick="show(2048);">Reyesano</div>
+<div id="551" onclick="show(551);">Sa'ban (UPSID)</div>
+<div id="888" onclick="show(888);">San Mateo del Mar Huave (PH)</div>
+<div id="1330" onclick="show(1330);">Selee</div>
+<div id="538" onclick="show(538);">Selkup (UPSID)</div>
+<div id="545" onclick="show(545);">Sinhala (UPSID)</div>
+<div id="2060" onclick="show(2060);">Siona-Tetete (SAPHON)</div>
+<div id="550" onclick="show(550);">Siona-Tetete (UPSID)</div>
+<div id="2116" onclick="show(2116);">Sirionó (SAPHON)</div>
+<div id="118" onclick="show(118);">Sirionó (SPA)</div>
+<div id="2526" onclick="show(2526);">Sora (EA)</div>
+<div id="2308" onclick="show(2308);">Spanish (EA)</div>
+<div id="2210" onclick="show(2210);">Spanish (UZ)</div>
+<div id="2223" onclick="show(2223);">Standard Malay (UZ)</div>
+<div id="1850" onclick="show(1850);">Suruahá</div>
+<div id="2554" onclick="show(2554);">Swedish (EA)</div>
+<div id="1150" onclick="show(1150);">Swedish (PH)</div>
+<div id="2049" onclick="show(2049);">Tacana (SAPHON)</div>
+<div id="583" onclick="show(583);">Tacana (UPSID)</div>
+<div id="37" onclick="show(37);">Tagalog (SPA)</div>
+<div id="570" onclick="show(570);">Temein</div>
+<div id="115" onclick="show(115);">Ticuna (SPA)</div>
+<div id="3005" onclick="show(3005);">Tiwi (ER)</div>
+<div id="1918" onclick="show(1918);">Toba (SAPHON)</div>
+<div id="2155" onclick="show(2155);">Trinitario</div>
+<div id="80" onclick="show(80);">Tunica (SPA)</div>
+<div id="2650" onclick="show(2650);">Urningangg</div>
+<div id="2434" onclick="show(2434);">Vach Khanty</div>
+<div id="1833" onclick="show(1833);">Wapishana (SAPHON)</div>
+<div id="2861" onclick="show(2861);">Warlpiri</div>
+<div id="3018" onclick="show(3018);">Western Warlpiri</div>
+<div id="503" onclick="show(503);">Wubuy (UPSID)</div>
+<div id="2920" onclick="show(2920);">Yadhaykenu</div>
+<div id="843" onclick="show(843);">Yambeta</div>
+<div id="848" onclick="show(848);">Yoruba (AA)</div>
+<div id="1945" onclick="show(1945);">Yuracaré (SAPHON)</div>
+<div id="1803" onclick="show(1803);">Achagua</div>
+<div id="2884" onclick="show(2884);">Anguthimri</div>
+<div id="1298" onclick="show(1298);">Anyin (GM)</div>
+<div id="2139" onclick="show(2139);">Arabela (SAPHON)</div>
+<div id="2044" onclick="show(2044);">Araona</div>
+<div id="2516" onclick="show(2516);">Asturian-Leonese-Cantabrian (EA)</div>
+<div id="30" onclick="show(30);">Atayal (SPA)</div>
+<div id="1656" onclick="show(1656);">Bafanji</div>
+<div id="1555" onclick="show(1555);">Bakaka (GM)</div>
+<div id="1813" onclick="show(1813);">Baré</div>
+<div id="144" onclick="show(144);">Beembe (SPA)</div>
+<div id="677" onclick="show(677);">Bhele</div>
+<div id="1251" onclick="show(1251);">Bila</div>
+<div id="883" onclick="show(883);">Bininj Kun-Wok</div>
+<div id="682" onclick="show(682);">Boko (Benin)</div>
+<div id="1897" onclick="show(1897);">Border Kuna (SAPHON)</div>
+<div id="1694" onclick="show(1694);">Buginese</div>
+<div id="1313" onclick="show(1313);">Burun</div>
+<div id="2022" onclick="show(2022);">Cajamarca Quechua</div>
+<div id="1815" onclick="show(1815);">Caquinte</div>
+<div id="855" onclick="show(855);">Chamicuro (PH)</div>
+<div id="1816" onclick="show(1816);">Chamicuro (SAPHON)</div>
+<div id="686" onclick="show(686);">Chumburung</div>
+<div id="298" onclick="show(298);">Dan (UPSID)</div>
+<div id="2167" onclick="show(2167);">Danish (UZ)</div>
+<div id="2995" onclick="show(2995);">Dhurga</div>
+<div id="2992" onclick="show(2992);">Djapu</div>
+<div id="981" onclick="show(981);">Dobu</div>
+<div id="1050" onclick="show(1050);">Dutch (PH)</div>
+<div id="2169" onclick="show(2169);">Dutch (UZ)</div>
+<div id="2173" onclick="show(2173);">Dutch (UZ)</div>
+<div id="2241" onclick="show(2241);">Eastern Mari (EA)</div>
+<div id="858" onclick="show(858);">Eastern Mari (PH)</div>
+<div id="460" onclick="show(460);">Eastern Mari (UPSID)</div>
+<div id="2451" onclick="show(2451);">Eastern Tamang (EA)</div>
+<div id="561" onclick="show(561);">Eastern Tamang (UPSID)</div>
+<div id="702" onclick="show(702);">Ebira</div>
+<div id="1654" onclick="show(1654);">Ejagham (GM)</div>
+<div id="969" onclick="show(969);">Elip</div>
+<div id="1902" onclick="show(1902);">Emberá-Catío</div>
+<div id="1310" onclick="show(1310);">Foodo</div>
+<div id="333" onclick="show(333);">Fur</div>
+<div id="770" onclick="show(770);">Ganda</div>
+<div id="337" onclick="show(337);">Garrwa (UPSID)</div>
+<div id="2080" onclick="show(2080);">Gavião Do Jiparaná</div>
+<div id="2631" onclick="show(2631);">Gooniyandi</div>
+<div id="2997" onclick="show(2997);">Gundungurra</div>
+<div id="2905" onclick="show(2905);">Gurdjar</div>
+<div id="884" onclick="show(884);">Haya</div>
+<div id="1255" onclick="show(1255);">Herero</div>
+<div id="1020" onclick="show(1020);">Hupdë (PH)</div>
+<div id="1991" onclick="show(1991);">Hupdë (SAPHON)</div>
+<div id="364" onclick="show(364);">Iban</div>
+<div id="731" onclick="show(731);">Ifè</div>
+<div id="2606" onclick="show(2606);">Iloko (EA)</div>
+<div id="2027" onclick="show(2027);">Inga</div>
+<div id="1928" onclick="show(1928);">Itonama (SAPHON)</div>
+<div id="103" onclick="show(103);">Itonama (SPA)</div>
+<div id="374" onclick="show(374);">Itonama (UPSID)</div>
+<div id="367" onclick="show(367);">Izon</div>
+<div id="737" onclick="show(737);">Jola-Fonyi (AA)</div>
+<div id="2258" onclick="show(2258);">Juang (EA)</div>
+<div id="1089" onclick="show(1089);">Juang (PH)</div>
+<div id="394" onclick="show(394);">Kafa</div>
+<div id="388" onclick="show(388);">Kalaallisut (UPSID)</div>
+<div id="1679" onclick="show(1679);">Kambera</div>
+<div id="745" onclick="show(745);">Kasem (AA)</div>
+<div id="184" onclick="show(184);">Kazym-Berezover-Suryskarer Khanty (SPA)</div>
+<div id="1215" onclick="show(1215);">Ke'o</div>
+<div id="12" onclick="show(12);">Khasi (SPA)</div>
+<div id="779" onclick="show(779);">Kita Maninkakan</div>
+<div id="2674" onclick="show(2674);">Kitja</div>
+<div id="871" onclick="show(871);">Korafe</div>
+<div id="401" onclick="show(401);">Koya (UPSID)</div>
+<div id="1274" onclick="show(1274);">Koyraboro Senni Songhai (GM)</div>
+<div id="433" onclick="show(433);">Kunama (UPSID)</div>
+<div id="1687" onclick="show(1687);">Kupang Malay</div>
+<div id="2765" onclick="show(2765);">Kuungkari of Barcoo River</div>
+<div id="921" onclick="show(921);">Kwaza (PH)</div>
+<div id="2124" onclick="show(2124);">Kwaza (SAPHON)</div>
+<div id="2194" onclick="show(2194);">Ladino (UZ)</div>
+<div id="1669" onclick="show(1669);">Lemeting</div>
+<div id="1432" onclick="show(1432);">Luwo</div>
+<div id="1316" onclick="show(1316);">Mabaan</div>
+<div id="1289" onclick="show(1289);">Mambwe-Lungu</div>
+<div id="1126" onclick="show(1126);">Mandinka</div>
+<div id="230" onclick="show(230);">Mapudungun (UPSID)</div>
+<div id="47" onclick="show(47);">Maranunggu</div>
+<div id="2679" onclick="show(2679);">Marra (ER)</div>
+<div id="937" onclick="show(937);">Marra (PH)</div>
+<div id="451" onclick="show(451);">Masai (UPSID)</div>
+<div id="2119" onclick="show(2119);">Mato Grosso Arára</div>
+<div id="48" onclick="show(48);">Mawng (SPA)</div>
+<div id="1558" onclick="show(1558);">Mbo (Cameroon) (GM)</div>
+<div id="481" onclick="show(481);">Min Nan Chinese</div>
+<div id="1698" onclick="show(1698);">Minangkabau</div>
+<div id="459" onclick="show(459);">Mogholi</div>
+<div id="1672" onclick="show(1672);">Moklen</div>
+<div id="1569" onclick="show(1569);">Morisyen</div>
+<div id="1932" onclick="show(1932);">Movima (SAPHON)</div>
+<div id="1746" onclick="show(1746);">Mudhili Gadaba</div>
+<div id="2720" onclick="show(2720);">Muruwari</div>
+<div id="1341" onclick="show(1341);">Mwali Comorian</div>
+<div id="155" onclick="show(155);">Nama</div>
+<div id="2635" onclick="show(2635);">Nangikurrunggurr (ER)</div>
+<div id="1611" onclick="show(1611);">Ndamba</div>
+<div id="2910" onclick="show(2910);">Ndra'ngith</div>
+<div id="2831" onclick="show(2831);">Ngawun (ER)</div>
+<div id="2834" onclick="show(2834);">Ngawun (ER)</div>
+<div id="1628" onclick="show(1628);">Ngiemboon (GM)</div>
+<div id="2916" onclick="show(2916);">Ngkoth</div>
+<div id="1411" onclick="show(1411);">Ngomba</div>
+<div id="2097" onclick="show(2097);">Nhengatu</div>
+<div id="1674" onclick="show(1674);">Nias</div>
+<div id="493" onclick="show(493);">Niellim (UPSID)</div>
+<div id="270" onclick="show(270);">Nivaclé (UPSID)</div>
+<div id="2030" onclick="show(2030);">North Junín Quechua (SAPHON)</div>
+<div id="2031" onclick="show(2031);">North Junín Quechua (SAPHON)</div>
+<div id="2037" onclick="show(2037);">North Junín Quechua (SAPHON)</div>
+<div id="307" onclick="show(307);">Northeastern Dinka</div>
+<div id="2492" onclick="show(2492);">Northeastern Thai (EA)</div>
+<div id="725" onclick="show(725);">Northern Grebo</div>
+<div id="801" onclick="show(801);">Northern Ngbandi</div>
+<div id="2628" onclick="show(2628);">Nyaw (EA)</div>
+<div id="1776" onclick="show(1776);">Paite Chin</div>
+<div id="2766" onclick="show(2766);">Pirriya</div>
+<div id="2206" onclick="show(2206);">Portuguese (UZ)</div>
+<div id="2543" onclick="show(2543);">Pottangi Ollar Gadaba (EA)</div>
+<div id="100" onclick="show(100);">San Miguel El Grande Mixtec (SPA)</div>
+<div id="997" onclick="show(997);">Sasak</div>
+<div id="998" onclick="show(998);">Savara</div>
+<div id="999" onclick="show(999);">Sayula Popoluca</div>
+<div id="1326" onclick="show(1326);">Sekpele</div>
+<div id="815" onclick="show(815);">Senara Sénoufo</div>
+<div id="1194" onclick="show(1194);">Southern Bobo Madaré</div>
+<div id="2996" onclick="show(2996);">Southern Coastal Yuin (ER)</div>
+<div id="3000" onclick="show(3000);">Southern Coastal Yuin (ER)</div>
+<div id="2999" onclick="show(2999);">Southern Inland Yuin</div>
+<div id="2303" onclick="show(2303);">Spanish (EA)</div>
+<div id="35" onclick="show(35);">Sundanese</div>
+<div id="2103" onclick="show(2103);">Suruí</div>
+<div id="2572" onclick="show(2572);">Tai Nüa</div>
+<div id="2563" onclick="show(2563);">Temiar</div>
+<div id="1044" onclick="show(1044);">Ternate</div>
+<div id="2294" onclick="show(2294);">Thakali</div>
+<div id="2993" onclick="show(2993);">Thurawal (ER)</div>
+<div id="2994" onclick="show(2994);">Thurawal (ER)</div>
+<div id="2213" onclick="show(2213);">Timne (UZ)</div>
+<div id="1450" onclick="show(1450);">Tiéyaxo Bozo</div>
+<div id="1045" onclick="show(1045);">Toba (PH)</div>
+<div id="96" onclick="show(96);">Tohono O'odham (SPA)</div>
+<div id="509" onclick="show(509);">Tohono O'odham (UPSID)</div>
+<div id="834" onclick="show(834);">Toura (Côte d'Ivoire) (AA)</div>
+<div id="1441" onclick="show(1441);">Tsotso</div>
+<div id="1225" onclick="show(1225);">Tuvinian (PH)</div>
+<div id="2911" onclick="show(2911);">Tyanngayt-Mamngayt-Ntrwangayt-Ntrangit</div>
+<div id="2570" onclick="show(2570);">Udihe</div>
+<div id="3012" onclick="show(3012);">Unggumi</div>
+<div id="1084" onclick="show(1084);">Ute-Southern Paiute</div>
+<div id="2947" onclick="show(2947);">Wagaya (ER)</div>
+<div id="2907" onclick="show(2907);">Walangama</div>
+<div id="2470" onclick="show(2470);">Western Frisian</div>
+<div id="2934" onclick="show(2934);">Wirangu-Nauo</div>
+<div id="1900" onclick="show(1900);">Woun Meu</div>
+<div id="2665" onclick="show(2665);">Wubuy (ER)</div>
+<div id="49" onclick="show(49);">Wubuy (SPA)</div>
+<div id="1837" onclick="show(1837);">Xiriâna</div>
+<div id="1978" onclick="show(1978);">Xokleng</div>
+<div id="2849" onclick="show(2849);">Yindjibarndi (ER)</div>
+<div id="847" onclick="show(847);">Yoruba (AA)</div>
+<div id="640" onclick="show(640);">Yucatec Maya</div>
+<div id="2309" onclick="show(2309);">Yue Chinese (EA)</div>
+<div id="645" onclick="show(645);">Zande (UPSID)</div>
+<div id="1521" onclick="show(1521);">Abure</div>
+<div id="587" onclick="show(587);">Acatepec Me'phaa</div>
+<div id="1093" onclick="show(1093);">Achinese</div>
+<div id="1527" onclick="show(1527);">Adioukrou (GM)</div>
+<div id="2880" onclick="show(2880);">Aghu Tharnggalu</div>
+<div id="1807" onclick="show(1807);">Ajyíninka Apurucayali</div>
+<div id="1572" onclick="show(1572);">Akaselem</div>
+<div id="1228" onclick="show(1228);">Aneityum</div>
+<div id="2375" onclick="show(2375);">Aragonese (EA)</div>
+<div id="1055" onclick="show(1055);">Aragonese (PH)</div>
+<div id="2571" onclick="show(2571);">Asturian-Leonese-Cantabrian (EA)</div>
+<div id="2137" onclick="show(2137);">Ayoreo</div>
+<div id="2768" onclick="show(2768);">Badimaya</div>
+<div id="664" onclick="show(664);">Bambara (AA)</div>
+<div id="2875" onclick="show(2875);">Bandjigali</div>
+<div id="2935" onclick="show(2935);">Banggarla</div>
+<div id="1559" onclick="show(1559);">Bassossi</div>
+<div id="1184" onclick="show(1184);">Batanga</div>
+<div id="2741" onclick="show(2741);">Bayungu</div>
+<div id="1190" onclick="show(1190);">Betta Kurumba (PH)</div>
+<div id="1101" onclick="show(1101);">Bondo (PH)</div>
+<div id="2630" onclick="show(2630);">Bunaba</div>
+<div id="2717" onclick="show(2717);">Bunganditj</div>
+<div id="2742" onclick="show(2742);">Burduna</div>
+<div id="269" onclick="show(269);">Caddo</div>
+<div id="854" onclick="show(854);">Cavineña (PH)</div>
+<div id="2045" onclick="show(2045);">Cavineña (SAPHON)</div>
+<div id="277" onclick="show(277);">Chamorro (UPSID)</div>
+<div id="450" onclick="show(450);">Chiquihuitlán Mazatec (UPSID)</div>
+<div id="860" onclick="show(860);">Chol</div>
+<div id="861" onclick="show(861);">Chrau</div>
+<div id="299" onclick="show(299);">Dagbani (UPSID)</div>
+<div id="691" onclick="show(691);">Dan (AA)</div>
+<div id="2256" onclick="show(2256);">Darkhat</div>
+<div id="2774" onclick="show(2774);">Daungwurrung</div>
+<div id="2743" onclick="show(2743);">Dhalandji</div>
+<div id="2973" onclick="show(2973);">Dhalwangu</div>
+<div id="2971" onclick="show(2971);">Dhangu</div>
+<div id="314" onclick="show(314);">Dhuwal</div>
+<div id="1398" onclick="show(1398);">Dinka</div>
+<div id="2744" onclick="show(2744);">Djiwarli</div>
+<div id="1583" onclick="show(1583);">Donga Mambila (GM)</div>
+<div id="777" onclick="show(777);">Eastern Maninkakan</div>
+<div id="320" onclick="show(320);">Ejagham (UPSID)</div>
+<div id="708" onclick="show(708);">Engenni</div>
+<div id="1659" onclick="show(1659);">Fipa</div>
+<div id="1325" onclick="show(1325);">Frafra</div>
+<div id="2269" onclick="show(2269);">French (EA)</div>
+<div id="331" onclick="show(331);">French (UPSID)</div>
+<div id="2182" onclick="show(2182);">French (UZ)</div>
+<div id="3008" onclick="show(3008);">Gambera</div>
+<div id="727" onclick="show(727);">Gourmanchéma</div>
+<div id="1855" onclick="show(1855);">Guambiano (SAPHON)</div>
+<div id="2737" onclick="show(2737);">Guwa</div>
+<div id="683" onclick="show(683);">Hainyaxo Bozo</div>
+<div id="887" onclick="show(887);">Huaylas Ancash Quechua</div>
+<div id="1114" onclick="show(1114);">Hungana-Saamba</div>
+<div id="371" onclick="show(371);">Irántxe-Münkü (UPSID)</div>
+<div id="2672" onclick="show(2672);">Iwaidja</div>
+<div id="1675" onclick="show(1675);">Javanese (GM)</div>
+<div id="1287" onclick="show(1287);">Jowulu</div>
+<div id="1312" onclick="show(1312);">Jumjum</div>
+<div id="1606" onclick="show(1606);">Kabuverdianu</div>
+<div id="2836" onclick="show(2836);">Kalaamaya</div>
+<div id="2835" onclick="show(2835);">Kalarko</div>
+<div id="2739" onclick="show(2739);">Kalkutung (ER)</div>
+<div id="431" onclick="show(431);">Kalkutung (UPSID)</div>
+<div id="2839" onclick="show(2839);">Kariyarra</div>
+<div id="746" onclick="show(746);">Kasem (AA)</div>
+<div id="2932" onclick="show(2932);">Kaurna</div>
+<div id="2792" onclick="show(2792);">Keramin</div>
+<div id="955" onclick="show(955);">Kimaama</div>
+<div id="188" onclick="show(188);">Kirghiz (SPA)</div>
+<div id="410" onclick="show(410);">Kirghiz (UPSID)</div>
+<div id="2197" onclick="show(2197);">Korean (UZ)</div>
+<div id="1498" onclick="show(1498);">Koyaga</div>
+<div id="819" onclick="show(819);">Koyra Chiini Songhay (AA)</div>
+<div id="424" onclick="show(424);">Kpan</div>
+<div id="2386" onclick="show(2386);">Ksingmul</div>
+<div id="1752" onclick="show(1752);">Kui (India)</div>
+<div id="2336" onclick="show(2336);">Kunigami</div>
+<div id="429" onclick="show(429);">Kurukh (UPSID)</div>
+<div id="1487" onclick="show(1487);">Kwama</div>
+<div id="1582" onclick="show(1582);">Kwanja</div>
+<div id="2285" onclick="show(2285);">Ladino (EA)</div>
+<div id="1278" onclick="show(1278);">Longto</div>
+<div id="2793" onclick="show(2793);">Lower Riverland</div>
+<div id="447" onclick="show(447);">Luiseno (UPSID)</div>
+<div id="1898" onclick="show(1898);">Malayo</div>
+<div id="2769" onclick="show(2769);">Malgana</div>
+<div id="1765" onclick="show(1765);">Mao Naga</div>
+<div id="106" onclick="show(106);">Mapudungun (SPA)</div>
+<div id="2639" onclick="show(2639);">Marithiel</div>
+<div id="2841" onclick="show(2841);">Martuthunira</div>
+<div id="1378" onclick="show(1378);">Mawa (Chad)</div>
+<div id="606" onclick="show(606);">Mbabaram (UPSID)</div>
+<div id="782" onclick="show(782);">Mbo (Cameroon) (AA)</div>
+<div id="785" onclick="show(785);">Meta'</div>
+<div id="2691" onclick="show(2691);">Minkin</div>
+<div id="1644" onclick="show(1644);">Mochi</div>
+<div id="1931" onclick="show(1931);">Mochica</div>
+<div id="2449" onclick="show(2449);">Modern Hebrew (EA)</div>
+<div id="1673" onclick="show(1673);">Moken (GM)</div>
+<div id="465" onclick="show(465);">Moro</div>
+<div id="793" onclick="show(793);">Murle (AA)</div>
+<div id="2678" onclick="show(2678);">Nakara</div>
+<div id="961" onclick="show(961);">Nangikurrunggurr (PH)</div>
+<div id="2039" onclick="show(2039);">Napo Lowland Quechua</div>
+<div id="2795" onclick="show(2795);">Narrinyeri</div>
+<div id="2837" onclick="show(2837);">Ngadjunmaya (ER)</div>
+<div id="2838" onclick="show(2838);">Ngadjunmaya (ER)</div>
+<div id="2461" onclick="show(2461);">Nganasan (EA)</div>
+<div id="494" onclick="show(494);">Nganasan (UPSID)</div>
+<div id="2843" onclick="show(2843);">Ngarluma</div>
+<div id="2794" onclick="show(2794);">Ngindadj</div>
+<div id="2844" onclick="show(2844);">Nhuwala</div>
+<div id="2130" onclick="show(2130);">Nonuya</div>
+<div id="2314" onclick="show(2314);">Northeastern Thai (EA)</div>
+<div id="2414" onclick="show(2414);">Northeastern Thai (EA)</div>
+<div id="2422" onclick="show(2422);">Northeastern Thai (EA)</div>
+<div id="681" onclick="show(681);">Northern Bobo Madaré (AA)</div>
+<div id="309" onclick="show(309);">Northern Dong</div>
+<div id="1904" onclick="show(1904);">Northern Emberá</div>
+<div id="2475" onclick="show(2475);">Northern Mansi</div>
+<div id="2286" onclick="show(2286);">Northern Yukaghir (EA)</div>
+<div id="193" onclick="show(193);">Northern Yukaghir (SPA)</div>
+<div id="634" onclick="show(634);">Northern Yukaghir (UPSID)</div>
+<div id="1534" onclick="show(1534);">Nuer (GM)</div>
+<div id="968" onclick="show(968);">Nuer (PH)</div>
+<div id="1392" onclick="show(1392);">Nyambo</div>
+<div id="45" onclick="show(45);">Nyangumarta (SPA)</div>
+<div id="990" onclick="show(990);">Nyankole</div>
+<div id="2426" onclick="show(2426);">Nyaw (EA)</div>
+<div id="2846" onclick="show(2846);">Nyiyaparli (ER)</div>
+<div id="2847" onclick="show(2847);">Nyiyaparli (ER)</div>
+<div id="1043" onclick="show(1043);">Pa'o Karen</div>
+<div id="2876" onclick="show(2876);">Paakantyi</div>
+<div id="2877" onclick="show(2877);">Pallanganmiddang</div>
+<div id="2848" onclick="show(2848);">Panytyima</div>
+<div id="84" onclick="show(84);">Papantla Totonac (SPA)</div>
+<div id="2531" onclick="show(2531);">Phu Thai (EA)</div>
+<div id="2207" onclick="show(2207);">Portuguese (UZ)</div>
+<div id="2954" onclick="show(2954);">Puditara</div>
+<div id="2360" onclick="show(2360);">Rawang</div>
+<div id="1634" onclick="show(1634);">Reel</div>
+<div id="430" onclick="show(430);">S'gaw Karen (UPSID)</div>
+<div id="1489" onclick="show(1489);">Saamia</div>
+<div id="2444" onclick="show(2444);">Sakha (EA)</div>
+<div id="994" onclick="show(994);">Samre or Siem Reap</div>
+<div id="2038" onclick="show(2038);">Santiago del Estero Quichua</div>
+<div id="1627" onclick="show(1627);">Siamou</div>
+<div id="1320" onclick="show(1320);">Siwu</div>
+<div id="1309" onclick="show(1309);">South Central Dinka</div>
+<div id="1548" onclick="show(1548);">Southern Birifor</div>
+<div id="2573" onclick="show(2573);">Southern Thai (EA)</div>
+<div id="2625" onclick="show(2625);">Southern Yukaghir (EA)</div>
+<div id="1027" onclick="show(1027);">Southern Yukaghir (PH)</div>
+<div id="2168" onclick="show(2168);">Southwestern Dinka</div>
+<div id="164" onclick="show(164);">Spanish (SPA)</div>
+<div id="553" onclick="show(553);">Spanish (UPSID)</div>
+<div id="2043" onclick="show(2043);">Sáliba (SAPHON)</div>
+<div id="1486" onclick="show(1486);">T'apo</div>
+<div id="2471" onclick="show(2471);">Tai Daeng</div>
+<div id="581" onclick="show(581);">Tama (Chad)</div>
+<div id="2365" onclick="show(2365);">Tausug (EA)</div>
+<div id="415" onclick="show(415);">Teke-Kukuya</div>
+<div id="1700" onclick="show(1700);">Tengger</div>
+<div id="1216" onclick="show(1216);">Thavung (PH)</div>
+<div id="2746" onclick="show(2746);">Thiin</div>
+<div id="1056" onclick="show(1056);">Tilquiapan Zapotec</div>
+<div id="1919" onclick="show(1919);">Toba (SAPHON)</div>
+<div id="597" onclick="show(597);">Turkish (UPSID)</div>
+<div id="599" onclick="show(599);">Tuvinian (UPSID)</div>
+<div id="600" onclick="show(600);">Tzeltal (UPSID)</div>
+<div id="1268" onclick="show(1268);">Umbundu</div>
+<div id="3011" onclick="show(3011);">Umiida</div>
+<div id="2949" onclick="show(2949);">Wagaya (ER)</div>
+<div id="2771" onclick="show(2771);">Wajarri</div>
+<div id="2747" onclick="show(2747);">Wariyangga</div>
+<div id="2718" onclick="show(2718);">Warrnambool</div>
+<div id="2776" onclick="show(2776);">Wathawurrung</div>
+<div id="262" onclick="show(262);">Western Bru</div>
+<div id="743" onclick="show(743);">Western Karaboro</div>
+<div id="776" onclick="show(776);">Western Maninkakan</div>
+<div id="611" onclick="show(611);">Wichita (UPSID)</div>
+<div id="2899" onclick="show(2899);">Wikngenchera</div>
+<div id="2775" onclick="show(2775);">Woiwurrung (ER)</div>
+<div id="2777" onclick="show(2777);">Woiwurrung (ER)</div>
+<div id="2668" onclick="show(2668);">Wurrugu</div>
+<div id="2330" onclick="show(2330);">Wymysorys</div>
+<div id="2740" onclick="show(2740);">Yalarnnga</div>
+<div id="2950" onclick="show(2950);">Yanyuwa (ER)</div>
+<div id="2778" onclick="show(2778);">Yari-Yari</div>
+<div id="3014" onclick="show(3014);">Yawijibaya</div>
+<div id="1800" onclick="show(1800);">Yerukula</div>
+<div id="2850" onclick="show(2850);">Yindjibarndi (ER)</div>
+<div id="2772" onclick="show(2772);">Yinggarda</div>
+<div id="2925" onclick="show(2925);">Yir-Yoront</div>
+<div id="2796" onclick="show(2796);">Yitha Yitha</div>
+<div id="642" onclick="show(642);">Yue Chinese (UPSID)</div>
+<div id="2166" onclick="show(2166);">Yue Chinese (UZ)</div>
+<div id="1993" onclick="show(1993);">Yuhup</div>
+<div id="2117" onclick="show(2117);">Yuqui</div>
+<div id="850" onclick="show(850);">Zarma-Kaado</div>
+<div id="1640" onclick="show(1640);">Zinza</div>
+<div id="648" onclick="show(648);">Zuni (UPSID)</div>
+<div id="649" onclick="show(649);">Abidji (AA)</div>
+<div id="1526" onclick="show(1526);">Abidji (GM)</div>
+<div id="650" onclick="show(650);">Adioukrou (AA)</div>
+<div id="1524" onclick="show(1524);">Aghem (GM)</div>
+<div id="563" onclick="show(563);">Aikanã (UPSID)</div>
+<div id="208" onclick="show(208);">Akan (UPSID)</div>
+<div id="1532" onclick="show(1532);">Akpes</div>
+<div id="2666" onclick="show(2666);">Amurdak</div>
+<div id="653" onclick="show(653);">Anyin Morofo (AA)</div>
+<div id="2761" onclick="show(2761);">Arabana</div>
+<div id="1550" onclick="show(1550);">Attié</div>
+<div id="662" onclick="show(662);">Bafut</div>
+<div id="238" onclick="show(238);">Bambara (UPSID)</div>
+<div id="668" onclick="show(668);">Baoulé (AA)</div>
+<div id="2615" onclick="show(2615);">Basque (EA)</div>
+<div id="249" onclick="show(249);">Beja</div>
+<div id="1726" onclick="show(1726);">Bodo Gadaba (RA)</div>
+<div id="2305" onclick="show(2305);">Bondo (EA)</div>
+<div id="2629" onclick="show(2629);">Burarra (ER)</div>
+<div id="1924" onclick="show(1924);">Camsá (SAPHON)</div>
+<div id="1925" onclick="show(1925);">Candoshi-Shapra</div>
+<div id="421" onclick="show(421);">Central Kanuri (UPSID)</div>
+<div id="14" onclick="show(14);">Central Khmer (SPA)</div>
+<div id="407" onclick="show(407);">Central Khmer (UPSID)</div>
+<div id="685" onclick="show(685);">Cerma</div>
+<div id="2136" onclick="show(2136);">Chamacoco</div>
+<div id="2356" onclick="show(2356);">Chantyal</div>
+<div id="910" onclick="show(910);">Chong of Chanthaburi</div>
+<div id="297" onclick="show(297);">Dangaleat</div>
+<div id="693" onclick="show(693);">Dazaga</div>
+<div id="2757" onclick="show(2757);">Dieri (ER)</div>
+<div id="700" onclick="show(700);">Duala</div>
+<div id="1777" onclick="show(1777);">Duruwa</div>
+<div id="2170" onclick="show(2170);">Dutch (UZ)</div>
+<div id="1671" onclick="show(1671);">Eastern Cham</div>
+<div id="2506" onclick="show(2506);">Eastern Mari (EA)</div>
+<div id="2532" onclick="show(2532);">Eastern Mari (EA)</div>
+<div id="1497" onclick="show(1497);">Ebang</div>
+<div id="706" onclick="show(706);">Ejagham (AA)</div>
+<div id="1901" onclick="show(1901);">Emberá-Baudó</div>
+<div id="1563" onclick="show(1563);">Eton-Mengisa</div>
+<div id="1621" onclick="show(1621);">Fang (Cameroon)</div>
+<div id="1979" onclick="show(1979);">Fulniô (SAPHON)</div>
+<div id="1141" onclick="show(1141);">Galician (PH)</div>
+<div id="2670" onclick="show(2670);">Garig</div>
+<div id="24" onclick="show(24);">Garo (SPA)</div>
+<div id="304" onclick="show(304);">German (UPSID)</div>
+<div id="2184" onclick="show(2184);">German (UZ)</div>
+<div id="18" onclick="show(18);">Hakka Chinese (SPA)</div>
+<div id="191" onclick="show(191);">Halh Mongolian (SPA)</div>
+<div id="2120" onclick="show(2120);">Hoti</div>
+<div id="360" onclick="show(360);">Huastec (UPSID)</div>
+<div id="1083" onclick="show(1083);">Huehuetla Tepehua</div>
+<div id="111" onclick="show(111);">Ignaciano (SPA)</div>
+<div id="2671" onclick="show(2671);">Ilgar</div>
+<div id="1927" onclick="show(1927);">Irántxe-Münkü (SAPHON)</div>
+<div id="2427" onclick="show(2427);">Italian (EA)</div>
+<div id="1053" onclick="show(1053);">Jamaican Creole English</div>
+<div id="380" onclick="show(380);">Javanese (UPSID)</div>
+<div id="1142" onclick="show(1142);">Kabiyé (PH)</div>
+<div id="1950" onclick="show(1950);">Kakua (SAPHON)</div>
+<div id="1048" onclick="show(1048);">Kalabari</div>
+<div id="1351" onclick="show(1351);">Karamojong</div>
+<div id="397" onclick="show(397);">Kekchí</div>
+<div id="1337" onclick="show(1337);">Kele-Foma</div>
+<div id="908" onclick="show(908);">Kenyang</div>
+<div id="398" onclick="show(398);">Kera (UPSID)</div>
+<div id="403" onclick="show(403);">Khasi (UPSID)</div>
+<div id="2382" onclick="show(2382);">Kirghiz (EA)</div>
+<div id="1508" onclick="show(1508);">Konkomba (GM)</div>
+<div id="2287" onclick="show(2287);">Korean (EA)</div>
+<div id="423" onclick="show(423);">Korean (UPSID)</div>
+<div id="1748" onclick="show(1748);">Korra Koraga</div>
+<div id="1620" onclick="show(1620);">Koshin</div>
+<div id="1751" onclick="show(1751);">Koya (RA)</div>
+<div id="2840" onclick="show(2840);">Kurrama</div>
+<div id="2246" onclick="show(2246);">Lao (EA)</div>
+<div id="2320" onclick="show(2320);">Lao (EA)</div>
+<div id="2385" onclick="show(2385);">Lao (EA)</div>
+<div id="753" onclick="show(753);">Liberia Kpelle (AA)</div>
+<div id="1541" onclick="show(1541);">Logba</div>
+<div id="1517" onclick="show(1517);">Loma (Liberia) (GM)</div>
+<div id="1240" onclick="show(1240);">Lyélé (PH)</div>
+<div id="2374" onclick="show(2374);">Lü (EA)</div>
+<div id="1315" onclick="show(1315);">Maay</div>
+<div id="2968" onclick="show(2968);">Malyangapa</div>
+<div id="154" onclick="show(154);">Masai (SPA)</div>
+<div id="1565" onclick="show(1565);">Masalit</div>
+<div id="1560" onclick="show(1560);">Mbo (Cameroon) (GM)</div>
+<div id="1596" onclick="show(1596);">Mmaala</div>
+<div id="1127" onclick="show(1127);">Mocoví (PH)</div>
+<div id="1916" onclick="show(1916);">Mocoví (SAPHON)</div>
+<div id="170" onclick="show(170);">Modern Greek (SPA)</div>
+<div id="318" onclick="show(318);">Modern Greek (UPSID)</div>
+<div id="1770" onclick="show(1770);">Mundari (RA)</div>
+<div id="946" onclick="show(946);">Mungaka</div>
+<div id="473" onclick="show(473);">Murle (UPSID)</div>
+<div id="474" onclick="show(474);">Murriny Patha</div>
+<div id="790" onclick="show(790);">Mwan</div>
+<div id="1448" onclick="show(1448);">Mwani</div>
+<div id="2936" onclick="show(2936);">Narungga</div>
+<div id="796" onclick="show(796);">Nawdm</div>
+<div id="1213" onclick="show(1213);">Ngad'a</div>
+<div id="2496" onclick="show(2496);">Northeastern Thai (EA)</div>
+<div id="1512" onclick="show(1512);">Northern Bobo Madaré (GM)</div>
+<div id="243" onclick="show(243);">Northern Bobo Madaré (UPSID)</div>
+<div id="1111" onclick="show(1111);">Northern Frisian</div>
+<div id="797" onclick="show(797);">Northern Nuni</div>
+<div id="2518" onclick="show(2518);">Northern Thai</div>
+<div id="1744" onclick="show(1744);">Northwestern Kolami (RA)</div>
+<div id="672" onclick="show(672);">Ntcham (AA)</div>
+<div id="1264" onclick="show(1264);">Ntcham (GM)</div>
+<div id="1453" onclick="show(1453);">Ntcham (GM)</div>
+<div id="967" onclick="show(967);">Nubi</div>
+<div id="502" onclick="show(502);">Nung (Viet Nam)</div>
+<div id="2397" onclick="show(2397);">Paiwan (EA)</div>
+<div id="522" onclick="show(522);">Paiwan (UPSID)</div>
+<div id="2901" onclick="show(2901);">Pakanha</div>
+<div id="2517" onclick="show(2517);">Phu Thai (EA)</div>
+<div id="1438" onclick="show(1438);">Pichi</div>
+<div id="2763" onclick="show(2763);">Pitta Pitta</div>
+<div id="517" onclick="show(517);">Plateau Malagasy (UPSID)</div>
+<div id="2623" onclick="show(2623);">Portuguese (EA)</div>
+<div id="811" onclick="show(811);">Rendille</div>
+<div id="1907" onclick="show(1907);">Selk'nam</div>
+<div id="2551" onclick="show(2551);">Shan (EA)</div>
+<div id="1149" onclick="show(1149);">Slovenian (PH)</div>
+<div id="552" onclick="show(552);">Somali (UPSID)</div>
+<div id="1787" onclick="show(1787);">Sora (RA)</div>
+<div id="2333" onclick="show(2333);">Southern Thai (EA)</div>
+<div id="32" onclick="show(32);">Standard Malay (SPA)</div>
+<div id="822" onclick="show(822);">Susu</div>
+<div id="2513" onclick="show(2513);">Tagalog (EA)</div>
+<div id="2582" onclick="show(2582);">Tai Do-Mene-Yo</div>
+<div id="598" onclick="show(598);">Taos Northern Tiwa</div>
+<div id="293" onclick="show(293);">Tedim Chin</div>
+<div id="2041" onclick="show(2041);">Tena Lowland Quichua</div>
+<div id="27" onclick="show(27);">Thai (SPA)</div>
+<div id="574" onclick="show(574);">Thai (UPSID)</div>
+<div id="2215" onclick="show(2215);">Thai (UZ)</div>
+<div id="1014" onclick="show(1014);">Thavung (PH)</div>
+<div id="577" onclick="show(577);">Tiwi (UPSID)</div>
+<div id="1158" onclick="show(1158);">Tlachichilco Tepehua</div>
+<div id="699" onclick="show(699);">Toro So Dogon (AA)</div>
+<div id="1637" onclick="show(1637);">Toura (Côte d'Ivoire) (GM)</div>
+<div id="2547" onclick="show(2547);">Tulu (EA)</div>
+<div id="2595" onclick="show(2595);">Turkmen</div>
+<div id="1079" onclick="show(1079);">Tzotzil</div>
+<div id="1019" onclick="show(1019);">Ulwa</div>
+<div id="2462" onclick="show(2462);">Vietnamese (EA)</div>
+<div id="15" onclick="show(15);">Vietnamese (SPA)</div>
+<div id="605" onclick="show(605);">Vietnamese (UPSID)</div>
+<div id="2233" onclick="show(2233);">Vietnamese (UZ)</div>
+<div id="2969" onclick="show(2969);">Wadikali</div>
+<div id="839" onclick="show(839);">Wan</div>
+<div id="2764" onclick="show(2764);">Wanggamala</div>
+<div id="2762" onclick="show(2762);">Wangganguru</div>
+<div id="282" onclick="show(282);">Western Cham (UPSID)</div>
+<div id="2538" onclick="show(2538);">Western Muria</div>
+<div id="74" onclick="show(74);">Wichita (SPA)</div>
+<div id="2738" onclick="show(2738);">Yanda</div>
+<div id="2970" onclick="show(2970);">Yardliyawarra</div>
+<div id="845" onclick="show(845);">Yemba (AA)</div>
+<div id="1229" onclick="show(1229);">Zaiwa</div>
+<div id="1701" onclick="show(1701);">Abujmaria</div>
+<div id="2068" onclick="show(2068);">Aché (SAPHON)</div>
+<div id="140" onclick="show(140);">Akan (SPA)</div>
+<div id="656" onclick="show(656);">Akoose (AA)</div>
+<div id="2681" onclick="show(2681);">Alawa (ER)</div>
+<div id="214" onclick="show(214);">Alawa (UPSID)</div>
+<div id="1551" onclick="show(1551);">Angolar</div>
+<div id="1658" onclick="show(1658);">Anii</div>
+<div id="2651" onclick="show(2651);">Anindilyakwa</div>
+<div id="658" onclick="show(658);">Anufo (AA)</div>
+<div id="1530" onclick="show(1530);">Ashe</div>
+<div id="2598" onclick="show(2598);">Assamese (EA)</div>
+<div id="1706" onclick="show(1706);">Assamese (RA)</div>
+<div id="1349" onclick="show(1349);">Bambassi</div>
+<div id="321" onclick="show(321);">Basque (UPSID)</div>
+<div id="2161" onclick="show(2161);">Basque (UZ)</div>
+<div id="671" onclick="show(671);">Bassa</div>
+<div id="2236" onclick="show(2236);">Belhariya</div>
+<div id="1105" onclick="show(1105);">Belize Kriol English</div>
+<div id="1513" onclick="show(1513);">Bena (Tanzania)</div>
+<div id="257" onclick="show(257);">Berom (UPSID)</div>
+<div id="2354" onclick="show(2354);">Betta Kurumba (EA)</div>
+<div id="679" onclick="show(679);">Bimoba</div>
+<div id="1714" onclick="show(1714);">Boro (Ethiopia) (RA)</div>
+<div id="259" onclick="show(259);">Brao</div>
+<div id="260" onclick="show(260);">Breton (UPSID)</div>
+<div id="2219" onclick="show(2219);">Bukharic</div>
+<div id="392" onclick="show(392);">Camsá (UPSID)</div>
+<div id="1256" onclick="show(1256);">Cebaara Senoufo (GM)</div>
+<div id="787" onclick="show(787);">Deg</div>
+<div id="867" onclick="show(867);">Denya</div>
+<div id="2749" onclick="show(2749);">Dieri (ER)</div>
+<div id="305" onclick="show(305);">Dieri (UPSID)</div>
+<div id="2750" onclick="show(2750);">Dirari</div>
+<div id="2976" onclick="show(2976);">Djinang</div>
+<div id="2977" onclick="show(2977);">Djinba</div>
+<div id="2255" onclick="show(2255);">Dolgan</div>
+<div id="1495" onclick="show(1495);">Dompo</div>
+<div id="698" onclick="show(698);">Doyayo (AA)</div>
+<div id="310" onclick="show(310);">Doyayo (UPSID)</div>
+<div id="2174" onclick="show(2174);">Dutch (UZ)</div>
+<div id="2695" onclick="show(2695);">Dyugun</div>
+<div id="2413" onclick="show(2413);">Eastern Mari (EA)</div>
+<div id="1500" onclick="show(1500);">Gaa</div>
+<div id="2331" onclick="show(2331);">Gagauz</div>
+<div id="2677" onclick="show(2677);">Guragone</div>
+<div id="1360" onclick="show(1360);">Hai//om</div>
+<div id="2359" onclick="show(2359);">Ho (EA)</div>
+<div id="356" onclick="show(356);">Hopi (UPSID)</div>
+<div id="1116" onclick="show(1116);">Huastec (PH)</div>
+<div id="2218" onclick="show(2218);">Isthmus Zapotec</div>
+<div id="2567" onclick="show(2567);">Jah Hut</div>
+<div id="889" onclick="show(889);">Jauja Wanca Quechua (PH)</div>
+<div id="36" onclick="show(36);">Javanese (SPA)</div>
+<div id="2662" onclick="show(2662);">Jawoyn</div>
+<div id="1154" onclick="show(1154);">K'iche'</div>
+<div id="1642" onclick="show(1642);">Kahe</div>
+<div id="1515" onclick="show(1515);">Kakabe</div>
+<div id="2751" onclick="show(2751);">Karangura</div>
+<div id="907" onclick="show(907);">Karipúna Creole French</div>
+<div id="627" onclick="show(627);">Katcha-Kadugli-Miri (UPSID)</div>
+<div id="624" onclick="show(624);">Kawaiisu</div>
+<div id="409" onclick="show(409);">Kiowa</div>
+<div id="913" onclick="show(913);">Kokota</div>
+<div id="625" onclick="show(625);">Komo (Sudan) (UPSID)</div>
+<div id="752" onclick="show(752);">Konkomba (AA)</div>
+<div id="747" onclick="show(747);">Koonzime</div>
+<div id="1" onclick="show(1);">Korean (SPA)</div>
+<div id="1965" onclick="show(1965);">Krenak</div>
+<div id="1307" onclick="show(1307);">Krim</div>
+<div id="756" onclick="show(756);">Krio (AA)</div>
+<div id="1561" onclick="show(1561);">Kru Pidgin English</div>
+<div id="916" onclick="show(916);">Kuay</div>
+<div id="917" onclick="show(917);">Kulung (Nepal)</div>
+<div id="2198" onclick="show(2198);">Kunama (UZ)</div>
+<div id="2656" onclick="show(2656);">Kundjeyhmi (ER)</div>
+<div id="2657" onclick="show(2657);">Kundjeyhmi (ER)</div>
+<div id="2658" onclick="show(2658);">Kune</div>
+<div id="2659" onclick="show(2659);">Kuninjku</div>
+<div id="2660" onclick="show(2660);">Kunwinjku</div>
+<div id="759" onclick="show(759);">Kusaal</div>
+<div id="2293" onclick="show(2293);">Kuvi (EA)</div>
+<div id="920" onclick="show(920);">Kuvi (PH)</div>
+<div id="1272" onclick="show(1272);">Kwangali</div>
+<div id="1519" onclick="show(1519);">Kyenga</div>
+<div id="441" onclick="show(441);">Lelemi</div>
+<div id="626" onclick="show(626);">Liberia Kpelle (UPSID)</div>
+<div id="765" onclick="show(765);">Ligbi</div>
+<div id="767" onclick="show(767);">Limbum (AA)</div>
+<div id="2643" onclick="show(2643);">Limilngan</div>
+<div id="927" onclick="show(927);">Lunda</div>
+<div id="448" onclick="show(448);">Luo (Kenya and Tanzania) (UPSID)</div>
+<div id="146" onclick="show(146);">Luvale</div>
+<div id="404" onclick="show(404);">Lü (UPSID)</div>
+<div id="456" onclick="show(456);">Maba (Chad)</div>
+<div id="1982" onclick="show(1982);">Maca</div>
+<div id="931" onclick="show(931);">Mada (Cameroon)</div>
+<div id="775" onclick="show(775);">Mampruli (AA)</div>
+<div id="1518" onclick="show(1518);">Mann</div>
+<div id="2661" onclick="show(2661);">Manyallaluk Mayali</div>
+<div id="1802" onclick="show(1802);">Mapudungun (SAPHON)</div>
+<div id="1042" onclick="show(1042);">Mazanderani</div>
+<div id="1474" onclick="show(1474);">Mbay</div>
+<div id="1270" onclick="show(1270);">Mbukushu</div>
+<div id="2278" onclick="show(2278);">Mirandese</div>
+<div id="1322" onclick="show(1322);">Mmani</div>
+<div id="2189" onclick="show(2189);">Modern Hebrew (UZ)</div>
+<div id="943" onclick="show(943);">Moken (PH)</div>
+<div id="1626" onclick="show(1626);">Mokpwe</div>
+<div id="1678" onclick="show(1678);">Mori Bawah</div>
+<div id="2915" onclick="show(2915);">Mpalitjanh</div>
+<div id="1859" onclick="show(1859);">Muinane (SAPHON)</div>
+<div id="256" onclick="show(256);">Muinane (UPSID)</div>
+<div id="478" onclick="show(478);">Mumuye</div>
+<div id="1618" onclick="show(1618);">Mundabli</div>
+<div id="1933" onclick="show(1933);">Muniche</div>
+<div id="1493" onclick="show(1493);">Narim</div>
+<div id="2654" onclick="show(2654);">Ngalakgan (ER)</div>
+<div id="2752" onclick="show(2752);">Ngamini</div>
+<div id="718" onclick="show(718);">Ngangam</div>
+<div id="1473" onclick="show(1473);">Ngasa</div>
+<div id="800" onclick="show(800);">Ngbaka Minagende</div>
+<div id="1983" onclick="show(1983);">Nivaclé (SAPHON)</div>
+<div id="749" onclick="show(749);">Northern Kissi</div>
+<div id="2321" onclick="show(2321);">Northern Pashto</div>
+<div id="2933" onclick="show(2933);">Nugunu (Australia)</div>
+<div id="972" onclick="show(972);">Obolo</div>
+<div id="929" onclick="show(929);">Oroko</div>
+<div id="1849" onclick="show(1849);">Paumari</div>
+<div id="1779" onclick="show(1779);">Pengo</div>
+<div id="1809" onclick="show(1809);">Pichis Ashéninka</div>
+<div id="2753" onclick="show(2753);">Pirlatapa</div>
+<div id="1774" onclick="show(1774);">Pottangi Ollar Gadaba (RA)</div>
+<div id="1454" onclick="show(1454);">Principense</div>
+<div id="2663" onclick="show(2663);">Rembarrnga</div>
+<div id="165" onclick="show(165);">Romanian (SPA)</div>
+<div id="527" onclick="show(527);">Romanian (UPSID)</div>
+<div id="989" onclick="show(989);">Rundi</div>
+<div id="992" onclick="show(992);">Samba Leko</div>
+<div id="361" onclick="show(361);">San Mateo del Mar Huave (UPSID)</div>
+<div id="2423" onclick="show(2423);">Shan (EA)</div>
+<div id="1520" onclick="show(1520);">Shanga</div>
+<div id="1156" onclick="show(1156);">Sipacapense</div>
+<div id="817" onclick="show(817);">Sissala of Burkina Faso (AA)</div>
+<div id="2455" onclick="show(2455);">Slovenian (EA)</div>
+<div id="2472" onclick="show(2472);">Southern Thai (EA)</div>
+<div id="548" onclick="show(548);">Sáliba (UPSID)</div>
+<div id="825" onclick="show(825);">Tamasheq</div>
+<div id="568" onclick="show(568);">Telugu (UPSID)</div>
+<div id="1528" onclick="show(1528);">Tiagbamrin Aizi</div>
+<div id="1938" onclick="show(1938);">Tinigua</div>
+<div id="1209" onclick="show(1209);">Tirma-Chai</div>
+<div id="830" onclick="show(830);">Tofin Gbe</div>
+<div id="382" onclick="show(382);">Tol</div>
+<div id="1152" onclick="show(1152);">Tukang Besi North</div>
+<div id="1223" onclick="show(1223);">Tz'utujil</div>
+<div id="73" onclick="show(73);">Unami</div>
+<div id="3006" onclick="show(3006);">Wageman</div>
+<div id="2860" onclick="show(2860);">Warlmanpa</div>
+<div id="2951" onclick="show(2951);">Warumungu</div>
+<div id="635" onclick="show(635);">Yana</div>
+<div id="217" onclick="show(217);">Yanesha' (UPSID)</div>
+<div id="2696" onclick="show(2696);">Yawuru</div>
+<div id="19" onclick="show(19);">Yue Chinese (SPA)</div>
+<div id="712" onclick="show(712);">Adamawa Fulfulde (AA)</div>
+<div id="692" onclick="show(692);">Adangme</div>
+<div id="204" onclick="show(204);">Aghem (UPSID)</div>
+<div id="652" onclick="show(652);">Aja (Benin) (AA)</div>
+<div id="50" onclick="show(50);">Alawa (SPA)</div>
+<div id="1529" onclick="show(1529);">Alladian (GM)</div>
+<div id="2159" onclick="show(2159);">Assamese (UZ)</div>
+<div id="1178" onclick="show(1178);">Baba</div>
+<div id="1182" onclick="show(1182);">Bamunka</div>
+<div id="667" onclick="show(667);">Bandi</div>
+<div id="1522" onclick="show(1522);">Bankon</div>
+<div id="2340" onclick="show(2340);">Basque (EA)</div>
+<div id="2583" onclick="show(2583);">Basque (EA)</div>
+<div id="179" onclick="show(179);">Basque (SPA)</div>
+<div id="674" onclick="show(674);">Bekwarra</div>
+<div id="676" onclick="show(676);">Beng</div>
+<div id="680" onclick="show(680);">Bissa (AA)</div>
+<div id="515" onclick="show(515);">Bouyei (UPSID)</div>
+<div id="2163" onclick="show(2163);">Bulgarian (UZ)</div>
+<div id="1390" onclick="show(1390);">Buli (Ghana)</div>
+<div id="1138" onclick="show(1138);">Catalan (PH)</div>
+<div id="1650" onclick="show(1650);">Cebaara Senoufo (GM)</div>
+<div id="1854" onclick="show(1854);">Cha'palaa (SAPHON)</div>
+<div id="690" onclick="show(690);">Dagbani (AA)</div>
+<div id="1271" onclick="show(1271);">Diriku</div>
+<div id="2171" onclick="show(2171);">Dutch (UZ)</div>
+<div id="2172" onclick="show(2172);">Dutch (UZ)</div>
+<div id="696" onclick="show(696);">Dyula</div>
+<div id="1131" onclick="show(1131);">Eastern Low German</div>
+<div id="710" onclick="show(710);">Fe'fe' (AA)</div>
+<div id="162" onclick="show(162);">French (SPA)</div>
+<div id="2334" onclick="show(2334);">Friulian (EA)</div>
+<div id="1651" onclick="show(1651);">Fuliiru (GM)</div>
+<div id="673" onclick="show(673);">Gagnoa Bété</div>
+<div id="2619" onclick="show(2619);">Galician (EA)</div>
+<div id="2435" onclick="show(2435);">Gata' (EA)</div>
+<div id="880" onclick="show(880);">Gbari</div>
+<div id="161" onclick="show(161);">German (SPA)</div>
+<div id="724" onclick="show(724);">Gonja</div>
+<div id="2323" onclick="show(2323);">Hakka Chinese (EA)</div>
+<div id="728" onclick="show(728);">Hanga</div>
+<div id="1643" onclick="show(1643);">Hangaza</div>
+<div id="158" onclick="show(158);">Icelandic (SPA)</div>
+<div id="654" onclick="show(654);">Igo (AA)</div>
+<div id="1580" onclick="show(1580);">Igo (GM)</div>
+<div id="1405" onclick="show(1405);">Ikwere</div>
+<div id="1737" onclick="show(1737);">Irula of the Nilgiri (RA)</div>
+<div id="1145" onclick="show(1145);">Italian (PH)</div>
+<div id="2596" onclick="show(2596);">Jerriais</div>
+<div id="2284" onclick="show(2284);">Judeo-Tat</div>
+<div id="739" onclick="show(739);">Kabiyé (AA)</div>
+<div id="1118" onclick="show(1118);">Kadiwéu (PH)</div>
+<div id="1915" onclick="show(1915);">Kadiwéu (SAPHON)</div>
+<div id="903" onclick="show(903);">Kamasau</div>
+<div id="136" onclick="show(136);">Katcha</div>
+<div id="2882" onclick="show(2882);">Kawarrang-Ogh Undjan (ER)</div>
+<div id="2883" onclick="show(2883);">Kawarrang-Ogh Undjan (ER)</div>
+<div id="2433" onclick="show(2433);">Khakas</div>
+<div id="2537" onclick="show(2537);">Khalkhal</div>
+<div id="412" onclick="show(412);">Khmu</div>
+<div id="1484" onclick="show(1484);">Komo (Sudan) (GM)</div>
+<div id="2481" onclick="show(2481);">Konda</div>
+<div id="1745" onclick="show(1745);">Konda-Dora</div>
+<div id="9" onclick="show(9);">Kota (India) (SPA)</div>
+<div id="400" onclick="show(400);">Kota (India) (UPSID)</div>
+<div id="1257" onclick="show(1257);">Koyra Chiini Songhay (GM)</div>
+<div id="1570" onclick="show(1570);">Krio (GM)</div>
+<div id="2355" onclick="show(2355);">Kumyk</div>
+<div id="46" onclick="show(46);">Kunjen</div>
+<div id="2123" onclick="show(2123);">Kunza</div>
+<div id="1119" onclick="show(1119);">Kutep</div>
+<div id="761" onclick="show(761);">Lele (Chad) (AA)</div>
+<div id="1275" onclick="show(1275);">Lele (Chad) (GM)</div>
+<div id="1261" onclick="show(1261);">Limbum (GM)</div>
+<div id="1262" onclick="show(1262);">Limbum (GM)</div>
+<div id="591" onclick="show(591);">Lishán Didán</div>
+<div id="2448" onclick="show(2448);">Liv</div>
+<div id="1022" onclick="show(1022);">Loxicha Zapotec</div>
+<div id="94" onclick="show(94);">Luiseno (SPA)</div>
+<div id="153" onclick="show(153);">Luo (Kenya and Tanzania) (SPA)</div>
+<div id="1284" onclick="show(1284);">Mada (Nigeria)</div>
+<div id="1691" onclick="show(1691);">Madurese</div>
+<div id="2667" onclick="show(2667);">Margu</div>
+<div id="1502" onclick="show(1502);">Mbalanhu</div>
+<div id="2914" onclick="show(2914);">Mbiywom</div>
+<div id="784" onclick="show(784);">Mende (Sierra Leone)</div>
+<div id="1123" onclick="show(1123);">Molale</div>
+<div id="1986" onclick="show(1986);">Mosetén-Chimané (SAPHON)</div>
+<div id="1987" onclick="show(1987);">Mosetén-Chimané (SAPHON)</div>
+<div id="1988" onclick="show(1988);">Mosetén-Chimané (SAPHON)</div>
+<div id="791" onclick="show(791);">Mundani</div>
+<div id="2295" onclick="show(2295);">Mundari (EA)</div>
+<div id="1617" onclick="show(1617);">Mungbam</div>
+<div id="2652" onclick="show(2652);">Ngalkbun</div>
+<div id="1286" onclick="show(1286);">Ngwe</div>
+<div id="1134" onclick="show(1134);">Nigerian Pidgin</div>
+<div id="1371" onclick="show(1371);">Njebi</div>
+<div id="236" onclick="show(236);">North Azerbaijani (UPSID)</div>
+<div id="603" onclick="show(603);">Northern Uzbek</div>
+<div id="1629" onclick="show(1629);">Nugunu (Cameroon) (GM)</div>
+<div id="1181" onclick="show(1181);">Nyong</div>
+<div id="2599" onclick="show(2599);">Oirad-Kalmyk</div>
+<div id="1631" onclick="show(1631);">Orma</div>
+<div id="510" onclick="show(510);">Ormuri</div>
+<div id="2930" onclick="show(2930);">Oykangand</div>
+<div id="1305" onclick="show(1305);">Pan</div>
+<div id="1133" onclick="show(1133);">Panamint</div>
+<div id="1388" onclick="show(1388);">Pangwa</div>
+<div id="1790" onclick="show(1790);">Pangwa Naga</div>
+<div id="2042" onclick="show(2042);">Piaroa</div>
+<div id="163" onclick="show(163);">Portuguese (SPA)</div>
+<div id="2125" onclick="show(2125);">Pumé</div>
+<div id="1224" onclick="show(1224);">Pwo Northern Karen (PH)</div>
+<div id="523" onclick="show(523);">Pwo Northern Karen (UPSID)</div>
+<div id="1799" onclick="show(1799);">Ravula</div>
+<div id="311" onclick="show(311);">Rukai</div>
+<div id="2361" onclick="show(2361);">Saek</div>
+<div id="1146" onclick="show(1146);">Salasaca Highland Quichua (PH)</div>
+<div id="2040" onclick="show(2040);">Salasaca Highland Quichua (SAPHON)</div>
+<div id="2507" onclick="show(2507);">Shan (EA)</div>
+<div id="1645" onclick="show(1645);">Suba-Simbiti</div>
+<div id="1041" onclick="show(1041);">Tagwana Senoufo</div>
+<div id="2266" onclick="show(2266);">Tajik</div>
+<div id="1831" onclick="show(1831);">Tariana</div>
+<div id="824" onclick="show(824);">Tawallammat Tamajaq</div>
+<div id="1386" onclick="show(1386);">Tee</div>
+<div id="1792" onclick="show(1792);">Thado Chin</div>
+<div id="2881" onclick="show(2881);">Thaypan</div>
+<div id="306" onclick="show(306);">Tipai (UPSID)</div>
+<div id="1939" onclick="show(1939);">Trumai (SAPHON)</div>
+<div id="462" onclick="show(462);">Tu (UPSID)</div>
+<div id="1795" onclick="show(1795);">Tulu (RA)</div>
+<div id="2416" onclick="show(2416);">Turkish (EA)</div>
+<div id="2536" onclick="show(2536);">Udmurt (EA)</div>
+<div id="1485" onclick="show(1485);">Uduk</div>
+<div id="1035" onclick="show(1035);">Ukrainian (PH)</div>
+<div id="2924" onclick="show(2924);">Ulkulu</div>
+<div id="2127" onclick="show(2127);">Uru</div>
+<div id="1798" onclick="show(1798);">Vaagri Booli</div>
+<div id="2589" onclick="show(2589);">Waneci</div>
+<div id="2618" onclick="show(2618);">Western Balochi (EA)</div>
+<div id="2520" onclick="show(2520);">Western Farsi (EA)</div>
+<div id="2205" onclick="show(2205);">Western Farsi (UZ)</div>
+<div id="2581" onclick="show(2581);">Western Mari (EA)</div>
+<div id="1984" onclick="show(1984);">Wichí Lhamtés Nocten</div>
+<div id="1333" onclick="show(1333);">Xamtanga</div>
+<div id="112" onclick="show(112);">Yanesha' (SPA)</div>
+<div id="844" onclick="show(844);">Yaouré</div>
+<div id="2921" onclick="show(2921);">Yinwum</div>
+<div id="1025" onclick="show(1025);">Yurok</div>
+<div id="1510" onclick="show(1510);">Zay</div>
+<div id="2931" onclick="show(2931);">Adnyamathanha</div>
+<div id="1400" onclick="show(1400);">Ahanta</div>
+<div id="1619" onclick="show(1619);">Ajumbu</div>
+<div id="213" onclick="show(213);">Aleut (UPSID)</div>
+<div id="212" onclick="show(212);">Alladian (UPSID)</div>
+<div id="2908" onclick="show(2908);">Alngith</div>
+<div id="1094" onclick="show(1094);">Antigua and Barbuda Creole English</div>
+<div id="1704" onclick="show(1704);">Ao Naga (RA)</div>
+<div id="1705" onclick="show(1705);">Apatani</div>
+<div id="205" onclick="show(205);">Aproumu Aizi</div>
+<div id="1258" onclick="show(1258);">Bafia (GM)</div>
+<div id="2249" onclick="show(2249);">Bakhtiari</div>
+<div id="1075" onclick="show(1075);">Baniwa do Icana (PH)</div>
+<div id="2419" onclick="show(2419);">Basque (EA)</div>
+<div id="675" onclick="show(675);">Berom (AA)</div>
+<div id="621" onclick="show(621);">Berta</div>
+<div id="1102" onclick="show(1102);">Bikele</div>
+<div id="1065" onclick="show(1065);">Blang</div>
+<div id="28" onclick="show(28);">Bouyei (SPA)</div>
+<div id="261" onclick="show(261);">Brahui (UPSID)</div>
+<div id="684" onclick="show(684);">Bulu (Cameroon)</div>
+<div id="537" onclick="show(537);">Cebaara Senoufo (UPSID)</div>
+<div id="688" onclick="show(688);">Central Dagaare</div>
+<div id="2431" onclick="show(2431);">Central Pashto (EA)</div>
+<div id="101" onclick="show(101);">Cha'palaa (SPA)</div>
+<div id="273" onclick="show(273);">Cha'palaa (UPSID)</div>
+<div id="1896" onclick="show(1896);">Cogui</div>
+<div id="865" onclick="show(865);">Cupeño</div>
+<div id="139" onclick="show(139);">Dagbani (SPA)</div>
+<div id="252" onclick="show(252);">Daloa Bété</div>
+<div id="300" onclick="show(300);">Dar Fur Daju</div>
+<div id="343" onclick="show(343);">Dawro</div>
+<div id="1452" onclick="show(1452);">Degema</div>
+<div id="420" onclick="show(420);">Dera (Nigeria)</div>
+<div id="457" onclick="show(457);">Dizin</div>
+<div id="773" onclick="show(773);">Donga Mambila (AA)</div>
+<div id="1990" onclick="show(1990);">Dâw</div>
+<div id="2388" onclick="show(2388);">Eastern Newari</div>
+<div id="2399" onclick="show(2399);">Eastern Yiddish (EA)</div>
+<div id="874" onclick="show(874);">Ekpeye</div>
+<div id="2252" onclick="show(2252);">English (EA)</div>
+<div id="2515" onclick="show(2515);">English (EA)</div>
+<div id="2175" onclick="show(2175);">English (UZ)</div>
+<div id="2176" onclick="show(2176);">English (UZ)</div>
+<div id="2178" onclick="show(2178);">English (UZ)</div>
+<div id="2179" onclick="show(2179);">English (UZ)</div>
+<div id="2180" onclick="show(2180);">English (UZ)</div>
+<div id="711" onclick="show(711);">Fon</div>
+<div id="1231" onclick="show(1231);">Friulian (PH)</div>
+<div id="716" onclick="show(716);">Fuliiru (AA)</div>
+<div id="717" onclick="show(717);">Ga (AA)</div>
+<div id="564" onclick="show(564);">Gaam (UPSID)</div>
+<div id="1720" onclick="show(1720);">Gata' (RA)</div>
+<div id="2398" onclick="show(2398);">German (EA)</div>
+<div id="1514" onclick="show(1514);">Guinea Kpelle (GM)</div>
+<div id="1638" onclick="show(1638);">Gweno</div>
+<div id="1397" onclick="show(1397);">Harari</div>
+<div id="1729" onclick="show(1729);">Ho (RA)</div>
+<div id="1304" onclick="show(1304);">Huba</div>
+<div id="891" onclick="show(891);">Ibani</div>
+<div id="2192" onclick="show(2192);">Igbo (UZ)</div>
+<div id="733" onclick="show(733);">Igede</div>
+<div id="1539" onclick="show(1539);">Jere</div>
+<div id="1732" onclick="show(1732);">Juang (RA)</div>
+<div id="489" onclick="show(489);">Kathmandu Valley Newari</div>
+<div id="2220" onclick="show(2220);">Kera (UZ)</div>
+<div id="912" onclick="show(912);">Kirike</div>
+<div id="1446" onclick="show(1446);">Kisa</div>
+<div id="425" onclick="show(425);">Koho</div>
+<div id="751" onclick="show(751);">Komo (Democratic Republic of Congo)</div>
+<div id="1622" onclick="show(1622);">Kuranko</div>
+<div id="53" onclick="show(53);">Kwoma (SPA)</div>
+<div id="418" onclick="show(418);">Kwoma (UPSID)</div>
+<div id="2319" onclick="show(2319);">Lahu (EA)</div>
+<div id="443" onclick="show(443);">Lahu (UPSID)</div>
+<div id="1710" onclick="show(1710);">Lambadi (RA)</div>
+<div id="1929" onclick="show(1929);">Leco</div>
+<div id="1338" onclick="show(1338);">Lengola</div>
+<div id="2325" onclick="show(2325);">Ligurian</div>
+<div id="2912" onclick="show(2912);">Linngithigh</div>
+<div id="2337" onclick="show(2337);">Luxembourgish (EA)</div>
+<div id="2200" onclick="show(2200);">Luxembourgish (UZ)</div>
+<div id="772" onclick="show(772);">Lyélé (AA)</div>
+<div id="807" onclick="show(807);">Ma'di</div>
+<div id="2275" onclick="show(2275);">Maltese (EA)</div>
+<div id="1327" onclick="show(1327);">Mampruli (GM)</div>
+<div id="1047" onclick="show(1047);">Mandarin Chinese (PH)</div>
+<div id="458" onclick="show(458);">Mba</div>
+<div id="2458" onclick="show(2458);">Modern Greek (EA)</div>
+<div id="135" onclick="show(135);">Modern Hebrew (SPA)</div>
+<div id="944" onclick="show(944);">Mosetén-Chimané (PH)</div>
+<div id="1769" onclick="show(1769);">Moyon</div>
+<div id="2634" onclick="show(2634);">Murrinhpatha</div>
+<div id="657" onclick="show(657);">Ngas (AA)</div>
+<div id="1077" onclick="show(1077);">North Alaskan Inupiatun</div>
+<div id="2296" onclick="show(2296);">North Azerbaijani (EA)</div>
+<div id="965" onclick="show(965);">Northern Khmer</div>
+<div id="2441" onclick="show(2441);">Norwegian</div>
+<div id="803" onclick="show(803);">Nyabwa</div>
+<div id="1447" onclick="show(1447);">Nyole</div>
+<div id="1399" onclick="show(1399);">Nzima</div>
+<div id="507" onclick="show(507);">Ogbia</div>
+<div id="119" onclick="show(119);">Paraguayan Guaraní (SPA)</div>
+<div id="2627" onclick="show(2627);">Pnar</div>
+<div id="594" onclick="show(594);">Purepecha (UPSID)</div>
+<div id="2895" onclick="show(2895);">Rimanggudhinma</div>
+<div id="533" onclick="show(533);">Sango (UPSID)</div>
+<div id="2339" onclick="show(2339);">Sauria Paharia (EA)</div>
+<div id="1763" onclick="show(1763);">Sauria Paharia (RA)</div>
+<div id="1492" onclick="show(1492);">Saxwe Gbe</div>
+<div id="2505" onclick="show(2505);">Scots</div>
+<div id="2499" onclick="show(2499);">Serbian</div>
+<div id="2367" onclick="show(2367);">Shan (EA)</div>
+<div id="1321" onclick="show(1321);">Sherbro</div>
+<div id="818" onclick="show(818);">Sissala of Burkina Faso (AA)</div>
+<div id="820" onclick="show(820);">Soninke (AA)</div>
+<div id="2259" onclick="show(2259);">South Azerbaijani</div>
+<div id="734" onclick="show(734);">Southeast Ijo</div>
+<div id="2545" onclick="show(2545);">Southern Balochi</div>
+<div id="387" onclick="show(387);">Southern Jinghpaw</div>
+<div id="480" onclick="show(480);">Southern Nambikuára</div>
+<div id="2611" onclick="show(2611);">Tamil (EA)</div>
+<div id="586" onclick="show(586);">Tampulma</div>
+<div id="828" onclick="show(828);">Tedaga</div>
+<div id="1426" onclick="show(1426);">Tese</div>
+<div id="1067" onclick="show(1067);">Tibetan (PH)</div>
+<div id="566" onclick="show(566);">Tulu (UPSID)</div>
+<div id="2603" onclick="show(2603);">Tundra Nenets (EA)</div>
+<div id="1649" onclick="show(1649);">Tunia</div>
+<div id="186" onclick="show(186);">Turkish (SPA)</div>
+<div id="2217" onclick="show(2217);">Turkish (UZ)</div>
+<div id="1810" onclick="show(1810);">Ucayali-Yurúa Ashéninka</div>
+<div id="836" onclick="show(836);">Vagla</div>
+<div id="1941" onclick="show(1941);">Vilela</div>
+<div id="2228" onclick="show(2228);">Vlax Romani (UZ)</div>
+<div id="607" onclick="show(607);">Wappo</div>
+<div id="2345" onclick="show(2345);">Western Balochi (EA)</div>
+<div id="2348" onclick="show(2348);">Western Balochi (EA)</div>
+<div id="2622" onclick="show(2622);">Western Balochi (EA)</div>
+<div id="29" onclick="show(29);">Western Cham (SPA)</div>
+<div id="172" onclick="show(172);">Western Farsi (SPA)</div>
+<div id="516" onclick="show(516);">Western Farsi (UPSID)</div>
+<div id="2273" onclick="show(2273);">Western Mari (EA)</div>
+<div id="614" onclick="show(614);">Wiyot</div>
+<div id="1838" onclick="show(1838);">Yanesha' (SAPHON)</div>
+<div id="1023" onclick="show(1023);">Yuki</div>
+<div id="849" onclick="show(849);">Zande (AA)</div>
+<div id="1702" onclick="show(1702);">A-Pucikwar (RA)</div>
+<div id="1163" onclick="show(1163);">Alyawarr (PH)</div>
+<div id="220" onclick="show(220);">Amo</div>
+<div id="1358" onclick="show(1358);">Avikam</div>
+<div id="1708" onclick="show(1708);">Badaga</div>
+<div id="1469" onclick="show(1469);">Bagirmi</div>
+<div id="663" onclick="show(663);">Baka (Cameroon) (AA)</div>
+<div id="1574" onclick="show(1574);">Baka (Cameroon) (GM)</div>
+<div id="1434" onclick="show(1434);">Belanda Bor</div>
+<div id="2268" onclick="show(2268);">Besermyan</div>
+<div id="704" onclick="show(704);">Bini</div>
+<div id="2588" onclick="show(2588);">Bonan</div>
+<div id="1362" onclick="show(1362);">Borana-Arsi-Guji Oromo</div>
+<div id="157" onclick="show(157);">Breton (SPA)</div>
+<div id="1200" onclick="show(1200);">Bubia</div>
+<div id="2425" onclick="show(2425);">Catalan (EA)</div>
+<div id="2555" onclick="show(2555);">Catalan (EA)</div>
+<div id="2594" onclick="show(2594);">Catalan (EA)</div>
+<div id="150" onclick="show(150);">Central Kanuri (SPA)</div>
+<div id="2322" onclick="show(2322);">Central Pashto (EA)</div>
+<div id="319" onclick="show(319);">Central Siberian Yupik</div>
+<div id="1139" onclick="show(1139);">Croatian</div>
+<div id="1817" onclick="show(1817);">Curripaco</div>
+<div id="1140" onclick="show(1140);">Czech (PH)</div>
+<div id="2745" onclick="show(2745);">Dhargari</div>
+<div id="2974" onclick="show(2974);">Djambarrpuyngu</div>
+<div id="181" onclick="show(181);">Eastern Mari (SPA)</div>
+<div id="2177" onclick="show(2177);">English (UZ)</div>
+<div id="877" onclick="show(877);">Fang (Equatorial Guinea)</div>
+<div id="180" onclick="show(180);">Finnish (SPA)</div>
+<div id="2469" onclick="show(2469);">Forest Enets</div>
+<div id="2450" onclick="show(2450);">Forest Nenets</div>
+<div id="722" onclick="show(722);">Gen (AA)</div>
+<div id="2975" onclick="show(2975);">Gumatj</div>
+<div id="2816" onclick="show(2816);">Gunya</div>
+<div id="2972" onclick="show(2972);">Gupapuyngu</div>
+<div id="1605" onclick="show(1605);">Guro</div>
+<div id="218" onclick="show(218);">Hamer-Banna</div>
+<div id="730" onclick="show(730);">Hausa (AA)</div>
+<div id="2557" onclick="show(2557);">Hungarian (EA)</div>
+<div id="358" onclick="show(358);">Hungarian (UPSID)</div>
+<div id="1329" onclick="show(1329);">Jaad-Badyara</div>
+<div id="2318" onclick="show(2318);">Kara-Kalpak</div>
+<div id="1794" onclick="show(1794);">Kok Borok</div>
+<div id="1087" onclick="show(1087);">Lake Miwok</div>
+<div id="1121" onclick="show(1121);">Lisu (PH)</div>
+<div id="1054" onclick="show(1054);">Mambai</div>
+<div id="2457" onclick="show(2457);">Mandarin Chinese (EA)</div>
+<div id="286" onclick="show(286);">Mandarin Chinese (UPSID)</div>
+<div id="2817" onclick="show(2817);">Margany</div>
+<div id="1472" onclick="show(1472);">Me'en</div>
+<div id="1072" onclick="show(1072);">Michif</div>
+<div id="1214" onclick="show(1214);">Muna</div>
+<div id="794" onclick="show(794);">Mwaghavul</div>
+<div id="795" onclick="show(795);">Nafaanra</div>
+<div id="2607" onclick="show(2607);">Najdi Arabic</div>
+<div id="2617" onclick="show(2617);">Nar Phu</div>
+<div id="1269" onclick="show(1269);">Ndonga (GM)</div>
+<div id="490" onclick="show(490);">Nez Perce (UPSID)</div>
+<div id="1623" onclick="show(1623);">Niellim (GM)</div>
+<div id="187" onclick="show(187);">North Azerbaijani (SPA)</div>
+<div id="2033" onclick="show(2033);">North Bolivian Quechua</div>
+<div id="2332" onclick="show(2332);">Northwestern Pakhto</div>
+<div id="806" onclick="show(806);">Nupe-Nupe-Tako</div>
+<div id="274" onclick="show(274);">Nyahkur</div>
+<div id="506" onclick="show(506);">Ocaina (UPSID)</div>
+<div id="279" onclick="show(279);">Quiotepec Chinantec</div>
+<div id="2979" onclick="show(2979);">Ritarungo</div>
+<div id="1005" onclick="show(1005);">Shabo</div>
+<div id="1359" onclick="show(1359);">Shilluk</div>
+<div id="1499" onclick="show(1499);">Shwai</div>
+<div id="1080" onclick="show(1080);">Sidamo</div>
+<div id="85" onclick="show(85);">Tabasco Chontal</div>
+<div id="575" onclick="show(575);">Tahaggart Tamahaq</div>
+<div id="1908" onclick="show(1908);">Tehuelche (SAPHON)</div>
+<div id="829" onclick="show(829);">Tem</div>
+<div id="90" onclick="show(90);">Tipai (SPA)</div>
+<div id="2501" onclick="show(2501);">Tu (EA)</div>
+<div id="2556" onclick="show(2556);">Tu (EA)</div>
+<div id="1573" onclick="show(1573);">Tuki</div>
+<div id="86" onclick="show(86);">Tzeltal (SPA)</div>
+<div id="774" onclick="show(774);">Western Mambila</div>
+<div id="622" onclick="show(622);">Wu Chinese (UPSID)</div>
+<div id="2978" onclick="show(2978);">Yan-nhangu</div>
+<div id="1479" onclick="show(1479);">Yemsa</div>
+<div id="846" onclick="show(846);">Yom</div>
+<div id="1483" onclick="show(1483);">Aari</div>
+<div id="1545" onclick="show(1545);">Ayere</div>
+<div id="1179" onclick="show(1179);">Babanki</div>
+<div id="1180" onclick="show(1180);">Bakoko</div>
+<div id="670" onclick="show(670);">Basa (Cameroon)</div>
+<div id="2290" onclick="show(2290);">Brahui (EA)</div>
+<div id="2377" onclick="show(2377);">Brahui (EA)</div>
+<div id="2946" onclick="show(2946);">Bularnu</div>
+<div id="1657" onclick="show(1657);">Burji</div>
+<div id="1985" onclick="show(1985);">Callawalla</div>
+<div id="1851" onclick="show(1851);">Central Aymara (SAPHON)</div>
+<div id="1323" onclick="show(1323);">Cherepon</div>
+<div id="99" onclick="show(99);">Chiquihuitlán Mazatec (SPA)</div>
+<div id="83" onclick="show(83);">Copainalá Zoque (SPA)</div>
+<div id="2024" onclick="show(2024);">Cusco Quechua</div>
+<div id="2383" onclick="show(2383);">Darma (EA)</div>
+<div id="1468" onclick="show(1468);">Dzùùngoo</div>
+<div id="1233" onclick="show(1233);">Ega</div>
+<div id="231" onclick="show(231);">Egyptian Arabic (UPSID)</div>
+<div id="323" onclick="show(323);">Ewe (UPSID)</div>
+<div id="324" onclick="show(324);">Ewondo (UPSID)</div>
+<div id="1481" onclick="show(1481);">Gamo</div>
+<div id="723" onclick="show(723);">Godié</div>
+<div id="2165" onclick="show(2165);">Hakka Chinese (UZ)</div>
+<div id="247" onclick="show(247);">Indonesian Bajau</div>
+<div id="373" onclick="show(373);">Itelmen (UPSID)</div>
+<div id="1538" onclick="show(1538);">Izere (GM)</div>
+<div id="1739" onclick="show(1739);">Jennu Kurumba</div>
+<div id="1381" onclick="show(1381);">Kagulu</div>
+<div id="2459" onclick="show(2459);">Kamas-Koibal</div>
+<div id="1368" onclick="show(1368);">Kamwe</div>
+<div id="2376" onclick="show(2376);">Kazym-Berezover-Suryskarer Khanty (EA)</div>
+<div id="426" onclick="show(426);">Komi-Zyrian (UPSID)</div>
+<div id="1749" onclick="show(1749);">Korku (RA)</div>
+<div id="1750" onclick="show(1750);">Kota (India) (RA)</div>
+<div id="1501" onclick="show(1501);">Kuanyama</div>
+<div id="23" onclick="show(23);">Lahu (SPA)</div>
+<div id="445" onclick="show(445);">Lakota (UPSID)</div>
+<div id="2894" onclick="show(2894);">Lamalama (ER)</div>
+<div id="3020" onclick="show(3020);">Lamalama (ER)</div>
+<div id="804" onclick="show(804);">Lamnso'</div>
+<div id="1758" onclick="show(1758);">Lepcha</div>
+<div id="2316" onclick="show(2316);">Lithuanian (EA)</div>
+<div id="771" onclick="show(771);">Lugbara (AA)</div>
+<div id="151" onclick="show(151);">Lugbara (SPA)</div>
+<div id="442" onclick="show(442);">Lugbara (UPSID)</div>
+<div id="694" onclick="show(694);">Luo (Kenya and Tanzania) (AA)</div>
+<div id="2363" onclick="show(2363);">Macedonian (EA)</div>
+<div id="930" onclick="show(930);">Macedonian (PH)</div>
+<div id="2302" onclick="show(2302);">Maithili (EA)</div>
+<div id="1128" onclick="show(1128);">Mam</div>
+<div id="1285" onclick="show(1285);">Mbe</div>
+<div id="2748" onclick="show(2748);">Mithaka</div>
+<div id="1293" onclick="show(1293);">Moru</div>
+<div id="958" onclick="show(958);">Naga Pidgin</div>
+<div id="81" onclick="show(81);">Nez Perce (SPA)</div>
+<div id="2655" onclick="show(2655);">Ngandi</div>
+<div id="959" onclick="show(959);">Ngoshie</div>
+<div id="2755" onclick="show(2755);">Nhirrpi</div>
+<div id="2131" onclick="show(2131);">Ocaina (SAPHON)</div>
+<div id="1324" onclick="show(1324);">Palor</div>
+<div id="87" onclick="show(87);">Purepecha (SPA)</div>
+<div id="813" onclick="show(813);">Sango (AA)</div>
+<div id="814" onclick="show(814);">Sango (AA)</div>
+<div id="2550" onclick="show(2550);">Santali (EA)</div>
+<div id="1610" onclick="show(1610);">Siwi</div>
+<div id="524" onclick="show(524);">South Bolivian Quechua (UPSID)</div>
+<div id="2442" onclick="show(2442);">South Estonian</div>
+<div id="518" onclick="show(518);">Southeastern Pomo (UPSID)</div>
+<div id="92" onclick="show(92);">Southern Tiwa</div>
+<div id="2586" onclick="show(2586);">Southwestern Pashto</div>
+<div id="2493" onclick="show(2493);">Standard Latvian</div>
+<div id="2272" onclick="show(2272);">Swiss German (EA)</div>
+<div id="2185" onclick="show(2185);">Swiss German (UZ)</div>
+<div id="631" onclick="show(631);">Tarok (UPSID)</div>
+<div id="1220" onclick="show(1220);">Thulung</div>
+<div id="576" onclick="show(576);">Tigre (UPSID)</div>
+<div id="1375" onclick="show(1375);">Tira</div>
+<div id="1069" onclick="show(1069);">Tolowa-Chetco (PH)</div>
+<div id="898" onclick="show(898);">Towa</div>
+<div id="2482" onclick="show(2482);">Tundra Nenets (EA)</div>
+<div id="185" onclick="show(185);">Tundra Nenets (SPA)</div>
+<div id="638" onclick="show(638);">Tundra Nenets (UPSID)</div>
+<div id="1796" onclick="show(1796);">Urali of Idukki</div>
+<div id="2759" onclick="show(2759);">Wangkumara (ER)</div>
+<div id="2760" onclick="show(2760);">Wangkumara (ER)</div>
+<div id="1030" onclick="show(1030);">Washo</div>
+<div id="2396" onclick="show(2396);">Wayu</div>
+<div id="1235" onclick="show(1235);">Western Arrarnta (PH)</div>
+<div id="138" onclick="show(138);">Wolof (SPA)</div>
+<div id="618" onclick="show(618);">Wolof (UPSID)</div>
+<div id="842" onclick="show(842);">Yamba</div>
+<div id="2754" onclick="show(2754);">Yandruwandha</div>
+<div id="2756" onclick="show(2756);">Yawarawarga</div>
+<div id="1110" onclick="show(1110);">Yekhee</div>
+<div id="1544" onclick="show(1544);">Àhàn</div>
+<div id="1297" onclick="show(1297);">Abua</div>
+<div id="1234" onclick="show(1234);">Adamawa Fulfulde (PH)</div>
+<div id="198" onclick="show(198);">Afade</div>
+<div id="2641" onclick="show(2641);">Ami</div>
+<div id="1296" onclick="show(1296);">Avatime</div>
+<div id="234" onclick="show(234);">Awngi (UPSID)</div>
+<div id="926" onclick="show(926);">Bafaw-Balong</div>
+<div id="1444" onclick="show(1444);">Bafia (GM)</div>
+<div id="914" onclick="show(914);">Bakole</div>
+<div id="1183" onclick="show(1183);">Bangolan</div>
+<div id="862" onclick="show(862);">Barbareño (PH)</div>
+<div id="255" onclick="show(255);">Bella Coola</div>
+<div id="1781" onclick="show(1781);">Bondo (RA)</div>
+<div id="1607" onclick="show(1607);">Bouna Kulango</div>
+<div id="713" onclick="show(713);">Central-Eastern Niger Fulfulde</div>
+<div id="1895" onclick="show(1895);">Cofán (SAPHON)</div>
+<div id="289" onclick="show(289);">Cofán (UPSID)</div>
+<div id="866" onclick="show(866);">Cuvok</div>
+<div id="2274" onclick="show(2274);">Czech (EA)</div>
+<div id="2480" onclick="show(2480);">Czech (EA)</div>
+<div id="2315" onclick="show(2315);">Dhivehi</div>
+<div id="1789" onclick="show(1789);">East-Central Tangkhul Naga</div>
+<div id="201" onclick="show(201);">Eastern Arrernte (UPSID)</div>
+<div id="2158" onclick="show(2158);">Eastern Arrernte (UZ)</div>
+<div id="488" onclick="show(488);">Eastern Pahari</div>
+<div id="2479" onclick="show(2479);">Eastern Panjabi (EA)</div>
+<div id="707" onclick="show(707);">Emai-Iuleha-Ora</div>
+<div id="160" onclick="show(160);">English (SPA)</div>
+<div id="703" onclick="show(703);">Ewe (AA)</div>
+<div id="705" onclick="show(705);">Ezaa</div>
+<div id="721" onclick="show(721);">Gen (AA)</div>
+<div id="390" onclick="show(390);">Georgian (UPSID)</div>
+<div id="2358" onclick="show(2358);">Gheg Albanian</div>
+<div id="754" onclick="show(754);">Guinea Kpelle (AA)</div>
+<div id="1115" onclick="show(1115);">Halkomelem</div>
+<div id="2297" onclick="show(2297);">Itelmen (EA)</div>
+<div id="197" onclick="show(197);">Japanese (SPA)</div>
+<div id="900" onclick="show(900);">Kabyle</div>
+<div id="2301" onclick="show(2301);">Kangjia</div>
+<div id="88" onclick="show(88);">Karok (SPA)</div>
+<div id="174" onclick="show(174);">Kashmiri (SPA)</div>
+<div id="389" onclick="show(389);">Kashmiri (UPSID)</div>
+<div id="1741" onclick="show(1741);">Khasi (RA)</div>
+<div id="1743" onclick="show(1743);">Kodava</div>
+<div id="246" onclick="show(246);">Kohumono</div>
+<div id="2221" onclick="show(2221);">Kumzari</div>
+<div id="75" onclick="show(75);">Lakota (SPA)</div>
+<div id="695" onclick="show(695);">Lakota Dida</div>
+<div id="1088" onclick="show(1088);">Laz (PH)</div>
+<div id="1636" onclick="show(1636);">Lese</div>
+<div id="1294" onclick="show(1294);">Logo</div>
+<div id="928" onclick="show(928);">Luchazi</div>
+<div id="714" onclick="show(714);">Maasina Fulfulde</div>
+<div id="16" onclick="show(16);">Mandarin Chinese (SPA)</div>
+<div id="1764" onclick="show(1764);">Manipuri (RA)</div>
+<div id="2640" onclick="show(2640);">Marti Ke</div>
+<div id="942" onclick="show(942);">Mmen</div>
+<div id="1410" onclick="show(1410);">Muyang</div>
+<div id="2491" onclick="show(2491);">Myeik</div>
+<div id="484" onclick="show(484);">Navajo (UPSID)</div>
+<div id="1660" onclick="show(1660);">Nawuri</div>
+<div id="487" onclick="show(487);">Ndut</div>
+<div id="2770" onclick="show(2770);">Nhanda</div>
+<div id="159" onclick="show(159);">Norwegian Bokmål (SPA)</div>
+<div id="117" onclick="show(117);">Ocaina (SPA)</div>
+<div id="2478" onclick="show(2478);">Occitan</div>
+<div id="2604" onclick="show(2604);">Polish (EA)</div>
+<div id="378" onclick="show(378);">Popti'</div>
+<div id="2304" onclick="show(2304);">Romansh</div>
+<div id="2317" onclick="show(2317);">Russia Buriat</div>
+<div id="25" onclick="show(25);">S'gaw Karen (SPA)</div>
+<div id="1078" onclick="show(1078);">San Juan Guelavía Zapotec</div>
+<div id="555" onclick="show(555);">Soqotri</div>
+<div id="2227" onclick="show(2227);">Southeast Pashayi</div>
+<div id="89" onclick="show(89);">Southeastern Pomo (SPA)</div>
+<div id="2211" onclick="show(2211);">Sumi Naga (UZ)</div>
+<div id="826" onclick="show(826);">Tarok (AA)</div>
+<div id="2380" onclick="show(2380);">Tibetan (EA)</div>
+<div id="2421" onclick="show(2421);">Tibetan (EA)</div>
+<div id="2558" onclick="show(2558);">Tibetan (EA)</div>
+<div id="832" onclick="show(832);">Tikar</div>
+<div id="2402" onclick="show(2402);">Tundra Nenets (EA)</div>
+<div id="2929" onclick="show(2929);">Umbuygamu</div>
+<div id="283" onclick="show(283);">Upper Chehalis</div>
+<div id="2569" onclick="show(2569);">Vlax Romani (EA)</div>
+<div id="715" onclick="show(715);">Western Niger Fulfulde</div>
+<div id="2418" onclick="show(2418);">Yagnobi</div>
+<div id="1480" onclick="show(1480);">Zayse</div>
+<div id="1028" onclick="show(1028);">Zhenkang Wa</div>
+<div id="651" onclick="show(651);">Aja (Benin) (AA)</div>
+<div id="1245" onclick="show(1245);">Akan (GM)</div>
+<div id="1162" onclick="show(1162);">Akha (PH)</div>
+<div id="219" onclick="show(219);">Amharic (UPSID)</div>
+<div id="1396" onclick="show(1396);">Argobba</div>
+<div id="128" onclick="show(128);">Awngi (SPA)</div>
+<div id="741" onclick="show(741);">Baangi</div>
+<div id="1009" onclick="show(1009);">Bamun</div>
+<div id="1612" onclick="show(1612);">Barain (GM)</div>
+<div id="2500" onclick="show(2500);">Bashkir (EA)</div>
+<div id="1435" onclick="show(1435);">Belanda Viri</div>
+<div id="250" onclick="show(250);">Bengali (UPSID)</div>
+<div id="1195" onclick="show(1195);">Bole</div>
+<div id="2145" onclick="show(2145);">Central Aymara (SAPHON)</div>
+<div id="781" onclick="show(781);">Cross River Mbembe</div>
+<div id="1109" onclick="show(1109);">Dimli</div>
+<div id="2477" onclick="show(2477);">Dongxiang</div>
+<div id="2242" onclick="show(2242);">East Yugur</div>
+<div id="873" onclick="show(873);">Eggon</div>
+<div id="142" onclick="show(142);">Ewe (SPA)</div>
+<div id="878" onclick="show(878);">Furu</div>
+<div id="1407" onclick="show(1407);">Gbaya-Mbodomo (GM)</div>
+<div id="939" onclick="show(939);">Gbaya-Mbodomo (PH)</div>
+<div id="2428" onclick="show(2428);">Georgian (EA)</div>
+<div id="2183" onclick="show(2183);">Georgian (UZ)</div>
+<div id="901" onclick="show(901);">Gidar</div>
+<div id="1352" onclick="show(1352);">Gwandara (GM)</div>
+<div id="1354" onclick="show(1354);">Gwandara (GM)</div>
+<div id="1356" onclick="show(1356);">Gwandara (GM)</div>
+<div id="1301" onclick="show(1301);">Hausa States Fulfulde (GM)</div>
+<div id="1736" onclick="show(1736);">Hills Karbi</div>
+<div id="359" onclick="show(359);">Hupa (UPSID)</div>
+<div id="732" onclick="show(732);">Igbo (AA)</div>
+<div id="372" onclick="show(372);">Isoko</div>
+<div id="896" onclick="show(896);">Izere (PH)</div>
+<div id="1738" onclick="show(1738);">Kashmiri (RA)</div>
+<div id="1755" onclick="show(1755);">Kuvi (RA)</div>
+<div id="1604" onclick="show(1604);">Kwami</div>
+<div id="924" onclick="show(924);">Lao (PH)</div>
+<div id="859" onclick="show(859);">Lealao Chinantec</div>
+<div id="763" onclick="show(763);">Loma (Liberia) (AA)</div>
+<div id="2638" onclick="show(2638);">Maringarr</div>
+<div id="455" onclick="show(455);">Mbum</div>
+<div id="950" onclick="show(950);">Ndemli</div>
+<div id="2370" onclick="show(2370);">Nivkh (EA)</div>
+<div id="496" onclick="show(496);">Nivkh (UPSID)</div>
+<div id="169" onclick="show(169);">Northern Tosk Albanian (SPA)</div>
+<div id="215" onclick="show(215);">Northern Tosk Albanian (UPSID)</div>
+<div id="1036" onclick="show(1036);">Phalura</div>
+<div id="2224" onclick="show(2224);">Plautdietsch</div>
+<div id="809" onclick="show(809);">Pulaar</div>
+<div id="810" onclick="show(810);">Pular</div>
+<div id="513" onclick="show(513);">Páez (UPSID)</div>
+<div id="1161" onclick="show(1161);">Qimant</div>
+<div id="952" onclick="show(952);">Quechan</div>
+<div id="1273" onclick="show(1273);">Soninke (GM)</div>
+<div id="823" onclick="show(823);">Swahili (AA)</div>
+<div id="542" onclick="show(542);">Tachelhit (UPSID)</div>
+<div id="2540" onclick="show(2540);">Taiga Sayan Turkic</div>
+<div id="567" onclick="show(567);">Tehuelche (UPSID)</div>
+<div id="1653" onclick="show(1653);">Tsuvadi (GM)</div>
+<div id="1345" onclick="show(1345);">Tupuri</div>
+<div id="2579" onclick="show(2579);">Tuvinian (EA)</div>
+<div id="827" onclick="show(827);">Téén</div>
+<div id="2353" onclick="show(2353);">Udmurt (EA)</div>
+<div id="2400" onclick="show(2400);">Udmurt (EA)</div>
+<div id="2612" onclick="show(2612);">Uighur</div>
+<div id="1034" onclick="show(1034);">Vai</div>
+<div id="2404" onclick="show(2404);">Varli</div>
+<div id="109" onclick="show(109);">Wayuu (SPA)</div>
+<div id="1288" onclick="show(1288);">Yala</div>
+<div id="1024" onclick="show(1024);">Yapese</div>
+<div id="1059" onclick="show(1059);">Zoogocho Zapotec</div>
+<div id="1253" onclick="show(1253);">Adamawa Fulfulde (GM)</div>
+<div id="206" onclick="show(206);">Ahtena</div>
+<div id="1542" onclick="show(1542);">Awngi (GM)</div>
+<div id="2381" onclick="show(2381);">Basque, Souletin</div>
+<div id="1478" onclick="show(1478);">Bench (GM)</div>
+<div id="1857" onclick="show(1857);">Bora</div>
+<div id="362" onclick="show(362);">Eastern Armenian (UPSID)</div>
+<div id="2616" onclick="show(2616);">Erzya</div>
+<div id="876" onclick="show(876);">Esimbi</div>
+<div id="335" onclick="show(335);">Ga (UPSID)</div>
+<div id="720" onclick="show(720);">Gbaya-Bossangoa (AA)</div>
+<div id="5" onclick="show(5);">Georgian (SPA)</div>
+<div id="1302" onclick="show(1302);">Gikyode</div>
+<div id="1578" onclick="show(1578);">Gude (GM)</div>
+<div id="2344" onclick="show(2344);">Gurung</div>
+<div id="1727" onclick="show(1727);">Halbi</div>
+<div id="735" onclick="show(735);">Ikwo</div>
+<div id="1733" onclick="show(1733);">Kangri</div>
+<div id="2403" onclick="show(2403);">Karaim</div>
+<div id="1380" onclick="show(1380);">Koalib-Rere</div>
+<div id="2384" onclick="show(2384);">Komi-Yazva</div>
+<div id="182" onclick="show(182);">Komi-Zyrian (SPA)</div>
+<div id="1281" onclick="show(1281);">Kotafon Gbe</div>
+<div id="1346" onclick="show(1346);">Kuo</div>
+<div id="919" onclick="show(919);">Kusunda</div>
+<div id="1503" onclick="show(1503);">Kwambi</div>
+<div id="1406" onclick="show(1406);">Lagwan</div>
+<div id="2300" onclick="show(2300);">Laz (EA)</div>
+<div id="2410" onclick="show(2410);">Laz (EA)</div>
+<div id="899" onclick="show(899);">Lijili</div>
+<div id="786" onclick="show(786);">Mamara Senoufo</div>
+<div id="945" onclick="show(945);">Mpongmpong</div>
+<div id="1263" onclick="show(1263);">Myene</div>
+<div id="780" onclick="show(780);">Mündü</div>
+<div id="557" onclick="show(557);">Natügu</div>
+<div id="1436" onclick="show(1436);">Ndogo</div>
+<div id="1505" onclick="show(1505);">Ndonga (GM)</div>
+<div id="1506" onclick="show(1506);">Ndonga (GM)</div>
+<div id="1507" onclick="show(1507);">Ndonga (GM)</div>
+<div id="2342" onclick="show(2342);">Nepali (EA)</div>
+<div id="936" onclick="show(936);">Ngemba</div>
+<div id="1624" onclick="show(1624);">North Giziga</div>
+<div id="689" onclick="show(689);">Northern Dagara</div>
+<div id="1135" onclick="show(1135);">Northern Pomo</div>
+<div id="2592" onclick="show(2592);">Northern Tosk Albanian (EA)</div>
+<div id="1906" onclick="show(1906);">Puelche</div>
+<div id="102" onclick="show(102);">Páez (SPA)</div>
+<div id="1018" onclick="show(1018);">Satawalese</div>
+<div id="2209" onclick="show(2209);">Slovak (UZ)</div>
+<div id="2157" onclick="show(2157);">Standard Arabic</div>
+<div id="2609" onclick="show(2609);">Tatar</div>
+<div id="2411" onclick="show(2411);">Tibetan (EA)</div>
+<div id="64" onclick="show(64);">Tolowa-Chetco (SPA)</div>
+<div id="1221" onclick="show(1221);">Tshangla (PH)</div>
+<div id="2240" onclick="show(2240);">Udmurt (EA)</div>
+<div id="2948" onclick="show(2948);">Warluwara</div>
+<div id="2406" onclick="show(2406);">Welsh</div>
+<div id="1280" onclick="show(1280);">Western Xwla Gbe</div>
+<div id="17" onclick="show(17);">Wu Chinese (SPA)</div>
+<div id="1279" onclick="show(1279);">Xwela Gbe</div>
+<div id="379" onclick="show(379);">Yanyuwa (UPSID)</div>
+<div id="851" onclick="show(851);">Zulgo-Gemzek</div>
+<div id="61" onclick="show(61);">Aleut (SPA)</div>
+<div id="2438" onclick="show(2438);">Arbëreshë Albanian (EA)</div>
+<div id="2487" onclick="show(2487);">Arbëreshë Albanian (EA)</div>
+<div id="2624" onclick="show(2624);">Bengali (EA)</div>
+<div id="2347" onclick="show(2347);">Besisi (EA)</div>
+<div id="2201" onclick="show(2201);">Besisi (UZ)</div>
+<div id="1332" onclick="show(1332);">Bilin</div>
+<div id="340" onclick="show(340);">Central Gelao-Qau</div>
+<div id="521" onclick="show(521);">Central Pashto (UPSID)</div>
+<div id="2208" onclick="show(2208);">Central Sama</div>
+<div id="38" onclick="show(38);">Chamorro (SPA)</div>
+<div id="1068" onclick="show(1068);">Che</div>
+<div id="1157" onclick="show(1157);">Chimborazo Highland Quichua</div>
+<div id="189" onclick="show(189);">Chuvash (SPA)</div>
+<div id="171" onclick="show(171);">Eastern Armenian (SPA)</div>
+<div id="1523" onclick="show(1523);">Efutu</div>
+<div id="325" onclick="show(325);">Eyak</div>
+<div id="338" onclick="show(338);">Gbaya-Bossangoa (UPSID)</div>
+<div id="726" onclick="show(726);">Gude (AA)</div>
+<div id="1112" onclick="show(1112);">Gujari (PH)</div>
+<div id="2568" onclick="show(2568);">Icelandic (EA)</div>
+<div id="2621" onclick="show(2621);">Jibbali</div>
+<div id="1311" onclick="show(1311);">Jola-Esulalu</div>
+<div id="744" onclick="show(744);">Karang</div>
+<div id="1347" onclick="show(1347);">Kare (Central African Republic)</div>
+<div id="2575" onclick="show(2575);">Komi-Permyak</div>
+<div id="2460" onclick="show(2460);">Komi-Zyrian (EA)</div>
+<div id="1757" onclick="show(1757);">Lambadi (RA)</div>
+<div id="1283" onclick="show(1283);">Machame</div>
+<div id="783" onclick="show(783);">Makaa</div>
+<div id="1762" onclick="show(1762);">Malayalam (RA)</div>
+<div id="2620" onclick="show(2620);">Manange (EA)</div>
+<div id="935" onclick="show(935);">Manange (PH)</div>
+<div id="470" onclick="show(470);">Marghi Central (UPSID)</div>
+<div id="1227" onclick="show(1227);">Mewati</div>
+<div id="2436" onclick="show(2436);">Mingrelian (EA)</div>
+<div id="941" onclick="show(941);">Mingrelian (PH)</div>
+<div id="1143" onclick="show(1143);">Mono (Democratic Republic of Congo)</div>
+<div id="1597" onclick="show(1597);">Mpade</div>
+<div id="602" onclick="show(602);">Mundari (UPSID)</div>
+<div id="1504" onclick="show(1504);">Ngandyera</div>
+<div id="125" onclick="show(125);">Ngas (SPA)</div>
+<div id="2484" onclick="show(2484);">Northern Kurdish (EA)</div>
+<div id="419" onclick="show(419);">Northern Kurdish (UPSID)</div>
+<div id="719" onclick="show(719);">Northwest Gbaya</div>
+<div id="976" onclick="show(976);">Ossetian (PH)</div>
+<div id="1374" onclick="show(1374);">Otoro</div>
+<div id="1172" onclick="show(1172);">Patep</div>
+<div id="446" onclick="show(446);">Peve</div>
+<div id="526" onclick="show(526);">Resígaro (UPSID)</div>
+<div id="1564" onclick="show(1564);">Réunion Creole French</div>
+<div id="1004" onclick="show(1004);">Serrano</div>
+<div id="2447" onclick="show(2447);">Slovak (EA)</div>
+<div id="127" onclick="show(127);">Somali (SPA)</div>
+<div id="68" onclick="show(68);">Squamish</div>
+<div id="2392" onclick="show(2392);">Svan</div>
+<div id="837" onclick="show(837);">Vute</div>
+<div id="1647" onclick="show(1647);">Wawa</div>
+<div id="613" onclick="show(613);">Wintu</div>
+<div id="1244" onclick="show(1244);">Anyin Morofo (GM)</div>
+<div id="1496" onclick="show(1496);">Bambara (GM)</div>
+<div id="1614" onclick="show(1614);">Barain (GM)</div>
+<div id="1615" onclick="show(1615);">Barain (GM)</div>
+<div id="1198" onclick="show(1198);">Brokskat (PH)</div>
+<div id="1336" onclick="show(1336);">Budu</div>
+<div id="2299" onclick="show(2299);">Bujhyal</div>
+<div id="2250" onclick="show(2250);">Central Kurdish</div>
+<div id="173" onclick="show(173);">Central Pashto (SPA)</div>
+<div id="2463" onclick="show(2463);">Dhimal</div>
+<div id="1721" onclick="show(1721);">Gade Lohar</div>
+<div id="148" onclick="show(148);">Gbaya-Bossangoa (SPA)</div>
+<div id="1282" onclick="show(1282);">Gbesi Gbe</div>
+<div id="1303" onclick="show(1303);">Ginyanga</div>
+<div id="2452" onclick="show(2452);">Gujarati (EA)</div>
+<div id="351" onclick="show(351);">Hausa (UPSID)</div>
+<div id="2188" onclick="show(2188);">Hausa (UZ)</div>
+<div id="354" onclick="show(354);">Hindi (UPSID)</div>
+<div id="95" onclick="show(95);">Hopi (SPA)</div>
+<div id="368" onclick="show(368);">Ik</div>
+<div id="370" onclick="show(370);">Iraqw (UPSID)</div>
+<div id="1730" onclick="show(1730);">Irula of the Nilgiri (RA)</div>
+<div id="738" onclick="show(738);">Jur Modo</div>
+<div id="1740" onclick="show(1740);">Kharia (RA)</div>
+<div id="11" onclick="show(11);">Kharia (SPA)</div>
+<div id="408" onclick="show(408);">Kharia (UPSID)</div>
+<div id="1226" onclick="show(1226);">Kinnauri</div>
+<div id="915" onclick="show(915);">Konni</div>
+<div id="2528" onclick="show(2528);">Korku (EA)</div>
+<div id="1753" onclick="show(1753);">Kumaoni</div>
+<div id="2439" onclick="show(2439);">Kurtokha</div>
+<div id="1754" onclick="show(1754);">Kurukh (RA)</div>
+<div id="26" onclick="show(26);">Lakkia (SPA)</div>
+<div id="2510" onclick="show(2510);">Mehri</div>
+<div id="951" onclick="show(951);">Mescalero-Chiricahua Apache</div>
+<div id="2409" onclick="show(2409);">Mingrelian (EA)</div>
+<div id="2417" onclick="show(2417);">Mingrelian (EA)</div>
+<div id="1409" onclick="show(1409);">Moloko</div>
+<div id="449" onclick="show(449);">Northern Lushootseed</div>
+<div id="2495" onclick="show(2495);">Odia (EA)</div>
+<div id="1775" onclick="show(1775);">Odia (RA)</div>
+<div id="808" onclick="show(808);">Parkwa</div>
+<div id="31" onclick="show(31);">Plateau Malagasy (SPA)</div>
+<div id="1046" onclick="show(1046);">Polish (PH)</div>
+<div id="2456" onclick="show(2456);">Purik-Sham-Nubra</div>
+<div id="2523" onclick="show(2523);">Salar</div>
+<div id="2216" onclick="show(2216);">San Martín Itunyoso Triqui</div>
+<div id="145" onclick="show(145);">Swahili (SPA)</div>
+<div id="1350" onclick="show(1350);">Tigrinya</div>
+<div id="1331" onclick="show(1331);">Tiv</div>
+<div id="1328" onclick="show(1328);">Tonga (Zambia)</div>
+<div id="1308" onclick="show(1308);">West Central Banda</div>
+<div id="647" onclick="show(647);">Zulu (UPSID)</div>
+<div id="665" onclick="show(665);">Banda-Ndélé (AA)</div>
+<div id="2584" onclick="show(2584);">Breton (EA)</div>
+<div id="476" onclick="show(476);">Burmese (UPSID)</div>
+<div id="856" onclick="show(856);">Chechen (PH)</div>
+<div id="2394" onclick="show(2394);">Dzongkha</div>
+<div id="1151" onclick="show(1151);">East Makian (PH)</div>
+<div id="1780" onclick="show(1780);">Eastern Panjabi (RA)</div>
+<div id="141" onclick="show(141);">Ga (SPA)</div>
+<div id="1353" onclick="show(1353);">Gwandara (GM)</div>
+<div id="124" onclick="show(124);">Hausa (SPA)</div>
+<div id="2270" onclick="show(2270);">Ishkashimi</div>
+<div id="62" onclick="show(62);">Kalaallisut (SPA)</div>
+<div id="923" onclick="show(923);">Langi</div>
+<div id="137" onclick="show(137);">Liberia Kpelle (SPA)</div>
+<div id="2578" onclick="show(2578);">Lisu (EA)</div>
+<div id="444" onclick="show(444);">Lithuanian (UPSID)</div>
+<div id="991" onclick="show(991);">Marwari (India)</div>
+<div id="2464" onclick="show(2464);">Mongolian</div>
+<div id="10" onclick="show(10);">Mundari (SPA)</div>
+<div id="482" onclick="show(482);">Nama (Namibia)</div>
+<div id="1348" onclick="show(1348);">Ndai</div>
+<div id="1547" onclick="show(1547);">Ndzwani Comorian</div>
+<div id="223" onclick="show(223);">Ngas (UPSID)</div>
+<div id="1130" onclick="show(1130);">Nisga'a</div>
+<div id="2283" onclick="show(2283);">Ossetian (EA)</div>
+<div id="1366" onclick="show(1366);">Otuho</div>
+<div id="525" onclick="show(525);">Quileute</div>
+<div id="1830" onclick="show(1830);">Resígaro (SAPHON)</div>
+<div id="530" onclick="show(530);">Russian (UPSID)</div>
+<div id="1735" onclick="show(1735);">Saurashtra</div>
+<div id="1003" onclick="show(1003);">Semelai</div>
+<div id="104" onclick="show(104);">South Bolivian Quechua (SPA)</div>
+<div id="1788" onclick="show(1788);">Tamil (RA)</div>
+<div id="2280" onclick="show(2280);">Tshangla (EA)</div>
+<div id="2527" onclick="show(2527);">Walungge</div>
+<div id="1437" onclick="show(1437);">Bade</div>
+<div id="1391" onclick="show(1391);">Balanta-Ganja</div>
+<div id="666" onclick="show(666);">Banda-Ndélé (AA)</div>
+<div id="2390" onclick="show(2390);">Bats (EA)</div>
+<div id="265" onclick="show(265);">Bulgarian (UPSID)</div>
+<div id="2338" onclick="show(2338);">Burmese (EA)</div>
+<div id="2164" onclick="show(2164);">Burmese (UZ)</div>
+<div id="1082" onclick="show(1082);">Chimariko</div>
+<div id="1299" onclick="show(1299);">Dghwede</div>
+<div id="2530" onclick="show(2530);">Domari</div>
+<div id="1460" onclick="show(1460);">Ezha</div>
+<div id="729" onclick="show(729);">Hausa (AA)</div>
+<div id="2237" onclick="show(2237);">Hunzib</div>
+<div id="39" onclick="show(39);">Iaai (SPA)</div>
+<div id="129" onclick="show(129);">Iraqw (SPA)</div>
+<div id="375" onclick="show(375);">Iu Mien (UPSID)</div>
+<div id="1442" onclick="show(1442);">Jamsay Dogon</div>
+<div id="1232" onclick="show(1232);">Jicarilla Apache</div>
+<div id="740" onclick="show(740);">Kako (AA)</div>
+<div id="1581" onclick="show(1581);">Kako (GM)</div>
+<div id="416" onclick="show(416);">Klamath-Modoc</div>
+<div id="149" onclick="show(149);">Koyraboro Senni Songhai (SPA)</div>
+<div id="439" onclick="show(439);">Lakkia (UPSID)</div>
+<div id="2254" onclick="show(2254);">Laz (EA)</div>
+<div id="2341" onclick="show(2341);">Laz (EA)</div>
+<div id="2371" onclick="show(2371);">Laz (EA)</div>
+<div id="2366" onclick="show(2366);">Leh-Kenhat (EA)</div>
+<div id="922" onclick="show(922);">Leh-Kenhat (PH)</div>
+<div id="1098" onclick="show(1098);">Libyan Arabic</div>
+<div id="1334" onclick="show(1334);">Liko</div>
+<div id="1488" onclick="show(1488);">Mayogo</div>
+<div id="1584" onclick="show(1584);">Merey</div>
+<div id="1760" onclick="show(1760);">Mizo</div>
+<div id="1625" onclick="show(1625);">Moghamo</div>
+<div id="2243" onclick="show(2243);">Moksha (EA)</div>
+<div id="1713" onclick="show(1713);">Mundari (RA)</div>
+<div id="152" onclick="show(152);">Nobiin (SPA)</div>
+<div id="1475" onclick="show(1475);">Northern Gumuz</div>
+<div id="500" onclick="show(500);">Nuu-chah-nulth (UPSID)</div>
+<div id="2432" onclick="show(2432);">Ossetian (EA)</div>
+<div id="1934" onclick="show(1934);">Páez (SAPHON)</div>
+<div id="166" onclick="show(166);">Russian (SPA)</div>
+<div id="190" onclick="show(190);">Sakha (SPA)</div>
+<div id="2601" onclick="show(2601);">Scottish Gaelic</div>
+<div id="1001" onclick="show(1001);">Seediq</div>
+<div id="816" onclick="show(816);">Sereer</div>
+<div id="1456" onclick="show(1456);">Soddo</div>
+<div id="2369" onclick="show(2369);">Spiti Bhoti</div>
+<div id="1648" onclick="show(1648);">Tachelhit (GM)</div>
+<div id="2387" onclick="show(2387);">Telugu (EA)</div>
+<div id="2541" onclick="show(2541);">Upper Sorbian</div>
+<div id="2608" onclick="show(2608);">Akha (EA)</div>
+<div id="1204" onclick="show(1204);">Bambalang</div>
+<div id="242" onclick="show(242);">Bats (UPSID)</div>
+<div id="1711" onclick="show(1711);">Bengali (RA)</div>
+<div id="22" onclick="show(22);">Burmese (SPA)</div>
+<div id="1717" onclick="show(1717);">Chaudangsi</div>
+<div id="1718" onclick="show(1718);">Chokri Naga</div>
+<div id="1107" onclick="show(1107);">Comox</div>
+<div id="2350" onclick="show(2350);">Dakpakha</div>
+<div id="1719" onclick="show(1719);">Darma (RA)</div>
+<div id="1616" onclick="show(1616);">Gaam (GM)</div>
+<div id="1543" onclick="show(1543);">Glavda</div>
+<div id="2542" onclick="show(2542);">Hindi (EA)</div>
+<div id="893" onclick="show(893);">Ingush (PH)</div>
+<div id="2521" onclick="show(2521);">Irish (EA)</div>
+<div id="1731" onclick="show(1731);">Jaunsari</div>
+<div id="2277" onclick="show(2277);">Kannada (EA)</div>
+<div id="2511" onclick="show(2511);">Kharia (EA)</div>
+<div id="909" onclick="show(909);">Kharia (PH)</div>
+<div id="1457" onclick="show(1457);">Kistane</div>
+<div id="1767" onclick="show(1767);">Kman</div>
+<div id="2454" onclick="show(2454);">Magahi</div>
+<div id="1761" onclick="show(1761);">Maithili (RA)</div>
+<div id="1408" onclick="show(1408);">Mbuko</div>
+<div id="1458" onclick="show(1458);">Mesqan</div>
+<div id="1768" onclick="show(1768);">Mising</div>
+<div id="868" onclick="show(868);">Nepali Kurux</div>
+<div id="491" onclick="show(491);">Ngizim</div>
+<div id="194" onclick="show(194);">Nivkh (SPA)</div>
+<div id="1314" onclick="show(1314);">Olu'bo (GM)</div>
+<div id="1633" onclick="show(1633);">Pana</div>
+<div id="2247" onclick="show(2247);">Rajbanshi</div>
+<div id="93" onclick="show(93);">Rio Grande Tewa</div>
+<div id="996" onclick="show(996);">Saanich</div>
+<div id="1459" onclick="show(1459);">Sebat Bet Gurage (GM)</div>
+<div id="2307" onclick="show(2307);">Solu-Khumbu Sherpa (EA)</div>
+<div id="2522" onclick="show(2522);">Solu-Khumbu Sherpa (EA)</div>
+<div id="821" onclick="show(821);">Soninke (AA)</div>
+<div id="520" onclick="show(520);">South Wa</div>
+<div id="1016" onclick="show(1016);">Spokane</div>
+<div id="1219" onclick="show(1219);">Torwali</div>
+<div id="2490" onclick="show(2490);">Veps</div>
+<div id="1635" onclick="show(1635);">Wuzlam</div>
+<div id="1241" onclick="show(1241);">Adamawa Fulfulde (GM)</div>
+<div id="1425" onclick="show(1425);">Aringa</div>
+<div id="2306" onclick="show(2306);">Balti (EA)</div>
+<div id="1709" onclick="show(1709);">Balti (RA)</div>
+<div id="1712" onclick="show(1712);">Bhili</div>
+<div id="2357" onclick="show(2357);">Bhojpuri</div>
+<div id="2498" onclick="show(2498);">Eastern Balochi</div>
+<div id="1725" onclick="show(1725);">Gujarati (RA)</div>
+<div id="1724" onclick="show(1724);">Gujari (RA)</div>
+<div id="1462" onclick="show(1462);">Gumer</div>
+<div id="1355" onclick="show(1355);">Gwandara (GM)</div>
+<div id="65" onclick="show(65);">Hupa (SPA)</div>
+<div id="2262" onclick="show(2262);">Irish (EA)</div>
+<div id="2193" onclick="show(2193);">Irish (UZ)</div>
+<div id="20" onclick="show(20);">Iu Mien (SPA)</div>
+<div id="1759" onclick="show(1759);">Lotha Naga</div>
+<div id="2263" onclick="show(2263);">Lowa (EA)</div>
+<div id="2504" onclick="show(2504);">Lowa (EA)</div>
+<div id="2602" onclick="show(2602);">Lower Sorbian</div>
+<div id="1747" onclick="show(1747);">Maharashtrian Konkani (RA)</div>
+<div id="788" onclick="show(788);">Mofu-Gudur (AA)</div>
+<div id="1598" onclick="show(1598);">Mofu-Gudur (GM)</div>
+<div id="2245" onclick="show(2245);">Moksha (EA)</div>
+<div id="1344" onclick="show(1344);">Mono (Cameroon)</div>
+<div id="2289" onclick="show(2289);">Munji</div>
+<div id="1772" onclick="show(1772);">Nepali (RA)</div>
+<div id="970" onclick="show(970);">Nyamwezi</div>
+<div id="1783" onclick="show(1783);">Santali (RA)</div>
+<div id="1785" onclick="show(1785);">Shina</div>
+<div id="1017" onclick="show(1017);">Sissano</div>
+<div id="2264" onclick="show(2264);">Stod Bhoti</div>
+<div id="1784" onclick="show(1784);">Sumi Naga (RA)</div>
+<div id="1168" onclick="show(1168);">Tanacross</div>
+<div id="2214" onclick="show(2214);">Tera (UZ)</div>
+<div id="1416" onclick="show(1416);">Tulishi</div>
+<div id="2503" onclick="show(2503);">Ukrainian (EA)</div>
+<div id="1797" onclick="show(1797);">Urdu (RA)</div>
+<div id="1535" onclick="show(1535);">Ut-Main</div>
+<div id="2326" onclick="show(2326);">Votic</div>
+<div id="1415" onclick="show(1415);">Weh</div>
+<div id="643" onclick="show(643);">Yulu</div>
+<div id="147" onclick="show(147);">Zulu (SPA)</div>
+<div id="1249" onclick="show(1249);">Baka (Sudan)</div>
+<div id="1248" onclick="show(1248);">Bana</div>
+<div id="177" onclick="show(177);">Bengali (SPA)</div>
+<div id="264" onclick="show(264);">Burushaski (UPSID)</div>
+<div id="1609" onclick="show(1609);">Central Moroccan Berber</div>
+<div id="1461" onclick="show(1461);">Chaha</div>
+<div id="687" onclick="show(687);">Daba (AA)</div>
+<div id="1576" onclick="show(1576);">Daba (GM)</div>
+<div id="1431" onclick="show(1431);">Didinga</div>
+<div id="2590" onclick="show(2590);">Digor</div>
+<div id="1384" onclick="show(1384);">Ghomálá'</div>
+<div id="363" onclick="show(363);">Iaai (UPSID)</div>
+<div id="1536" onclick="show(1536);">Idoma</div>
+<div id="1852" onclick="show(1852);">Jaqaru (SAPHON)</div>
+<div id="105" onclick="show(105);">Jaqaru (SPA)</div>
+<div id="385" onclick="show(385);">Jaqaru (UPSID)</div>
+<div id="1734" onclick="show(1734);">Kannada (RA)</div>
+<div id="1417" onclick="show(1417);">Keiga</div>
+<div id="1339" onclick="show(1339);">Keliko</div>
+<div id="2391" onclick="show(2391);">Lamjung-Melamchi Yolmo</div>
+<div id="168" onclick="show(168);">Lithuanian (SPA)</div>
+<div id="2548" onclick="show(2548);">Longchuan Achang</div>
+<div id="778" onclick="show(778);">Mangbetu</div>
+<div id="126" onclick="show(126);">Marghi Central (SPA)</div>
+<div id="2186" onclick="show(2186);">Modern Greek (UZ)</div>
+<div id="1771" onclick="show(1771);">Naiki</div>
+<div id="956" onclick="show(956);">Naki</div>
+<div id="66" onclick="show(66);">Navajo (SPA)</div>
+<div id="2509" onclick="show(2509);">Ossetian (EA)</div>
+<div id="2298" onclick="show(2298);">Puxi</div>
+<div id="2261" onclick="show(2261);">Russian (EA)</div>
+<div id="1463" onclick="show(1463);">Sebat Bet Gurage (GM)</div>
+<div id="69" onclick="show(69);">Straits Salish</div>
+<div id="1568" onclick="show(1568);">Sukuma</div>
+<div id="2329" onclick="show(2329);">Tsez</div>
+<div id="1663" onclick="show(1663);">Tumtum</div>
+<div id="2281" onclick="show(2281);"> (EA)</div>
+<div id="660" onclick="show(660);">Avokaya</div>
+<div id="1707" onclick="show(1707);">Awadhi</div>
+<div id="2368" onclick="show(2368);">Bulgarian (EA)</div>
+<div id="167" onclick="show(167);">Bulgarian (SPA)</div>
+<div id="1575" onclick="show(1575);">Bum</div>
+<div id="1402" onclick="show(1402);">Buwal</div>
+<div id="2379" onclick="show(2379);">Dzalakha</div>
+<div id="2473" onclick="show(2473);">Elfdalian</div>
+<div id="1403" onclick="show(1403);">Hdi</div>
+<div id="1728" onclick="show(1728);">Hindi (RA)</div>
+<div id="1404" onclick="show(1404);">Lamang</div>
+<div id="1756" onclick="show(1756);">Leh-Kenhat (RA)</div>
+<div id="1260" onclick="show(1260);">Limbum (GM)</div>
+<div id="1343" onclick="show(1343);">Mundang</div>
+<div id="1531" onclick="show(1531);">Ngazidja Comorian</div>
+<div id="963" onclick="show(963);">Ngombale</div>
+<div id="2544" onclick="show(2544);">Nuclear Tamang</div>
+<div id="964" onclick="show(964);">Nuu-chah-nulth (PH)</div>
+<div id="70" onclick="show(70);">Nuu-chah-nulth (SPA)</div>
+<div id="2351" onclick="show(2351);">Ossetian (EA)</div>
+<div id="2476" onclick="show(2476);">Ossetian (EA)</div>
+<div id="2343" onclick="show(2343);">Rusyn</div>
+<div id="1782" onclick="show(1782);">Sanskrit</div>
+<div id="1008" onclick="show(1008);">Shona</div>
+<div id="543" onclick="show(543);">Shuswap</div>
+<div id="2415" onclick="show(2415);">Sikkimese</div>
+<div id="178" onclick="show(178);">Sinhala (SPA)</div>
+<div id="2466" onclick="show(2466);">Urdu (EA)</div>
+<div id="290" onclick="show(290);">Wamey</div>
+<div id="2267" onclick="show(2267);">Yongning Na</div>
+<div id="1250" onclick="show(1250);">Aja (Sudan)</div>
+<div id="1091" onclick="show(1091);">Ambele</div>
+<div id="1661" onclick="show(1661);">Anfillo</div>
+<div id="1703" onclick="show(1703);">Angami Naga</div>
+<div id="2560" onclick="show(2560);">Axi Yi</div>
+<div id="1239" onclick="show(1239);">Barbareño (PH)</div>
+<div id="1716" onclick="show(1716);">Bundeli</div>
+<div id="2561" onclick="show(2561);">Burushaski (EA)</div>
+<div id="2577" onclick="show(2577);">Burushaski (EA)</div>
+<div id="2613" onclick="show(2613);">Burushaski (EA)</div>
+<div id="6" onclick="show(6);">Burushaski (SPA)</div>
+<div id="278" onclick="show(278);">Chipewyan (UPSID)</div>
+<div id="2593" onclick="show(2593);">East Latvian</div>
+<div id="1049" onclick="show(1049);">Eastern Yiddish (PH)</div>
+<div id="1377" onclick="show(1377);">Fali</div>
+<div id="2195" onclick="show(2195);">Italian (UZ)</div>
+<div id="1421" onclick="show(1421);">Katcha-Kadugli-Miri (GM)</div>
+<div id="1423" onclick="show(1423);">Katcha-Kadugli-Miri (GM)</div>
+<div id="1418" onclick="show(1418);">Krongo</div>
+<div id="1540" onclick="show(1540);">Legbo</div>
+<div id="2311" onclick="show(2311);">Lezgian (EA)</div>
+<div id="2559" onclick="show(2559);">Malayalam (EA)</div>
+<div id="485" onclick="show(485);">Naxi</div>
+<div id="1778" onclick="show(1778);">Pattani</div>
+<div id="34" onclick="show(34);">Sa'ban (SPA)</div>
+<div id="1490" onclick="show(1490);">Southern Nuni</div>
+<div id="592" onclick="show(592);">Southern-Coastal Tsimshian</div>
+<div id="1793" onclick="show(1793);">Toda</div>
+<div id="1063" onclick="show(1063);">Tsuvadi (PH)</div>
+<div id="1595" onclick="show(1595);">Vame</div>
+<div id="2514" onclick="show(2514);">Wakhi</div>
+<div id="1364" onclick="show(1364);">Wolaytta</div>
+<div id="841" onclick="show(841);">Wolof (AA)</div>
+<div id="1074" onclick="show(1074);">Yuchi (PH)</div>
+<div id="78" onclick="show(78);">Yuchi (SPA)</div>
+<div id="641" onclick="show(641);">Yuchi (UPSID)</div>
+<div id="1176" onclick="show(1176);">Awing</div>
+<div id="2707" onclick="show(2707);">Ayerrerenge</div>
+<div id="934" onclick="show(934);">Bamenyam</div>
+<div id="1401" onclick="show(1401);">Besleri</div>
+<div id="2276" onclick="show(2276);">Chechen (EA)</div>
+<div id="2512" onclick="show(2512);">Chechen (EA)</div>
+<div id="2549" onclick="show(2549);">Chechen (EA)</div>
+<div id="2574" onclick="show(2574);">Chechen (EA)</div>
+<div id="63" onclick="show(63);">Chipewyan (SPA)</div>
+<div id="2181" onclick="show(2181);">Estonian (UZ)</div>
+<div id="1466" onclick="show(1466);">Inor (GM)</div>
+<div id="1467" onclick="show(1467);">Inor (GM)</div>
+<div id="342" onclick="show(342);">Irish (UPSID)</div>
+<div id="911" onclick="show(911);">Kinyarwanda</div>
+<div id="2429" onclick="show(2429);">Northern Qiang (EA)</div>
+<div id="2486" onclick="show(2486);">Northern Qiang (EA)</div>
+<div id="1376" onclick="show(1376);">Nyam</div>
+<div id="2626" onclick="show(2626);">Ossetian (EA)</div>
+<div id="1370" onclick="show(1370);">Saya</div>
+<div id="1464" onclick="show(1464);">Sebat Bet Gurage (GM)</div>
+<div id="13" onclick="show(13);">Sedang (SPA)</div>
+<div id="549" onclick="show(549);">South Saami</div>
+<div id="413" onclick="show(413);">Western Keres</div>
+<div id="2702" onclick="show(2702);">Alyawarr (ER)</div>
+<div id="2705" onclick="show(2705);">Andegerebinha</div>
+<div id="2346" onclick="show(2346);">Baima</div>
+<div id="1586" onclick="show(1586);">Chonyi-Dzihana-Kauma</div>
+<div id="863" onclick="show(863);">Coeur d'Alene</div>
+<div id="1588" onclick="show(1588);">Duruma (GM)</div>
+<div id="2703" onclick="show(2703);">Eastern Anmatyerre</div>
+<div id="2708" onclick="show(2708);">Eastern Arrernte (ER)</div>
+<div id="1589" onclick="show(1589);">Giryama (GM)</div>
+<div id="1590" onclick="show(1590);">Giryama (GM)</div>
+<div id="1593" onclick="show(1593);">Giryama (GM)</div>
+<div id="1594" onclick="show(1594);">Giryama (GM)</div>
+<div id="1465" onclick="show(1465);">Inor (GM)</div>
+<div id="736" onclick="show(736);">Izi</div>
+<div id="1591" onclick="show(1591);">Kambe</div>
+<div id="1422" onclick="show(1422);">Katcha-Kadugli-Miri (GM)</div>
+<div id="1592" onclick="show(1592);">Kauma</div>
+<div id="2711" onclick="show(2711);">Kaytetye</div>
+<div id="2328" onclick="show(2328);">Khams Tibetan (EA)</div>
+<div id="2393" onclick="show(2393);">Kyerung</div>
+<div id="2709" onclick="show(2709);">Lower Southern Aranda</div>
+<div id="2706" onclick="show(2706);">Mparntwe Arrernte</div>
+<div id="1132" onclick="show(1132);">Northern Pame</div>
+<div id="2324" onclick="show(2324);">Ossetian (EA)</div>
+<div id="2389" onclick="show(2389);">Ossetian (EA)</div>
+<div id="2408" onclick="show(2408);">Ossetian (EA)</div>
+<div id="2424" onclick="show(2424);">Ossetian (EA)</div>
+<div id="2443" onclick="show(2443);">Romanian (EA)</div>
+<div id="1652" onclick="show(1652);">Sandawe (GM)</div>
+<div id="1567" onclick="show(1567);">Tangale</div>
+<div id="1791" onclick="show(1791);">Telugu (RA)</div>
+<div id="2704" onclick="show(2704);">Western Anmatyerre</div>
+<div id="2710" onclick="show(2710);">Western Arrarnta (ER)</div>
+<div id="1715" onclick="show(1715);">Brokskat (RA)</div>
+<div id="2126" onclick="show(2126);">Chipaya</div>
+<div id="1587" onclick="show(1587);">Digo</div>
+<div id="1300" onclick="show(1300);">Eloyi</div>
+<div id="755" onclick="show(755);">Gbaya (Sudan)</div>
+<div id="2313" onclick="show(2313);">Humla</div>
+<div id="535" onclick="show(535);">Sedang (UPSID)</div>
+<div id="1786" onclick="show(1786);">Sindhi (RA)</div>
+<div id="701" onclick="show(701);">Duruma (AA)</div>
+<div id="1742" onclick="show(1742);">Khezha Naga</div>
+<div id="437" onclick="show(437);">Kwak'wala (UPSID)</div>
+<div id="1766" onclick="show(1766);">Marathi</div>
+<div id="97" onclick="show(97);">Mezquital Otomi</div>
+<div id="1424" onclick="show(1424);">Morokodo</div>
+<div id="2203" onclick="show(2203);">Nara (UZ)</div>
+<div id="1070" onclick="show(1070);">Pagibete</div>
+<div id="1632" onclick="show(1632);">Pinyin</div>
+<div id="595" onclick="show(595);">Tera (UPSID)</div>
+<div id="2614" onclick="show(2614);">Amdo Tibetan (EA)</div>
+<div id="1186" onclick="show(1186);">Befang</div>
+<div id="1357" onclick="show(1357);">Gwandara (GM)</div>
+<div id="365" onclick="show(365);">Igbo (UPSID)</div>
+<div id="1449" onclick="show(1449);">Kgalagadi</div>
+<div id="762" onclick="show(762);">Lendu</div>
+<div id="2234" onclick="show(2234);">Pite Saami (UZ)</div>
+<div id="2585" onclick="show(2585);">Southern Pumi</div>
+<div id="579" onclick="show(579);">Tlingit</div>
+<div id="233" onclick="show(233);">Avar (UPSID)</div>
+<div id="2546" onclick="show(2546);">Campidanese Sardinian</div>
+<div id="1393" onclick="show(1393);">Dan (GM)</div>
+<div id="1552" onclick="show(1552);">Eastern Oromo</div>
+<div id="156" onclick="show(156);">Irish (SPA)</div>
+<div id="2610" onclick="show(2610);">Kabardian (EA)</div>
+<div id="2327" onclick="show(2327);">Khams Tibetan (EA)</div>
+<div id="2600" onclick="show(2600);">Khams Tibetan (EA)</div>
+<div id="1365" onclick="show(1365);">Kunyi</div>
+<div id="1277" onclick="show(1277);">Mongo</div>
+<div id="1470" onclick="show(1470);">Ngiti</div>
+<div id="2502" onclick="show(2502);">Shumcho</div>
+<div id="1148" onclick="show(1148);">Sindhi (PH)</div>
+<div id="1292" onclick="show(1292);">Southern Ma'di</div>
+<div id="1203" onclick="show(1203);">Totela</div>
+<div id="91" onclick="show(91);">Zuni (SPA)</div>
+<div id="1246" onclick="show(1246);">Anufo (GM)</div>
+<div id="1525" onclick="show(1525);">Arbore</div>
+<div id="98" onclick="show(98);">Central Mazahua (SPA)</div>
+<div id="452" onclick="show(452);">Central Mazahua (UPSID)</div>
+<div id="291" onclick="show(291);">Chuanqiandian Cluster Miao</div>
+<div id="2312" onclick="show(2312);">Dagur (EA)</div>
+<div id="287" onclick="show(287);">Haka Chin</div>
+<div id="2440" onclick="show(2440);">Karata (EA)</div>
+<div id="2244" onclick="show(2244);">Lithuanian (EA)</div>
+<div id="2282" onclick="show(2282);">Lithuanian (EA)</div>
+<div id="2488" onclick="show(2488);">Lithuanian (EA)</div>
+<div id="932" onclick="show(932);">Madi (Papua New Guinea)</div>
+<div id="134" onclick="show(134);">Maltese (SPA)</div>
+<div id="947" onclick="show(947);">Mvumbo</div>
+<div id="353" onclick="show(353);">Northern Haida (UPSID)</div>
+<div id="2497" onclick="show(2497);">Pite Saami (EA)</div>
+<div id="2230" onclick="show(2230);">Shixing (UZ)</div>
+<div id="123" onclick="show(123);">Tarifiyt-Beni-Iznasen-Eastern Middle Atlas Berber</div>
+<div id="1585" onclick="show(1585);">Wandala</div>
+<div id="1477" onclick="show(1477);">Bench (GM)</div>
+<div id="2474" onclick="show(2474);">Chenchu</div>
+<div id="1363" onclick="show(1363);">Hadiyya</div>
+<div id="143" onclick="show(143);">Igbo (SPA)</div>
+<div id="2580" onclick="show(2580);">Karata (EA)</div>
+<div id="7" onclick="show(7);">Kurukh (SPA)</div>
+<div id="71" onclick="show(71);">Kwak'wala (SPA)</div>
+<div id="1414" onclick="show(1414);">Silt'e</div>
+<div id="2437" onclick="show(2437);">Sindhi (EA)</div>
+<div id="1202" onclick="show(1202);">Subiya</div>
+<div id="2605" onclick="show(2605);">Sui (EA)</div>
+<div id="1577" onclick="show(1577);">Gavar</div>
+<div id="1254" onclick="show(1254);">Hausa States Fulfulde (GM)</div>
+<div id="2310" onclick="show(2310);">Kabardian (EA)</div>
+<div id="1373" onclick="show(1373);">Kambaata</div>
+<div id="67" onclick="show(67);">Northern Haida (SPA)</div>
+<div id="532" onclick="show(532);">Sandawe (UPSID)</div>
+<div id="2231" onclick="show(2231);">Shixing (UZ)</div>
+<div id="2508" onclick="show(2508);">Sindhi (EA)</div>
+<div id="560" onclick="show(560);">Sui (UPSID)</div>
+<div id="8" onclick="show(8);">Telugu (SPA)</div>
+<div id="130" onclick="show(130);">Tigre (SPA)</div>
+<div id="2553" onclick="show(2553);">Amdo Tibetan (EA)</div>
+<div id="2239" onclick="show(2239);">Hmong Njua</div>
+<div id="391" onclick="show(391);">Kabardian (UPSID)</div>
+<div id="1599" onclick="show(1599);">Mbe'</div>
+<div id="1011" onclick="show(1011);">Saraiki</div>
+<div id="2162" onclick="show(2162);">Bengali (UZ)</div>
+<div id="4" onclick="show(4);">Kabardian (SPA)</div>
+<div id="2587" onclick="show(2587);">Khams Tibetan (EA)</div>
+<div id="2591" onclick="show(2591);">Khams Tibetan (EA)</div>
+<div id="1482" onclick="show(1482);">Koorete</div>
+<div id="1208" onclick="show(1208);">Northern Gyalrong (PH)</div>
+<div id="1318" onclick="show(1318);">Copi</div>
+<div id="175" onclick="show(175);">Eastern Panjabi (SPA)</div>
+<div id="852" onclick="show(852);">Fwe</div>
+<div id="183" onclick="show(183);">Hungarian (SPA)</div>
+<div id="2191" onclick="show(2191);">Hungarian (UZ)</div>
+<div id="2407" onclick="show(2407);">Japhug</div>
+<div id="2352" onclick="show(2352);">Lizu</div>
+<div id="1451" onclick="show(1451);">Alaba-K'abeena</div>
+<div id="2199" onclick="show(2199);">Ersu (UZ)</div>
+<div id="1367" onclick="show(1367);">Masaaba</div>
+<div id="2539" onclick="show(2539);">Shixing (EA)</div>
+<div id="2566" onclick="show(2566);">Skolt Saami</div>
+<div id="2494" onclick="show(2494);">Ter Saami</div>
+<div id="131" onclick="show(131);">Amharic (SPA)</div>
+<div id="2251" onclick="show(2251);">Ingush (EA)</div>
+<div id="1664" onclick="show(1664);">Iyive</div>
+<div id="1420" onclick="show(1420);">Kanga (GM)</div>
+<div id="2257" onclick="show(2257);">Northern Gyalrong (EA)</div>
+<div id="2534" onclick="show(2534);">Amdo Tibetan (EA)</div>
+<div id="1440" onclick="show(1440);">Dime</div>
+<div id="2565" onclick="show(2565);">Godoberi</div>
+<div id="1419" onclick="show(1419);">Kanga (GM)</div>
+<div id="2204" onclick="show(2204);">Nepali (UZ)</div>
+<div id="659" onclick="show(659);">Sudanese Arabic</div>
+<div id="301" onclick="show(301);">Dahalo</div>
+<div id="2533" onclick="show(2533);">Ersu (EA)</div>
+<div id="531" onclick="show(531);">Rutul</div>
+<div id="2401" onclick="show(2401);">Kabardian (EA)</div>
+<div id="905" onclick="show(905);">Kenswei Nsei</div>
+<div id="2349" onclick="show(2349);">Adyghe</div>
+<div id="357" onclick="show(357);">Hadza</div>
+<div id="2525" onclick="show(2525);">Khams Tibetan (EA)</div>
+<div id="1608" onclick="show(1608);">Tsamai</div>
+<div id="661" onclick="show(661);">Vengo</div>
+<div id="2156" onclick="show(2156);">Amharic (UZ)</div>
+<div id="132" onclick="show(132);">Egyptian Arabic (SPA)</div>
+<div id="2335" onclick="show(2335);">Lak (EA)</div>
+<div id="1317" onclick="show(1317);">Nizaa</div>
+<div id="2483" onclick="show(2483);">Sichuan Yi</div>
+<div id="2468" onclick="show(2468);">Abkhazian (EA)</div>
+<div id="2467" onclick="show(2467);">Avar (EA)</div>
+<div id="1276" onclick="show(1276);">Ikalanga</div>
+<div id="750" onclick="show(750);">Kom (Cameroon)</div>
+<div id="1372" onclick="show(1372);">Tadaksahak</div>
+<div id="2420" onclick="show(2420);">Zhongu</div>
+<div id="2489" onclick="show(2489);">Khams Tibetan (EA)</div>
+<div id="3" onclick="show(3);">Lak (SPA)</div>
+<div id="440" onclick="show(440);">Lak (UPSID)</div>
+<div id="1491" onclick="show(1491);">Zimbabwean Ndebele</div>
+<div id="2465" onclick="show(2465);">Andi</div>
+<div id="1533" onclick="show(1533);">Eten</div>
+<div id="2190" onclick="show(2190);">Hindi (UZ)</div>
+<div id="2235" onclick="show(2235);">North Saami</div>
+<div id="1546" onclick="show(1546);">Ronga</div>
+<div id="228" onclick="show(228);">Archi</div>
+<div id="2229" onclick="show(2229);">Tachelhit (UZ)</div>
+<div id="2552" onclick="show(2552);">Abkhazian (EA)</div>
+<div id="1601" onclick="show(1601);">Southern Mfumte</div>
+<div id="176" onclick="show(176);">Hindi (SPA)</div>
+<div id="133" onclick="show(133);">Moroccan Arabic</div>
+<div id="1319" onclick="show(1319);">Xhosa</div>
+<div id="853" onclick="show(853);">Yeyi</div>
+<div id="1537" onclick="show(1537);">Irigwe</div>
+<div id="2524" onclick="show(2524);">Lezgian (EA)</div>
+<div id="432" onclick="show(432);">South-Eastern Ju</div>
+<div id="1383" onclick="show(1383);">North-Central Ju</div>
+<div id="1630" onclick="show(1630);">Tigon Mbembe</div>
+<div id="2519" onclick="show(2519);">Khams Tibetan (EA)</div>
+<div id="2260" onclick="show(2260);">Kildin Saami</div>
+<div id="1379" onclick="show(1379);">East Taa</div>
+            
+					</div>
+				</div>
+			</div>
+			<div id="langbox">
+				<h2 id="langtitle">Language information</h2>
+				<p id="langinfo">Click on a language name to display more information here.</p>
+				<div class="tdiv">
+					<table id="langtable"></table>
+				</div>
+				<p id="clicks" style="display: none;"><span class="minititle">Clicks:</span> <span id="clicklist"></span></p>
+				<p id="vowels" style="display: none;"><span class="minititle">Vowels:</span> <span id="vowellist"></span></p>
+			</div>
+		</div>
+
+		<div id="moreinfo">
+			<h2>Detailed information</h2>
+			<p>
+				Sophoi is built using the Phoible database, which is a collection of cross-linguistic phoneme inventory data, covering over 2000 languages (and as some languages are coded more than once for different reasons, the number of coded inventories is over 3000). Phoible is not per se a collection of language descriptions, but rather a collation of ten different sub-databases (e.g. UPSID). All of the sub-databases follow slightly different transcription conventions that are not entirely normalized in the Phoible super-database. Therefore some extra processing of the Phoible data has been done for Sophoi in order to facilitate cross-linguistic comparisons. The alterations made to the Phoible data are as follows:
+			</p>
+			<ul>
+				<li>Phoible transcribes post-alveolar affricates as /t̠ʃ/, but these have been simplified to /tʃ/ in Sophoi. This is just a notational convention for convenience and readability. Similarly, /ɲ̥ ŋ̥/ have been changed to have the voiceless symbol on top to not interfere with the descender: /ɲ̊ ŋ̊/.</li>
+				<li>The UPSID sub-database occasionally indicates uncertainty in transcriptions: the Phoible symbol /t̪|t/ represents a stop that is dental or alveolar (and similarly for other manners of articulation). This is a good effort at maintaining precision when language descriptions are phonetically imprecise, but only one of ten sub-databases does this. The other sub-databases appear to mostly default to the unmarked alveolar symbols, so the underspecified UPSID symbols have been merged into alveolars.</li>
+				<li>The breathy voiced stops of Indo-Aryan languages is represented in Phoible as /bʱ/, /b̤/, or /b̤ʱ/ seemingly at random, often differing between different descriptions of the same language. There seems to be no phonetic or phonological reason to distinguish these transcriptions, so they have been merged to /bʱ/ for Sophoi.</li>
+				<li>Phoible mainly represents prenasalized stops as /mb nd ŋɡ/, but sometimes uses /ⁿb ⁿd ⁿɡ/. The latter have been merged into the former.</li>
+				<li>Phoible uses two idiosyncratic fortis/lenis diacritics: fortis C͈ with a double vertical line diacritic, and lenis C͉ with a left angle diacritic. This is not a problem per se, but different sub-databases make use of this to very different extents. The ER database of Australian languages, in particular, uses a fortis/lenis transcription every time there are two stop series. This is suitable for comparisons within the ER database, but unsuitable for comparisons between languages in ER and languages transcribed in a more traditional manner, as the rest of the Phoible dataset typically is. Therefore the ER fortis/lenis distinction has been retranscribed as a voicing distinction, matching most primary sources. Be aware that this may not always represent phonetic reality (for Australian languages, but also elsewhere).</li>
+				<li>There are several ways of transcribing a (laminal, so not retroflex) articulation intermediate between alveolar and palatal: /t̠/, /t̠ʲ/, /ȶ/, and /c̟/. All four occur in Phoible but never contrast, so for Sophoi they have been merged into the nonstandard but useful symbol /ȶ/, and similarly for other manners of articulation.</li>
+			</ul>
+			<p>
+				Finally it should be mentioned that Phoible provides a distinction between full and marginal phonemes. Sophoi currently only processes full phonemes, completely ignoring marginal phonemes. This may change in the future.
+			</p>
+			<p>
+				Sophoi was created by David Hultman, building upon the Phoible database edited by Steven Moran and Daniel McCloy. David Hultman is not involved in the Phoible project, and the editors of Phoible are not involved with Sophoi. If you have questions, comments or concerns about Sophoi, feel free to contact David at astianthus@gmail.com. Like Phoible, Sophoi is released under a <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA license</a>.
+			</p>
+		</div>
+	</div>
+
+</body>
+</html>
